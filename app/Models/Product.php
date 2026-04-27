@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public $fillable = ['name','description', 'image1', 'image2', 'image3', 'price'];
+    protected $fillable = ['name','description','price'];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
