@@ -2,13 +2,22 @@
     @csrf
 
     <div>
-        Nome do Produto: 
+        Nome do Produto:
         <input type="text" name="name">
     </div>
 
     <div>
-        Descrição: 
+        Descrição:
         <input type="text" name="description">
+    </div>
+
+    <div>
+        Categoria:
+        <select name="category_id">
+            @foreach(\App\Models\Category::all() as $c)
+                <option value="{{$c->id}}">{{$c->name}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div>
@@ -19,7 +28,7 @@
     </div>
 
     <div>
-        Preço: 
+        Preço:
         <input type="number" name="price" step="0.01">
     </div>
 

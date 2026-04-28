@@ -54,36 +54,39 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, Product $product){
+   public function update(Request $request, Product $product){
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'images.*' => 'nullable|url'
-        ]);
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'images.*' => 'nullable|url'
+    ]);
 
-        // atualiza dados do produto
-        $product->update($request->only([
-            'name','description','price'
-        ]));
+    // atualiza produto
+    $product->update($request->only([
+        'name','description','price'
+    ]));
 
-        // adiciona novas imagens
-        if ($request->images) {
-            foreach ($request->images as $img) {
-                if (!empty($img)) {
-                    $product->images()->create([
-                        'path' => $img
-                    ]);
-                }
+    // 🔄 substitui imagens (remove antigas + adiciona novas)
+    if ($request->images && count(array_filter($request->images)) > 0) {
+
+        $product->images()->delete();
+
+        foreach ($request->images as $img) {
+            if (!empty($img)) {
+                $product->images()->create([
+                    'path' => $img
+                ]);
             }
         }
-
-        return redirect('/product');
     }
 
+    return redirect('/product');
+}
+
     public function delete(Product $product){
-        $product->delete(); // cascade apaga imagens
+        $product->delete(); 
         return redirect('/product');
     }
 }
