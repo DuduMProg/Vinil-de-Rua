@@ -28,6 +28,7 @@
 
     <div>
         Adicionar novas imagens (URLs):
+        <input type="text" name="main_img" placeholder="Main https://...">
         <input type="text" name="images[]" placeholder="https://...">
         <input type="text" name="images[]" placeholder="https://...">
         <input type="text" name="images[]" placeholder="https://...">

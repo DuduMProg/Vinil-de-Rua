@@ -48,6 +48,25 @@ class ProductController extends Controller
             }
         }
 
+        $images = $request->input('images');
+
+        $mainImage = $images[0] ?? null;
+        $secondaryImages = array_slice($images, 1);
+
+        // salvar produto
+        $product->main_image = $mainImage;
+        $product->save();
+
+        // salvar secundárias (se tiver tabela separada)
+        foreach ($secondaryImages as $img) {
+            if ($img) {
+                Product::create([
+                    'product_id' => $product->id,
+                    'url' => $img
+                ]);
+            }
+        }
+
         return redirect('/product');
     }
 
@@ -101,7 +120,8 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    public function show(Product $product){
-        return view('product.show', ['product'=>$product]);
+    public function show(Product $product)
+    {
+        return view('product.show', ['product' => $product]);
     }
 }
