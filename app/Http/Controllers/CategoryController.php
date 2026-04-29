@@ -22,4 +22,5 @@ class CategoryController extends Controller
         Category::create($request->all());
         return redirect('/category');
     }
+
 }
