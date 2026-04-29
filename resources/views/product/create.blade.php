@@ -25,6 +25,7 @@
         <input type="text" name="images[]" placeholder="https://...">
         <input type="text" name="images[]" placeholder="https://...">
         <input type="text" name="images[]" placeholder="https://...">
+        <input type="text" name="images[]" placeholder="https://...">
     </div>
 
     <div>
