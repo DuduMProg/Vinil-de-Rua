@@ -100,4 +100,8 @@ class ProductController extends Controller
         $product->delete();
         return redirect('/product');
     }
+
+    public function show(Product $product){
+        return view('product.show', ['product'=>$product]);
+    }
 }

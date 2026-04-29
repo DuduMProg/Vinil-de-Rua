@@ -13,7 +13,7 @@
     @foreach($products as $p)
         <tr>
             <td>{{$p->id}}</td>
-            <td>{{$p->name}}</td>
+            <td><a href="/product/show/{{$p->id}}">{{$p->name}}</a></td>
             <td>{{$p->description}}</td>
             <td>{{$p->category->name ?? 'Sem categoria' }}</td>
             <td>{{$p->images->count()}}</td>
