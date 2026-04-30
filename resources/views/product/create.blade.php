@@ -1,36 +1,65 @@
-<form action="/product/store" method="POST">
+{{-- resources/views/product/create.blade.php --}}
+
+<h1>Novo Produto</h1>
+
+@if($errors->any())
+    <ul style="color:red">
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
+<form action="/product" method="POST">
     @csrf
 
     <div>
-        Nome do Produto:
-        <input type="text" name="name">
+        Nome do Álbum:
+        <input type="text" name="name" value="{{ old('name') }}">
+    </div>
+
+    <div>
+        Artista:
+        <input type="text" name="artist" value="{{ old('artist') }}">
     </div>
 
     <div>
         Descrição:
-        <input type="text" name="description">
+        <input type="text" name="description" value="{{ old('description') }}">
     </div>
 
     <div>
         Categoria:
         <select name="category_id">
-            @foreach(\App\Models\Category::all() as $c)
-                <option value="{{$c->id}}">{{$c->name}}</option>
+            <option value="">Sem categoria</option>
+            @foreach($categories as $c)
+                <option value="{{ $c->id }}" {{ old('category_id') == $c->id ? 'selected' : '' }}>
+                    {{ $c->name }}
+                </option>
             @endforeach
         </select>
     </div>
 
     <div>
-        Imagens (URLs):
-        <input type="text" name="main_img" placeholder="Main https://...">
-        <input type="text" name="images[]" placeholder="https://...">
-        <input type="text" name="images[]" placeholder="https://...">
-        <input type="text" name="images[]" placeholder="https://...">
+        Preço:
+        <input type="number" name="price" step="0.01" value="{{ old('price') }}">
     </div>
 
     <div>
-        Preço:
-        <input type="number" name="price" step="0.01">
+        Estoque:
+        <input type="number" name="stock" value="{{ old('stock', 0) }}">
+    </div>
+
+    <div>
+        Imagem Principal (URL):
+        <input type="text" name="main_img" placeholder="https://...">
+    </div>
+
+    <div>
+        Imagens Secundárias (URLs):
+        <input type="text" name="images[]" placeholder="https://...">
+        <input type="text" name="images[]" placeholder="https://...">
+        <input type="text" name="images[]" placeholder="https://...">
     </div>
 
     <button type="submit">Criar Produto</button>

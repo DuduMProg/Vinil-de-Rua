@@ -1,167 +1,51 @@
-<a href="/product/create">Criar Produto</a>
+{{-- resources/views/product/index.blade.php --}}
 
+@if(session('success'))
+    <p style="color: green">{{ session('success') }}</p>
+@endif
 
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
-    }
-
-    :root {
-        /* fontes */
-        --fontePrimaria: 'Caesar Dressing', cursive;
-        --fonteSecundaria: 'Anton', sans-serif;
-        --fonteTerciaria: "Young Serif", serif;
-        /* Cores */
-        --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-        --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-        --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-        /* drop shadow discos */
-        --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
-    }
-
-
-
-
-    .catalogoCategoria {
-        display: grid;
-        grid-template-columns: repeat(4, 224px);
-        gap: 150px;
-        font-family: Arial, sans-serif;
-        justify-content: center;
-        padding: 125px 0;
-        margin: 0 210px;
-    }
-
-    .cardDisco {
-        width: 224px;
-        height: 253px;
-        background: var(--gradienteCardDiscos);
-        font-family: var(--fontePrimaria);
-        border-radius: 5px;
-        padding: 0px 7px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: transform 0.2s ease;
-    }
-
-    .cardDisco:hover {
-        transform: scale(1.03);
-    }
-
-    .cardDisco .imgCard {
-        cursor: pointer;
-        padding-top: 6px;
-        padding-left: 7px;
-        padding-right: 9px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .cardDisco .imgCard>img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        object-fit: contain;
-    }
-
-    .infoDisco {
-        font-size: 15px;
-        padding-bottom: 20px;
-    }
-
-    .infoDisco .precoDisco {
-        padding-top: 4px;
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-
-    .preçoEFavDisco {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 7px;
-    }
-
-    .preçoEFavDisco button {
-        border-radius: 3px;
-        border: 1px solid #000000;
-        padding: 2px 12px;
-        font-family: var(--fontePrimaria);
-        cursor: pointer;
-        transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
-    }
-
-    .preçoEFavDisco button:hover {
-        background-color: #acacac;
-        color: #ffffff;
-        border: 2.2px solid #ffffff;
-        transform: scale(1.0);
-        box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    .preçoEFavDisco .favorite img {
-        width: 20px;
-        height: 20px;
-        transition: color 0.8s ease-in-out;
-        cursor: pointer;
-    }
-
-    .preçoEFavDisco .cart img {
-        width: 20px;
-        height: 20px;
-        transition: color 0.8s ease-in-out;
-        cursor: pointer;
-    }
-
-    .preçoEFavDisco .favorite img:hover {
-        content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
-    }
-
-    .preçoEFavDisco .cart img:hover {
-        content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
-    }
-</style>
-
+<a href="/product/create">+ Novo Produto</a>
 
 <table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Capa</th>
+        <th>Produto</th>
+        <th>Artista</th>
+        <th>Categoria</th>
+        <th>Estoque</th>
+        <th>Preço</th>
+        <th>Imagens</th>
+        <th>Ações</th>
+    </tr>
+
     @foreach($products as $p)
-
-        <div class="cardDisco">
-            <img src="{{ $p->main_image }}" alt="Capa do albúm {{$p->name}}" class="imgCard">
-            <div class="infoDisco">
-                <p class="nomeDisco">{{ $p->name }}</p>
-                <p class="precoDisco">
-                    R$ {{ number_format($p->price, 2, ',', '.') }}
-                </p>
-            </div>
-        </div>
-
+        @php $cover = $p->images->firstWhere('is_cover', true) ?? $p->images->first() @endphp
         <tr>
-            <th>Id do produto</th>
-            <th>Produto</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Imagens</th>
-            <th>Preço</th>
-            <th>Ações</th>
-        </tr>
-        <tr>
-            <td>{{$p->id}}</td>
-            <td><a href="/product/show/{{$p->id}}">{{$p->name}}</a></td>
-            <td>{{$p->description}}</td>
-            <td>{{$p->category->name ?? 'Sem categoria' }}</td>
-            <td>{{$p->images->count()}}</td>
-            <td>{{$p->price}}</td>
+            <td>{{ $p->id }}</td>
             <td>
-                <a href="/product/edit/{{$p->id}}">Editar</a> |
-                <a href="/product/delete/{{$p->id}}">Deletar</a>
+                @if($cover)
+                    <img src="{{ $cover->path }}" width="60" alt="Capa">
+                @else
+                    —
+                @endif
+            </td>
+            <td><a href="/product/{{ $p->id }}">{{ $p->name }}</a></td>
+            <td>{{ $p->artist }}</td>
+            <td>{{ $p->category->name ?? 'Sem categoria' }}</td>
+            <td>{{ $p->stock }}</td>
+            <td>R$ {{ number_format($p->price, 2, ',', '.') }}</td>
+            <td>{{ $p->images_count }}</td>
+            <td>
+                <a href="/product/{{ $p->id }}/edit">Editar</a> |
+
+                {{-- ✅ Delete via form com método DELETE --}}
+                <form action="/product/{{ $p->id }}" method="POST" style="display:inline"
+                      onsubmit="return confirm('Deletar {{ $p->name }}?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Deletar</button>
+                </form>
             </td>
         </tr>
     @endforeach
