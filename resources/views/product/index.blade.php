@@ -20,7 +20,7 @@
     </tr>
 
     @foreach($products as $p)
-        @php $cover = $p->images->firstWhere('is_cover', true) ?? $p->images->first() @endphp
+        @php $cover = $p->images->firstWhere('D', true) ?? $p->images->first() @endphp
         <tr>
             <td>{{ $p->id }}</td>
             <td>

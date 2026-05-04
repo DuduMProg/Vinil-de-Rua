@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //ROTAS DOS PRODUTOS
+    Route::resource('product', ProductController::class);
     Route::get('/product/create', [ProductController::class, 'create']);
     Route::post('/product/store', [ProductController::class, 'store']);
     Route::get('/product/edit/{product}', [ProductController::class, 'edit']);
@@ -37,3 +38,5 @@ Route::get('/product', [ProductController::class, 'index']);
 require __DIR__ . '/auth.php';
 
 Route::get('/product/show/{product}', [ProductController::class, 'show']);
+
+

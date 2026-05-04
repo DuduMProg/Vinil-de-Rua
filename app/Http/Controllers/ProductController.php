@@ -69,11 +69,11 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        // carrega imagens junto
         $product->load('images');
 
         return view('product.edit', [
-            'product'    => $product,
-            'categories' => Category::all()
+            'product' => $product
         ]);
     }
 
