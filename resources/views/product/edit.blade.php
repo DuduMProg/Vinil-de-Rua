@@ -12,6 +12,15 @@
     </div>
 
     <div>
+    Tag: 
+        <select name="tags_id[]" multiple>
+        @foreach(\App\Models\Tag::all() as $t)
+            <option value="{{$t->id}}">{{$t->name}}</option>
+        @endforeach
+        </select>
+    </div>
+
+    <div>
         Preço: 
         <input type="number" name="price" value="{{$product->price}}" step="0.01">
     </div>

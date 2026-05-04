@@ -12,7 +12,6 @@
 <p>Categoria: {{ $product->category->name ?? 'Sem categoria' }}</p>
 <p>{{ $product->description }}</p>
 <h3>R$ {{ number_format($product->price, 2, ',', '.') }}</h3>
-<p>Estoque: {{ $product->stock }}</p>
 
 @if($product->images->count() > 1)
     <div>

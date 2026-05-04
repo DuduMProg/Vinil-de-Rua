@@ -25,29 +25,31 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'artist'      => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'artist' => 'required|string|max:255',
             'description' => 'required|string',
-            'price'       => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
-            'stock'       => 'nullable|integer|min:0',
-            'main_img'    => 'nullable|url',
-            'images.*'    => 'nullable|url',
+            'tag_id' => 'nullable|exists:tag,id',
+            'stock' => 'nullable|integer|min:0',
+            'main_img' => 'nullable|url',
+            'images.*' => 'nullable|url',
         ]);
 
         $product = Product::create([
-            'name'        => $request->name,
-            'artist'      => $request->artist,
+            'name' => $request->name,
+            'artist' => $request->artist,
             'description' => $request->description,
-            'price'       => $request->price,
+            'price' => $request->price,
             'category_id' => $request->category_id,
-            'stock'       => $request->stock ?? 0,
+            'tag_id' => $request->tag_id,
+            'stock' => $request->stock ?? 0,
         ]);
 
         // Salva imagem principal como primeira (is_cover = true)
         if ($request->filled('main_img')) {
             $product->images()->create([
-                'path'     => $request->main_img,
+                'path' => $request->main_img,
                 'is_cover' => true,
             ]);
         }
@@ -57,7 +59,7 @@ class ProductController extends Controller
             foreach ($request->images as $img) {
                 if (!empty($img)) {
                     $product->images()->create([
-                        'path'     => $img,
+                        'path' => $img,
                         'is_cover' => false,
                     ]);
                 }
@@ -80,23 +82,25 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'artist'      => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'artist' => 'required|string|max:255',
             'description' => 'required|string',
-            'price'       => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
-            'stock'       => 'nullable|integer|min:0',
-            'main_img'    => 'nullable|url',
-            'images.*'    => 'nullable|url',
+            'tag_id' => 'nullable|exists:tag,id',
+            'stock' => 'nullable|integer|min:0',
+            'main_img' => 'nullable|url',
+            'images.*' => 'nullable|url',
         ]);
 
         $product->update([
-            'name'        => $request->name,
-            'artist'      => $request->artist,
+            'name' => $request->name,
+            'artist' => $request->artist,
             'description' => $request->description,
-            'price'       => $request->price,
+            'price' => $request->price,
             'category_id' => $request->category_id,
-            'stock'       => $request->stock ?? $product->stock,
+            'tag_id' => $request->tag_id,
+            'stock' => $request->stock ?? $product->stock,
         ]);
 
         // Substitui imagens se novas forem enviadas
@@ -110,7 +114,7 @@ class ProductController extends Controller
 
             foreach ($novas as $index => $img) {
                 $product->images()->create([
-                    'path'     => $img,
+                    'path' => $img,
                     'is_cover' => $index === 0,
                 ]);
             }

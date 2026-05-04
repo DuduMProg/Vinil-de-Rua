@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
+
 
 
 Route::get('/', function () {
@@ -28,10 +30,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/delete/{product}', [ProductController::class, 'delete']);
 
 
-    //ROTAS DA CATEGORIA
+    //ROTAS DA CATEGORIA{
+
+    //CRIAÇÃO
     Route::get('/category', [CategoryController::class, 'index']);
     Route::get('/category/create', [CategoryController::class, 'create']);
     Route::post('/category/store', [CategoryController::class, 'store']);
+
+    //VISUALIZAÇÃO
+    Route::get('/categories/grime', [CategoryController::class, 'grime']);
+
+    //ROTAS DA Tag
+    Route::get('/tag/create', [TagController::class, 'create']);
+    Route::post('/tag/store', [TagController::class, 'store']);
+    Route::get('/tag', [TagController::class, 'index']);
+
 });
 
 Route::get('/product', [ProductController::class, 'index']);

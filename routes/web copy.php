@@ -17,7 +17,7 @@ Route::post('/product/update/{product}', [ProductController::Class, 'update']);
 Route::get('/product/delete/{product}', [ProductController::Class, 'delete']);
 
 
-//Categoria
+//Criação de categoria
 Route::get('/category', [CategoryController::class, 'index']);
 Route::get('/category/create', [CategoryController::class, 'create']);
 Route::post('/category/store', [CategoryController::class, 'store']);
