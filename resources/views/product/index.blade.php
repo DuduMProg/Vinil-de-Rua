@@ -33,6 +33,7 @@
             <td><a href="/product/{{ $p->id }}">{{ $p->name }}</a></td>
             <td>{{ $p->artist }}</td>
             <td>{{ $p->category->name ?? 'Sem categoria' }}</td>
+            <td>{{ $p->tags ? $p->tags->count() : 0 }}</td>
             <td>{{ $p->stock }}</td>
             <td>R$ {{ number_format($p->price, 2, ',', '.') }}</td>
             <td>{{ $p->images_count }}</td>
