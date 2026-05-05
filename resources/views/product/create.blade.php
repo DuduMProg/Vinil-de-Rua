@@ -42,12 +42,14 @@
 
     <div>
         Tag:
-        <select name="tags_id[]" multiple>
-            @foreach(\App\Models\Tag::all() as $t)
-                <option value="{{$t->id}}">{{$t->name}}</option>
+        <select name="tag_id">
+            <option value="">Sem tag</option>
+            @foreach($tags as $t)
+                <option value="{{ $t->id }}" {{ old('tag_id') == $t->id ? 'selected' : '' }}>
+                    {{ $t->name }}
+                </option>
             @endforeach
         </select>
-    </div>
 
     <div>
         Preço:

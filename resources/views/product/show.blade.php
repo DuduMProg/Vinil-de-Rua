@@ -7,7 +7,7 @@
 @endif
 
 <h1>{{ $product->name }}</h1>
-<h2>{{ $product->artist }}</h2>  {{-- Artista ao lado do álbum --}}
+<h2>{{ $product->artist }}</h2>  
 
 <p>Categoria: {{ $product->category->name ?? 'Sem categoria' }}</p>
 <p>{{ $product->description }}</p>
@@ -16,7 +16,7 @@
 @if($product->images->count() > 1)
     <div>
         @foreach($product->images->where('is_cover', false) as $img)
-            <img src="{{ $img->path }}" width="100">
+            <img src="{{ $img->path }}" >
         @endforeach
     </div>
 @endif

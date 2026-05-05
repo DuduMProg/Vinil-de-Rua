@@ -12,6 +12,7 @@ class Product extends Model
         'artist',
         'description',
         'price',
+        'tag_id',
         'stock',
         'category_id',
         'slug',
@@ -42,5 +43,9 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function Tags(){
+        return $this->belongsToMany(Tag::class);
     }
 }

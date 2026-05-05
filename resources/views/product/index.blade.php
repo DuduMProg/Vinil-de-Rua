@@ -1,4 +1,3 @@
-{{-- resources/views/product/index.blade.php --}}
 
 @if(session('success'))
     <p style="color: green">{{ session('success') }}</p>
@@ -34,14 +33,13 @@
             <td><a href="/product/{{ $p->id }}">{{ $p->name }}</a></td>
             <td>{{ $p->artist }}</td>
             <td>{{ $p->category->name ?? 'Sem categoria' }}</td>
-            <td>{{ $p->tag ?? 'Sem tag' }}</td>
+            <td>{{ $p->tags_count ?? 0 }}</td>
             <td>{{ $p->stock }}</td>
             <td>R$ {{ number_format($p->price, 2, ',', '.') }}</td>
             <td>{{ $p->images_count }}</td>
             <td>
                 <a href="/product/{{ $p->id }}/edit">Editar</a> |
 
-                {{-- ✅ Delete via form com método DELETE --}}
                 <form action="/product/{{ $p->id }}" method="POST" style="display:inline"
                     onsubmit="return confirm('Deletar {{ $p->name }}?')">
                     @csrf
