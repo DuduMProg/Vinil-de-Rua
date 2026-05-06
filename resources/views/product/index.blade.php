@@ -30,7 +30,7 @@
                     —
                 @endif
             </td>
-            <td><a href="/product/{{ $p->id }}">{{ $p->name }}</a></td>
+            <td><a href="/categories/{{ $p->id }}">{{ $p->name }}</a></td>
             <td>{{ $p->artist }}</td>
             <td>{{ $p->category->name ?? 'Sem categoria' }}</td>
             <td>{{ $p->tags_count ?? 0 }}</td>

@@ -23,4 +23,14 @@ class CategoryController extends Controller
         return redirect('/category');
     }
 
+    public function show(Category $category)
+    {
+        return view('category.show', [
+            'category' => $category,
+            'products' => $category->products()->get()
+        ]);
+    }
+
+    
+
 }

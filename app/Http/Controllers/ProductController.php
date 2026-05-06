@@ -125,7 +125,6 @@ class ProductController extends Controller
         return redirect('/product')->with('success', 'Produto atualizado com sucesso!');
     }
 
-    // ✅ DELETE corrigido — usa método DELETE via form, não GET via link
     public function destroy(Product $product)
     {
         $product->images()->delete();
@@ -134,10 +133,5 @@ class ProductController extends Controller
         return redirect('/product')->with('success', 'Produto deletado com sucesso!');
     }
 
-    public function show(Product $product)
-    {
-        $product->load(['images', 'category']);
-
-        return view('product.show', ['product' => $product]);
-    }
+    
 }

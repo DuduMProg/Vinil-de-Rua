@@ -38,7 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/category/store', [CategoryController::class, 'store']);
 
     //VISUALIZAÇÃO
-    Route::get('/categories/grime', [CategoryController::class, 'grime']);
 
     //ROTAS DA Tag
     Route::get('/tag/create', [TagController::class, 'create']);
@@ -46,8 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tag', [TagController::class, 'index']);
 
 });
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index']); 
 require __DIR__ . '/auth.php';
 
 Route::get('/product/show/{product}', [ProductController::class, 'show']);

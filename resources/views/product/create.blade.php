@@ -45,7 +45,7 @@
         <select name="tag_id">
             <option value="">Sem tag</option>
             @foreach($tags as $t)
-                <option value="{{ $t->id }}" {{ old('tag_id') == $t->id ? 'selected' : '' }}>
+                <option value="{{ $t->id }}" {{ old('category_id') == $t->id ? 'selected' : '' }}>
                     {{ $t->name }}
                 </option>
             @endforeach
