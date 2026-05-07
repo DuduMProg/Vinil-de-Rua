@@ -34,7 +34,7 @@
             <option value="">Sem categoria</option>
             @foreach($categories as $c)
                 <option value="{{ $c->id }}" {{ old('category_id') == $c->id ? 'selected' : '' }}>
-                    {{ $c->name }}
+                    {{ $c -> name }}
                 </option>
             @endforeach
         </select>
@@ -45,11 +45,12 @@
         <select name="tag_id">
             <option value="">Sem tag</option>
             @foreach($tags as $t)
-                <option value="{{ $t->id }}" {{ old('category_id') == $t->id ? 'selected' : '' }}>
-                    {{ $t->name }}
+                <option value="{{ $t->id }}" {{ old('tag_id') == $t->id ? 'selected' : '' }}>
+                    {{ $t -> name }}
                 </option>
             @endforeach
         </select>
+    </div>
 
     <div>
         Preço:

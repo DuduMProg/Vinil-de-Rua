@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Tag;
 
 class ProductController extends Controller
 {
@@ -15,12 +16,13 @@ class ProductController extends Controller
         ]);
     }
 
-    
+
 
     public function create()
     {
         return view('product.create', [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ]);
     }
 
@@ -46,6 +48,8 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'tag_id' => $request->tag_id,
             'stock' => $request->stock ?? 0,
+            'main_img' => 'nullable|url',
+            'images.*' => 'nullable|url',
         ]);
 
         // Salva imagem principal como primeira (is_cover = true)
@@ -133,5 +137,5 @@ class ProductController extends Controller
         return redirect('/product')->with('success', 'Produto deletado com sucesso!');
     }
 
-    
+
 }
