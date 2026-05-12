@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\Auth\TwoFactorController;
+use App\Http\Controllers\CartController;
 
 
 Route::get('/', function () {
@@ -44,6 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/tag/store', [TagController::class, 'store']);
     Route::get('/tag', [TagController::class, 'index']);
 
+
+    //CARRINHO
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/store/{product}', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
+    Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 });
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
