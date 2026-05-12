@@ -104,7 +104,6 @@ class ProductController extends Controller
             'artist' => $request->artist,
             'description' => $request->description,
             'price' => $request->price,
-            'category_id' => $request->category_id,
             'tag_id' => $request->tag_id,
             'stock' => $request->stock ?? $product->stock,
         ]);
