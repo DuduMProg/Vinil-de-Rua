@@ -1,42 +1,49 @@
-<form action="/product/update/{{$product->id}}" method="POST">
+<form action="/product/{{ $product->id }}" method="POST">
     @csrf
+    @method('PUT')
 
     <div>
         Nome do Produto:
-        <input type="text" name="name" value="{{$product->name}}">
+        <input type="text" name="name" value="{{ $product->name }}">
     </div>
 
     <div>
         Nome do Artista:
-        <input type="text" name="name" value="{{$product->artist}}">
+        <input type="text" name="artist" value="{{ $product->artist }}">
     </div>
 
     <div>
         Descrição:
-        <input type="text" name="description" value="{{$product->description}}">
+        <input type="text" name="description" value="{{ $product->description }}">
     </div>
 
     <div>
         Categoria:
-        <select name="category_id[]" multiple>
+        <select name="category_id"> 
+            <option value="">Sem categoria</option>
             @foreach(\App\Models\Category::all() as $c)
-                <option value="{{$c->id}}">{{$c->name  ? 'selected' : '' }}</option>
+                <option value="{{ $c->id }}" {{ $product->category_id == $c->id ? 'selected' : '' }}>
+                    {{ $c->name }} 
+                </option>
             @endforeach
         </select>
     </div>
 
     <div>
-        Tag: 
-        <select name="tags_id[]" multiple>
+        Tag:
+        <select name="tag_id"> 
+            <option value="">Sem tag</option>
             @foreach(\App\Models\Tag::all() as $t)
-                <option value="{{$t->id}}">{{$t->name  ? 'selected' : '' }}</option>
+                <option value="{{ $t->id }}" {{ $product->tag_id == $t->id ? 'selected' : '' }}>
+                    {{ $t->name }} 
+                </option>
             @endforeach
         </select>
     </div>
 
     <div>
         Preço:
-        <input type="number" name="price" value="{{$product->price}}" step="0.01">
+        <input type="number" name="price" value="{{ $product->price }}" step="0.01">
     </div>
 
     <div>
@@ -61,15 +68,13 @@
             <div>
                 <img src="{{ $img->path }}" width="100">
                 <p>{{ $img->path }}</p>
-                <input type="text" name="images[]" placeholder="https://...">
             </div>
         @endforeach
 
-
+        <input type="text" name="images[]" placeholder="https://...">
+        <input type="text" name="images[]" placeholder="https://...">
+        <input type="text" name="images[]" placeholder="https://...">
     </div>
-
-
-
 
     <button type="submit">Editar Produto</button>
 </form>
