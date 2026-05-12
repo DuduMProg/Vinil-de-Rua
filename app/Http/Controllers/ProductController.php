@@ -87,23 +87,13 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'category_id' => 'nullable|exists:categories,id',
-            'tag_id' => 'nullable|exists:tag,id',
-            'stock' => 'nullable|integer|min:0',
-            'main_img' => 'nullable|url',
-            'images.*' => 'nullable|url',
-        ]);
 
         $product->update([
             'name' => $request->name,
             'artist' => $request->artist,
             'description' => $request->description,
             'price' => $request->price,
+            'category_id' => $request->category_id,
             'tag_id' => $request->tag_id,
             'stock' => $request->stock ?? $product->stock,
         ]);

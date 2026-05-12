@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
-
+use App\Http\Controllers\Auth\TwoFactorController;
 
 
 Route::get('/', function () {
@@ -47,9 +47,19 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
-Route::get('/product', [ProductController::class, 'index']); 
+Route::get('/product', [ProductController::class, 'index']);
 require __DIR__ . '/auth.php';
 
 Route::get('/product/show/{product}', [ProductController::class, 'show']);
+
+
+
+
+Route::get('two-factor', [TwoFactorController::class, 'show'])
+    ->name('2fa.show');
+Route::post('two-factor', [TwoFactorController::class, 'verify'])
+    ->name('2fa.verify');
+Route::post('two-factor/resend', [TwoFactorController::class, 'resend'])
+    ->name('2fa.resend');
 
 
