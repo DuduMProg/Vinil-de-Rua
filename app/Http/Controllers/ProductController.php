@@ -97,7 +97,7 @@ class ProductController extends Controller
             'tag_id' => $request->tag_id,
             'stock' => $request->stock ?? $product->stock,
         ]);
-        
+
 
         // Substitui imagens se novas forem enviadas
         $novas = array_filter(array_merge(
@@ -127,5 +127,12 @@ class ProductController extends Controller
         return redirect('/product')->with('success', 'Produto deletado com sucesso!');
     }
 
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('product.show', compact('product'));
+    }
 
 }

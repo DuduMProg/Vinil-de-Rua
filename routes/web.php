@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/delete/{product}', [ProductController::class, 'delete']);
 
 
-    //ROTAS DA CATEGORIA{
+    //ROTAS DA CATEGORIA
 
     //CRIAÇÃO
     Route::get('/category', [CategoryController::class, 'index']);
@@ -39,11 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/category/store', [CategoryController::class, 'store']);
 
     //VISUALIZAÇÃO
+    Route::get('/product/show/{product}', [ProductController::class, 'show']);
 
     //ROTAS DA Tag
     Route::get('/tag/create', [TagController::class, 'create']);
     Route::post('/tag/store', [TagController::class, 'store']);
-    Route::get('/tag', [TagController::class, 'index']);
 
 
     //CARRINHO
@@ -53,13 +53,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
     Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 });
+
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 
 Route::get('/product', [ProductController::class, 'index']);
 require __DIR__ . '/auth.php';
 
-Route::get('/product/show/{product}', [ProductController::class, 'show']);
+Route::get('/tag', [TagController::class, 'index']);
 
+Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
 
