@@ -1,9 +1,13 @@
-
 @if(session('success'))
     <p style="color: green">{{ session('success') }}</p>
 @endif
 
 <a href="/product/create">+ Novo Produto</a>
+
+<a href="/tag/show/1">
+            Pag de ofertas
+</a>
+
 
 <table border="1">
     <tr>
@@ -19,7 +23,12 @@
         <th>Ações</th>
     </tr>
 
+
     @foreach($products as $p)
+
+
+
+
         @php $cover = $p->images->firstWhere('D', true) ?? $p->images->first() @endphp
         <tr>
             <td>{{ $p->id }}</td>
@@ -33,7 +42,7 @@
             <td><a href="/categories/{{ $p->category->id }}">{{ $p->name }}</a></td>
             <td>{{ $p->artist }}</td>
             <td>{{ $p->category->name ?? 'Sem categoria' }}</td>
-            <td>{{ $p->tags_count ?? 0 }}</td>
+            <td>{{ $p->tag->name ?? 'Sem tag' }}</td>
             <td>{{ $p->stock }}</td>
             <td>R$ {{ number_format($p->price, 2, ',', '.') }}</td>
             <td>{{ $p->images_count }}</td>

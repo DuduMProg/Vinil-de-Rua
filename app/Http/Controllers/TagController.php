@@ -22,4 +22,12 @@ class TagController extends Controller
         Tag::create($request->all());
         return redirect('/tag');
     }
+
+    public function show(Tag $tag)
+    {
+        return view('tag.show', [
+            'tag' => $tag,
+            'products' => $tag->products()->get()
+        ]);
+    }
 }
