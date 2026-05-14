@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $tag->name }}</title>
+    <title>Ofertas</title>
 </head>
-<link rel="stylesheet" href="{{ asset('css/category.css') }}">
 
 <style>
     * {

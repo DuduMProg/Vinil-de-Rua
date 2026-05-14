@@ -7,7 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\Auth\TwoFactorController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\SpotifyController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,7 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/tag', [TagController::class, 'index']);
     Route::get('/tag/create', [TagController::class, 'create']);
     Route::post('/tag/store', [TagController::class, 'store']);
-    Route::get('/tag/show/{tag}', [TagController::class, 'show'])->name('tag.show');
+    Route::get('/tag/show/{tag}', [TagController::class, 'show']);
+    Route::get('/tag/edit/{tag}', [TagController::class, 'edit']);
+    Route::post('/tag/update/{tag}', [TagController::class, 'update']);
+    Route::get('/tag/delete/{tag}', [TagController::class, 'delete']);
+
+
+
 
     //CARRINHO
 
@@ -55,6 +62,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
     Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 });
+
+//SPOTIFY
+Route::get('/spotify/token', [SpotifyController::class, 'token'])->name('spotify.token');
+
+//FAVORITO
+Route::get('/whishlist', [WishlistController::class, 'index'])->name('whishlist.index');
+Route::post('/whishlist/store/{product}', [WishlistController::class, 'store'])->name('whishlist.store');
+Route::post('/whishlist/delete/{product}', [WishlistController::class, 'delete'])->name('whishlist.delete');
 
 
 
