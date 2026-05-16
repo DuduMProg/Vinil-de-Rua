@@ -1,301 +1,421 @@
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-    :root {
-        --fontePrimaria: 'Caesar Dressing', cursive;
-        --fonteSecundaria: 'Anton', sans-serif;
-        --fonteTerciaria: "Young Serif", serif;
-        --fonteNumeros: "Sahitya", serif;
-        --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-        --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-        --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    }
+:root {
+    /* fontes */
+    --fontePrimaria: 'Caesar Dressing', cursive;
+    --fonteSecundaria: 'Anton', sans-serif;
+    --fonteTerciaria: "Young Serif", serif;
+    /* Cores */
+    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* drop shadow discos */
+    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+}
 
-    #preloader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-    }
-
-    header {
-        width: 100%;
-        height: 110px;
-        display: flex;
-        align-items: center;
-        padding: 0 25px;
-        justify-content: space-between;
-        background-color: #7E7E7E;
-        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
-
-    nav {
-        display: flex;
-        gap: 78px;
-    }
-
-    nav a {
-        text-decoration: none;
-        color: #FFFFFF;
-        font-family: "Caesar Dressing", system-ui;
-        font-size: 32px;
-        transition: color 0.8s ease-in-out;
-    }
-
-    header img {
-        width: 87px;
-        height: 87px;
-    }
-
-    .logoHeader {
-        display: flex;
-        align-items: center;
-        color: #FFFFFF;
-        font-family: "Anton", sans-serif;
-        font-size: 35px;
-        transition: color 0.8s ease-in-out;
-    }
-
-    .logoHeader a {
-        text-decoration: none;
-    }
-
-    .logoHeader p {
-        margin-left: 7px;
-    }
-
-    header .icons img {
-        width: 47px;
-        height: 47px;
-        filter: brightness(0) invert(1);
-        transition: filter 0.8s ease-in-out;
-    }
-
-    .icons {
-        display: flex;
-        gap: 14px;
-    }
-
-    header.scrolled {
-        background-color: #FFFFFF;
-        padding: 0 25px;
-    }
-
-    header.scrolled .logoHeader img {
-        content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
-        width: 87px;
-        height: 87px;
-    }
-
-    header.scrolled .logoHeader p {
-        color: #000000;
-    }
-
-    header.scrolled nav a {
-        color: #000000;
-    }
-
-    header.scrolled .icons img {
-        filter: brightness(0);
-    }
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 
 
+header {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    justify-content: space-between;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
 
-    .fundoPrincipal {
-        background: var(--gradienteVertical2);
-    }
+nav {
+    display: flex;
+    gap: 78px;
+}
 
-    .detalhesProduto {
-        display: flex;
-        flex-direction: column;
-        width: 500px;
-    }
+nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-family: "Caesar Dressing", system-ui;
+    font-size: 32px;
+    transition: color 0.8 ease-in-out;
+}
 
-    .imgProduto {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        border: 2px solid red;
-        align-items: center;
-        justify-content: center;
-    }
+header img {
+    width: 87px;
+    height: 87px;
+}
 
- 
+.logoHeader {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    font-family: "Anton", sans-serif;
+    font-size: 35px;
+    transition: color 0.8 ease-in-out;
+}
 
-    
-    
-    .cadaImgMini{
-        border: 1px solid #000000;
-        padding: 12px;
-    }
+.logoHeader a {
+    text-decoration: none;
+}
 
-    .imgProdutoMini img {
-        width: 100px;
-        height: auto;
-    }
+.logoHeader p {
+    margin-left: 7px;
+}
 
-    .img-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        cursor: zoom-out;
-    }
+header .icons img {
+    width: 47px;
+    height: 47px;
+    filter: brightness(0) invert(1);
+    /* deixa branco */
+    transition: filter 0.8 ease-in-out;
+}
 
-    .img-overlay img {
-        max-width: 80vw;
-        max-height: 80vh;
-        border-radius: 10px;
-        box-shadow: 0 0 40px #000;
-        transform: scale(1.2);
-        transition: transform 0.3s ease;
-        cursor: pointer;
-    }
+.icons {
+    display: flex;
+    gap: 14px;
+}
 
-    .img-overlay img:hover {
-        transform: scale(2.2);
-    }
-    
-        
+/* ===== ESTADO APÓS ROLAR ===== */
+header.scrolled {
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
+    padding: 0 25px;
+}
 
-    .telaCompra {
-        display: flex;
-        justify-content: center;
-        gap: 500px;
-        margin: 100px;
-        padding: 100px;
-        border: 2px solid red;
-    }
+header.scrolled .logoHeader img {
+    content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
+    width: 87px;
+    height: 87px;
+}
 
-    .infosProduto {
-        display: flex;
-        gap: 65px;
-        flex-direction: column;
-        align-items: center;
-        justify-content: right;
-    }
+header.scrolled .logoHeader p {
+    color: #000000;
+}
 
-    .infosProduto h1 {
-        font-family: var(--fontePrimaria);
-        font-size: 40px;
-    }
+header.scrolled nav a {
+    color: #000000;
+}
 
-    .finalizarCompra {
-        align-self: flex-end;
-        margin-top: auto;
-        text-align: right;
-        font-family: var(--fontePrimaria);
-    }
+header.scrolled .logoHeader img {
+    color: #000000;
+}
 
-    .finalizarCompra p {
-        font-size: 26px;
-        margin-bottom: 15px;
-    }
+header.scrolled .icons img {
+    filter: brightness(0);
+}
 
-    .finalizarCompra button {
-        border-radius: 3px;
-        border: 1px solid #000000;
-        padding: 6px 18px;
-        font-family: var(--fontePrimaria);
-        font-size: 20px;
-        cursor: pointer;
-        color: #ffff;
-        background-color: #000000;
-        transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
-    }
 
-    .finalizarCompra button:hover {
-        background-color: #acacac;
-        color: #ffffff;
-        border: 2.2px solid #ffffff;
-        transform: scale(1.0);
-        box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
-    }
+main {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    /* Spotify */
+.conteiner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 745px;
+}
 
-    
+.conteiner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
 
-    .spotifyErro {
-        font-family: var(--fonteTerciaria);
-        color: #303030;
-        font-size: 16px;
-    }
+.conteiner span {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 94px;
+    font-weight: bold;
+    color: #000000;
+    font-family: var(--fontePrimaria);
+    background-color: #838383;
+    border-radius: 8px;
+    padding: 20px 34px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
 
-    footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 30px 45px;
-        width: 100%;
-        background-color: #4C4C4C;
-        color: white;
-        border-radius: 10px 10px 0 0;
-    }
 
-    .footerLogo {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
+/* PARTE CATALOGO */
 
-    .footerLogo img {
-        width: 88px;
-        height: 88px;
-    }
+.fundoPrincipal {
+    background: var(--gradienteVertical2);
+}
 
-    .footerLogo h1 {
-        font-family: var(--fonteSecundaria);
-        font-size: 24px;
-        font-weight: 100;
-        letter-spacing: 2px;
-        line-height: 35px;
-        display: flex;
-        align-items: end;
-    }
+.outrasCategorias {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 0 210px;
+    font-family: var(--fontePrimaria);
+}
 
-    .avisosFooter {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 50px;
-        font-family: var(--fonteTerciaria);
-        font-size: 22px;
-    }
+.outrasCategorias h1 {
+    color: #000000;
+    font-size: 42px;
 
-    .termos a {
-        margin-top: 20px;
-        text-decoration: underline;
-        font-family: var(--fonteTerciaria);
-        color: #ffffffff;
-        font-size: 22px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+}
+
+.categorias {
+    display: flex;
+    gap: 50px;
+}
+
+.categorias a {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.categorias a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #1b1b1b;
+    transition: width 0.3s ease-in-out;
+}
+
+.categorias a:hover::after {
+    width: 100%;
+}
+
+
+
+
+
+.catalogoCategoria {
+    display: grid;
+    grid-template-columns: repeat(4, 224px);
+    gap: 150px;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    padding: 125px 0;
+    margin: 0 210px;
+}
+
+.cardDisco {
+    width: 224px;
+    height: 253px;
+    background: var(--gradienteCardDiscos);
+    font-family: var(--fontePrimaria);
+    border-radius: 5px;
+    padding: 0px 7px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+}
+
+.cardDisco:hover {
+    transform: scale(1.03);
+}
+
+.cardDisco .imgCard {
+    cursor: pointer;
+    padding-top: 6px;
+    padding-left: 7px;
+    padding-right: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardDisco .imgCard>img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.infoDisco {
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+.infoDisco .precoDisco {
+    padding-top: 4px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.preçoEFavDisco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.preçoEFavDisco button {
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding: 2px 12px;
+    font-family: var(--fontePrimaria);
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.preçoEFavDisco button:hover {
+    background-color: #acacac;
+    color: #ffffff;
+    border: 2.2px solid #ffffff;
+    transform: scale(1.0);
+    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.preçoEFavDisco .favorite img {
+    width: 20px;
+    height: 20px;
+    transition: color 0.8s ease-in-out;
+    cursor: pointer;
+}
+
+.preçoEFavDisco .cart img {
+    width: 20px;
+    height: 20px;
+    transition: color 0.8s ease-in-out;
+    cursor: pointer;
+}
+
+.preçoEFavDisco .favorite img:hover {
+    content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
+}
+
+.preçoEFavDisco .cart img:hover {
+    content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
+}
+
+
+
+
+
+
+
+footer {
+    background-color: #4C4C4C;
+    color: white;
+    padding: 30px;
+    border-radius: 30px 30px 0px 0px;
+
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    justify-content: flex-start;
+    gap: 238px;
+}
+
+.footerLogo img {
+    width: 117px;
+    height: 117px;
+}
+
+.footerLogo h1 {
+    font-family: var(--fonteSecundaria);
+    font-size: 35px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    line-height: 35px;
+}
+
+.footerLogo {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.socialConteiner {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: var(--fonteTerciaria);
+    margin-right: 335px;
+}
+
+.socialConteiner hr {
+    margin-top: 16px;
+    margin-bottom: 11px;
+}
+
+
+.social {
+    font-size: 24px;
+    margin-top: 23px;
+    margin-bottom: 15px;
+}
+
+
+.socialLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.socialLogo img {
+    max-width: 30px;
+}
+
+.copyrightVdR {
+    display: flex;
+    justify-content: center;
+    font-family: var(--fonteTerciaria);
+    font-size: 24px;
+    margin-top: 90px;
+}
+
+.footerCtt h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.formasPagamento hr {
+    margin-top: 16px;
+    margin-bottom: 11px;
+}
+
+.formasPagamentoImg {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}

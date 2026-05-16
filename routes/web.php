@@ -35,9 +35,7 @@ Route::middleware('auth')->group(function () {
     //ROTAS DA CATEGORIA
 
     //CATEGORIA
-    Route::get('/category', [CategoryController::class, 'index']);
-    Route::get('/category/create', [CategoryController::class, 'create']);
-    Route::post('/category/store', [CategoryController::class, 'store']);
+    Route::resource('category', CategoryController::class);
     Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');
 
     //VISUALIZAÇÃO

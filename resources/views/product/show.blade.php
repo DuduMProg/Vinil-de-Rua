@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
     <!-- SEPARAÇÃO -->
-    <link rel="stylesheet" href="@vite('resources/css/category.css')">
+    <link rel="stylesheet" href="@vite('resources/css/telaDeCompra.css')">
     <link rel="shortcut icon" type="imagex/png" href="/src/assets/images/logoVinilDeRua.svg">
 
 </head>

@@ -3,12 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    public $fillable = ['name'];
+    public $fillable = ['name', 'banner'];
 
-    public function Products(){
+    protected static function booted(): void
+    {
+        static::creating(function ($category) {
+            if (empty($category->slug)) {
+                $category->slug = Str::slug($category->name);
+            }
+        });
+    }
+
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }

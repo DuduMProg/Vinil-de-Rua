@@ -9,7 +9,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('category.index', ['categories' => Category::all()]);
+        return view('category.index', [
+            'categories' => Category::withCount('products')->get()
+        ]);
     }
 
     public function create()
@@ -19,19 +21,56 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect('/category');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'banner' => 'nullable|url',
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+            'banner' => $request->banner,
+        ]);
+
+        return redirect('/category')->with('success', 'Categoria criada!');
     }
 
+    public function edit(Category $category)
+    {
+        return view('category.edit', ['category' => $category]);
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'banner' => 'nullable|url',
+        ]);
+
+        $category->update([
+            'name' => $request->name,
+            'banner' => $request->banner ?? $category->banner,
+        ]);
+
+        return redirect('/category')->with('success', 'Categoria atualizada!');
+    }
+
+    public function destroy(Category $category)
+    {
+        if ($category->banner) {
+            \Storage::disk('public')->delete($category->banner);
+        }
+
+        $category->delete();
+
+        return redirect('/category')->with('success', 'Categoria deletada!');
+    }
 
     public function show(Category $category)
     {
         return view('category.show', [
             'category' => $category,
-            'products' => $category->products()->get(),
-            'categories' => Category::all()
+            'products' => $category->products()->with('images')->get(),
+            'categories' => Category::all(),
         ]);
     }
-
-
 }
