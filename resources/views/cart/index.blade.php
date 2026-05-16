@@ -1,71 +1,233 @@
 {{-- resources/views/cart/index.blade.php --}}
 
-@php $total = 0; @endphp
+<!DOCTYPE html>
+<html lang="pt-br">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@if(session('error'))
-    <p style="color: red">{{ session('error') }}</p>
-@endif
+    <title>Vinil de Rua - Home</title>
 
-@if($cart->items->isEmpty())
-    <p>Seu carrinho está vazio.</p>
-    <a href="/product">Ver produtos</a>
-@else
-    <table border="1">
-        <tr>
-            <th>Capa</th>
-            <th>Produto</th>
-            <th>Artista</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Ações</th>
-        </tr>
+    {{-- FONTES --}}
+    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
 
-        @foreach($cart->items as $i)
-            @php
-                $subtotal = $i->units * $i->product->price;
-                $total += $subtotal;
-                $cover = $i->product->images->firstWhere('is_cover', true) ?? $i->product->images->first();
-            @endphp
-            <tr>
-                <td>
-                    @if($cover)
-                        <img src="{{ $cover->path }}" width="60" alt="Capa">
-                    @else
-                        —
-                    @endif
-                </td>
-                <td><a href="/product/{{ $i->product->id }}">{{ $i->product->name }}</a></td>
-                <td>{{ $i->product->artist }}</td>
-                <td>
-                    {{-- Decrementa --}}
-                    <form action="/cart/decrement/{{ $i->product_id }}" method="POST" style="display:inline">
-                        @csrf
-                        <button type="submit">−</button>
-                    </form>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-                    {{ $i->units }}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-                    {{-- Incrementa --}}
-                    <form action="/cart/store/{{ $i->product_id }}" method="POST" style="display:inline">
-                        @csrf
-                        <button type="submit">+</button>
-                    </form>
-                </td>
-                <td>R$ {{ number_format($i->units * $i->product->price, 2, ',', '.') }}</td>
-                <td>
-                    <form action="/cart/delete/{{ $i->product_id }}" method="POST" style="display:inline"
-                        onsubmit="return confirm('Remover {{ $i->product->name }}?')">
-                        @csrf
-                        <button type="submit">Remover</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </table>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-    <hr>
-    <p><strong>Total: R$ {{ number_format($total, 2, ',', '.') }}</strong></p>
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
 
-    <a href="/checkout">Finalizar Pedido →</a>
-@endif
+    {{-- CSS --}}
+    @vite('resources/css/index.css')
+
+    <link rel="shortcut icon" type="imagex/png" href="/src/assets/images/logoVinilDeRua.svg">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logoHeader">
+
+            <a href="/">
+                <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="logo-Vinil-De-Rua">
+            </a>
+
+            <p>
+                VINIL <br>DE RUA
+            </p>
+
+        </div>
+
+        <nav>
+
+            <a href="/#catalogo">Cátalogo</a>
+
+            <a href="/src/assets/pages/pageOff.html#catalogoOff">
+                Ofertas
+            </a>
+
+            <a href="#contato">Contato</a>
+
+        </nav>
+
+        <div class="icons">
+
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" onclick="openSidebar('wishlist')">
+
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" onclick="openSidebar('cart')">
+
+            <a href="/perfil">
+
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+
+            </a>
+
+        </div>
+
+        {{-- Overlay --}}
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        {{-- Sidebar --}}
+        <div class="sidebar" id="sidebar">
+
+            <div class="sidebar-header">
+
+                <h2 id="sidebar-title">
+                    Carrinho
+                </h2>
+
+                <button onclick="closeSidebar()">
+                    ✖
+                </button>
+
+            </div>
+
+            <div class="sidebar-content">
+
+                @if(session('error'))
+
+                    <p style="color: red">
+                        {{ session('error') }}
+                    </p>
+
+                @endif
+
+                @if($cart->items->isEmpty())
+
+                    <p>
+                        Seu carrinho está vazio.
+                    </p>
+
+                    <a href="/product">
+                        Se pudermos fazer algumas sugestões...
+                    </a>
+
+                @else
+
+                    @php $total = 0; @endphp
+
+                    @foreach($cart->items as $i)
+
+                        @php
+                            $subtotal = $i->units * $i->product->price;
+
+                            $total += $subtotal;
+
+                            $cover =
+                                $i->product->images->firstWhere('is_cover', true)
+                                ?? $i->product->images->first();
+                        @endphp
+
+                        <div class="produtoItem">
+
+                            @if($cover)
+
+                                <img src="{{ $cover->path }}" alt="{{ $i->product->name }}" class="imgProdCart">
+
+                            @endif
+
+                            <div class="nomeProd">
+
+                                <p>
+                                    {{ $i->product->name }}
+                                </p>
+
+                                <div class="qntdProd">
+
+                                    {{-- decrementa --}}
+                                    <form action="/cart/decrement/{{ $i->product_id }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit">
+                                            -
+                                        </button>
+                                    </form>
+
+                                    <span>
+                                        {{ $i->units }}
+                                    </span>
+
+                                    {{-- incrementa --}}
+                                    <form action="/cart/store/{{ $i->product_id }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit">
+                                            +
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                            <div class="deletePrice">
+
+                                <form action="/cart/delete/{{ $i->product_id }}" method="POST"
+                                    onsubmit="return confirm('Remover {{ $i->product->name }}?')">
+                                    @csrf
+
+                                    <button type="submit" class="deleteBtn">
+
+                                        <img src="https://i.ibb.co/Zzdfgwmf/delete.png" class="deleteIcon" alt="deletar">
+
+                                    </button>
+
+                                </form>
+
+                                <p>
+                                    R$ {{ number_format($subtotal, 2, ',', '.') }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    @endforeach
+
+                    <div class="cartTotal">
+
+                        <h3>
+                            Total: R$ {{ number_format($total, 2, ',', '.') }}
+                        </h3>
+
+                    </div>
+
+                @endif
+
+            </div>
+
+            <div class="btnResumo">
+
+                <a href="/checkout">
+
+                    <button>
+                        Resumo da compra
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <script src="/src/assets/scripts/navbar.js"></script>
+
+    <script src="/src/assets/scripts/loading.js"></script>
+
+    <script src="/src/assets/scripts/carrinho.js"></script>
+
+    <script src="/src/assets/scripts/conexão.js"></script>
+
+    <script src="/src/assets/scripts/telaDeCompra.js"></script>
+
+    @vite('resources/js/index.js')
+
+</body>
+
+</html>
