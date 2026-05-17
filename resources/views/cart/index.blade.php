@@ -55,17 +55,11 @@
         </nav>
 
         <div class="icons">
-
             <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" onclick="openSidebar('wishlist')">
-
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" onclick="openSidebar('cart')">
-
             <a href="/perfil">
-
                 <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-
             </a>
-
         </div>
 
         {{-- Overlay --}}
@@ -73,39 +67,20 @@
 
         {{-- Sidebar --}}
         <div class="sidebar" id="sidebar">
-
             <div class="sidebar-header">
-
-                <h2 id="sidebar-title">
-                    Carrinho
-                </h2>
-
-                <button onclick="closeSidebar()">
-                    ✖
-                </button>
-
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button onclick="closeSidebar()">✖</button>
             </div>
-
             <div class="sidebar-content">
 
                 @if(session('error'))
-
-                    <p style="color: red">
-                        {{ session('error') }}
-                    </p>
-
+                    <p style="color: red">{{ session('error') }}</p>
                 @endif
 
                 @if($cart->items->isEmpty())
+                    <p>Seu carrinho está vazio.</p>
 
-                    <p>
-                        Seu carrinho está vazio.
-                    </p>
-
-                    <a href="/product">
-                        Se pudermos fazer algumas sugestões...
-                    </a>
-
+                    <a href="/product">Se pudermos fazer algumas sugestões...</a>
                 @else
 
                     @php $total = 0; @endphp
@@ -123,76 +98,50 @@
                         @endphp
 
                         <div class="produtoItem">
-
                             @if($cover)
-
                                 <img src="{{ $cover->path }}" alt="{{ $i->product->name }}" class="imgProdCart">
-
                             @endif
 
                             <div class="nomeProd">
-
-                                <p>
-                                    {{ $i->product->name }}
-                                </p>
-
+                                <p>{{ $i->product->name }}</p>
                                 <div class="qntdProd">
-
                                     {{-- decrementa --}}
                                     <form action="/cart/decrement/{{ $i->product_id }}" method="POST">
                                         @csrf
-
-                                        <button type="submit">
-                                            -
-                                        </button>
+                                        <button type="submit">-</button>
                                     </form>
 
-                                    <span>
-                                        {{ $i->units }}
-                                    </span>
+                                    <span>{{ $i->units }}</span>
 
                                     {{-- incrementa --}}
                                     <form action="/cart/store/{{ $i->product_id }}" method="POST">
                                         @csrf
 
-                                        <button type="submit">
-                                            +
-                                        </button>
+                                        <button type="submit">+</button>
                                     </form>
-
                                 </div>
-
                             </div>
-
                             <div class="deletePrice">
 
                                 <form action="/cart/delete/{{ $i->product_id }}" method="POST"
                                     onsubmit="return confirm('Remover {{ $i->product->name }}?')">
                                     @csrf
 
-                                    <button type="submit" class="deleteBtn">
-
-                                        <img src="https://i.ibb.co/Zzdfgwmf/delete.png" class="deleteIcon" alt="deletar">
-
-                                    </button>
+                                    <button type="submit" class="deleteBtn"><img src="https://i.ibb.co/Zzdfgwmf/delete.png"
+                                            class="deleteIcon" alt="deletar"></button>
 
                                 </form>
 
-                                <p>
-                                    R$ {{ number_format($subtotal, 2, ',', '.') }}
-                                </p>
+                                <p>R$ {{ number_format($subtotal, 2, ',', '.') }}</p>
 
                             </div>
-
                         </div>
 
                     @endforeach
 
                     <div class="cartTotal">
 
-                        <h3>
-                            Total: R$ {{ number_format($total, 2, ',', '.') }}
-                        </h3>
+                        <h3>Total: R$ {{ number_format($total, 2, ',', '.') }}</h3>
 
                     </div>
 
@@ -204,9 +153,7 @@
 
                 <a href="/checkout">
 
-                    <button>
-                        Resumo da compra
-                    </button>
+                    <button>Resumo da compra</button>
 
                 </a>
 
@@ -216,15 +163,6 @@
 
     </header>
 
-    <script src="/src/assets/scripts/navbar.js"></script>
-
-    <script src="/src/assets/scripts/loading.js"></script>
-
-    <script src="/src/assets/scripts/carrinho.js"></script>
-
-    <script src="/src/assets/scripts/conexão.js"></script>
-
-    <script src="/src/assets/scripts/telaDeCompra.js"></script>
 
     @vite('resources/js/index.js')
 

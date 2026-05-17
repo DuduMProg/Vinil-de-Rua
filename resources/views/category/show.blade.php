@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$category->name}} - Categoria</title>
-    <link rel="stylesheet" href="{{ asset('/css/category.css') }}">
-    
+
     <!-- FONTES USADASS -->
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,13 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
     <!-- SEPARAÇÃO -->
-    <link rel="stylesheet" href="@vite('resources/css/category.css')">
-    <link rel="shortcut icon" type="imagex/png" href="/src/assets/images/logoVinilDeRua.svg">
+    @vite('resources/css/category.css')
+    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
+
 </head>
 
 <body>
 
-
+    <div id="preloader">
+        <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading" border="0">
+    </div>
 
     <header>
         <div class="logoHeader">
@@ -229,11 +231,9 @@
 
     </section>
 
-    <script src="{{ asset('js/navbar.js') }}"></script>
-    <script src="{{ asset('js/loading.js') }}"></script>
-    <script src="{{ asset('js/carrinho.js') }}"></script>
-    <script src="{{ asset('js/conexao.js') }}"></script>
-    <script src="{{ asset('js/telaDeCompra.js') }}"></script>
+    @vite('resources/js/navbar.js')
+    @vite('resources/js/loading.js')
+    @vite('resources/js/telaDeCompra.js')
 
 </body>
 

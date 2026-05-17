@@ -9,10 +9,10 @@ use App\Http\Controllers\Auth\TwoFactorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\SpotifyController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/show/{product}', [ProductController::class, 'show']);
 
     //ROTAS DA Tag
+
+
+    Route::resource('tag', TagController::class);
     Route::get('/tag', [TagController::class, 'index']);
     Route::get('/tag/create', [TagController::class, 'create']);
     Route::post('/tag/store', [TagController::class, 'store']);
@@ -54,12 +57,14 @@ Route::middleware('auth')->group(function () {
 
 
     //CARRINHO
-
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart/sidebar', [CartController::class, 'sidebar'])->name('cart.sidebar'); // nova
     Route::post('/cart/store/{product}', [CartController::class, 'store'])->name('cart.store');
     Route::post('/cart/decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
     Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 });
+
+Route::get('/', [HomeController::class, 'index']);
 
 //SPOTIFY
 Route::get('/spotify/token', [SpotifyController::class, 'token'])->name('spotify.token');

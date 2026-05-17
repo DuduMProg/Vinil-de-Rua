@@ -314,6 +314,7 @@ main {
 .conteiner {
   display: flex;
   align-items: center;
+  height: 100vh;
   justify-content: space-between;
   padding: 80px 10%;
   gap: 40px;
@@ -333,6 +334,7 @@ main {
 
 .textConteiner h1 span {
   font-style: bold;
+  font-family: var(--fontePrimaria);
   color: #000000;
 }
 
@@ -343,33 +345,64 @@ main {
   margin-bottom: 366px;
 }
 
-/* SE EU CONSEGUIR FAZER, FAÇO ESSA PARTE DE CAMDADA CERTIN DPS OK BY: EDUARDO */
+.banner {
+  position: relative;
 
-/* Todas as imagens ocupam o mesmo espaço */
-/* .imageHero img {
+  width: 500px;
+  height: 500px;
+}
+
+/* fundo */
+.shape {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-}
+  inset: 0;
 
-.discoGirando {
+
   z-index: 1;
-  width: 150%;   
-  left: -25%;    
 }
 
+/* disco */
+.vinyl {
+  position: absolute;
 
-.fundo {
-  z-index: 2; 
+  width: 340px;
+
+  top: 85px;
+  right: 25px;
+
+  z-index: 2;
+
+  animation: spin 5s linear infinite;
+
+  transform-origin: center center;
 }
 
-.imgSabota {
-  z-index: 3; 
+/* artista */
+.artist {
+  position: absolute;
+
+  width: 670px;
+
+  left: 50%;
+  bottom: -40px;
+
+  transform: translateX(-55%);
+
+  z-index: 3;
+
+  filter:
+    drop-shadow(0 15px 20px rgba(0, 0, 0, .45));
 }
 
-*/
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .fundoPrincipal {
   position: relative;
@@ -658,8 +691,9 @@ main {
 }
 
 .categorias img {
-  width: 100%;
-  display: block;
+  width: 500px;
+  height: 150px;
+  border-radius: 10px;
 }
 
 .cardCategorias {

@@ -11,14 +11,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
     <!-- SEPARAÇÃO -->
-    <link rel="stylesheet" href="@vite('resources/css/telaDeCompra.css')">
-    <link rel="shortcut icon" type="imagex/png" href="/src/assets/images/logoVinilDeRua.svg">
+    @vite('resources/css/telaDeCompra.css')
+    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
+
 
 </head>
 
 
 
 <body class="fundoPrincipal">
+
+    <div id="preloader">
+        <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading" border="0">
+    </div>
+
+    <header>
+        <div class="logoHeader">
+            <a href="/">
+                <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="logo-Vinil-De-Rua">
+            </a>
+            <p>VINIL <br>DE RUA</p>
+        </div>
+
+        <nav>
+            <a href="/#catalogo">Catalogo</a>
+            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="icons">
+            <a href="/favorite">
+                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
+            </a>
+            <a href="/cart">
+                <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart">
+            </a>
+            <a href="/profile">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </a>
+        </div>
+    </header>
+
 
     <section class="telaCompra">
 
@@ -43,7 +76,8 @@
                 @if($secundarias->count() > 0)
                     <div class="imgProdutoMini">
                         @foreach($secundarias as $img)
-                            <img src="{{ $img->path }}" alt="Imagem de {{ $product->name }}" class="cadaImgMini" style="cursor:pointer">
+                            <img src="{{ $img->path }}" alt="Imagem de {{ $product->name }}" class="cadaImgMini"
+                                style="cursor:pointer">
                         @endforeach
                     </div>
                 @endif
@@ -93,65 +127,26 @@
     <div id="spotifyData" data-album="{{ $product->name }}" data-artist="{{ $product->artist }}" style="display:none">
     </div>
 
-    <script>
-        document.querySelectorAll('.imgProduto img').forEach(img => {
-            img.addEventListener('click', function () {
-                // Cria o overlay
-                const overlay = document.createElement('div');
-                overlay.className = 'img-overlay';
-                overlay.innerHTML = `<img src="${this.src}" alt="${this.alt}">`;
-                document.body.appendChild(overlay);
+    <footer id="contato">
+        <div class="footerLogo">
+            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
+            <h1>VINIL <br>DE RUA</h1>
+        </div>
 
-                overlay.addEventListener('click', function () {
-                    overlay.remove();
-                });
-            });
-        });
+        <div class="avisosFooter">
+            <p>Duvidas? (11) 4002-8922 (SP)</p>
+            <p>Seg a Sex, 9h às 21h Sáb 10h às 18h</p>
 
+        </div>
+        <div class="termos">
+            <a href="">Termos e Condições</a>
+        </div>
 
-        // ── Spotify ──
+    </footer>
 
-        // Busca o token no Laravel (renovado automaticamente via cache)
-        async function getToken() {
-            const res = await fetch('/spotify/token');
-            const data = await res.json();
-            return data.token;
-        }
-
-        // Busca álbum pelo nome + artista para maior precisão
-        async function buscarAlbum(nomeAlbum, nomeArtista) {
-            const token = await getToken();
-            const query = encodeURIComponent(`album:${nomeAlbum} artist:${nomeArtista}`);
-
-            const res = await fetch(
-                `https://api.spotify.com/v1/search?q=${query}&type=album&limit=1`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-
-            const data = await res.json();
-            return data.albums?.items[0] ?? null;
-        }
-
-        // Atualiza o iframe com o álbum encontrado
-        async function atualizarEmbed() {
-            const el = document.getElementById('spotifyData');
-            const album = el.dataset.album;
-            const artist = el.dataset.artist;
-            const iframe = document.getElementById('spotifyEmbed');
-            const erro = document.getElementById('spotifyErro');
-
-            const resultado = await buscarAlbum(album, artist);
-
-            if (resultado) {
-                iframe.src = `https://open.spotify.com/embed/album/${resultado.id}?utm_source=generator&theme=0`;
-                iframe.style.display = 'block';
-            } else {
-                erro.style.display = 'block';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', atualizarEmbed);
-    </script>
+    @vite('resources/js/navbar.js')
+    @vite('resources/js/loading.js')
+    @vite('resources/js/telaDeCompra.js')
 
 </body>
 

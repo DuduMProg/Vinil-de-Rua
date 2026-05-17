@@ -2,10 +2,7 @@
     @csrf
     @method('PUT')
 
-    <div>
-        Nome da Tag:
-        <input type="text" name="name" value="{{ $tag->name }}">
-    </div>
+    Nome: <input type="text" name="name" value="{{ old('name', $tag->name) }}">
 
-    <button type="submit">Editar Tag</button>
+    <button type="submit">Salvar Alterações</button>
 </form>

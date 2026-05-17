@@ -9,6 +9,7 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
+    
 
     // Exibe o carrinho do usuário
     public function index()
@@ -16,62 +17,33 @@ class CartController extends Controller
         $cart = Cart::with(['items.product.images'])
             ->firstOrCreate(['user_id' => auth()->id()]);
 
-        return view('cart.index', [
-            'cart' => $cart,
-        ]);
+        return $this->cartResponse();
     }
 
     // Adiciona produto ao carrinho
     public function store(Request $request, Product $product)
     {
-        // Verifica estoque
         if ($product->stock <= 0) {
-            return redirect()->back()->with('error', 'Produto fora de estoque.');
+            return $this->cartResponse('Produto fora de estoque.', false);
         }
 
-        // Busca ou cria o carrinho do usuário
         $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
-
-        // Verifica se o produto já está no carrinho
         $item = $cart->items()->where('product_id', $product->id)->first();
 
         if ($item) {
-            // Verifica se tem estoque suficiente para incrementar
             if ($item->units >= $product->stock) {
-                return redirect()->back()->with('error', 'Estoque insuficiente.');
+                return $this->cartResponse('Estoque insuficiente.', false);
             }
             $item->increment('units');
         } else {
             $cart->items()->create([
                 'product_id' => $product->id,
                 'units'      => 1,
-                'price'      => $product->price, // snapshot do preço atual
+                'price'      => $product->price,
             ]);
         }
 
-        return redirect()->route('cart.index');
-    }
-
-    // Atualiza quantidade de um item
-    public function update(Request $request, CartItem $cartItem)
-    {
-        $request->validate([
-            'units' => 'required|integer|min:1',
-        ]);
-
-        // Garante que o item pertence ao carrinho do usuário logado
-        if ($cartItem->cart->user_id !== auth()->id()) {
-            abort(403);
-        }
-
-        // Verifica estoque
-        if ($request->units > $cartItem->product->stock) {
-            return redirect()->back()->with('error', 'Estoque insuficiente.');
-        }
-
-        $cartItem->update(['units' => $request->units]);
-
-        return redirect()->route('cart.index')->with('success', 'Carrinho atualizado!');
+        return $this->cartResponse();
     }
 
     // Decrementa quantidade — se chegar a 0, remove o item
@@ -88,7 +60,7 @@ class CartController extends Controller
             }
         }
 
-        return redirect()->route('cart.index');
+        return $this->cartResponse();
     }
 
     // Remove o item completamente
@@ -100,6 +72,49 @@ class CartController extends Controller
             $cart->items()->where('product_id', $product->id)->delete();
         }
 
-        return redirect()->route('cart.index')->with('success', 'Item removido!');
+        return $this->cartResponse();
+    }
+
+    // Retorna HTML da sidebar via AJAX
+    public function sidebar()
+    {
+        $cart = Cart::with(['items.product.images'])
+            ->firstOrCreate(['user_id' => auth()->id()]);
+
+        return $this->cartResponse();
+    }
+
+    // Atualiza quantidade de um item
+    public function update(Request $request, CartItem $cartItem)
+    {
+        $request->validate(['units' => 'required|integer|min:1']);
+
+        if ($cartItem->cart->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        if ($request->units > $cartItem->product->stock) {
+            return $this->cartResponse('Estoque insuficiente.', false);
+        }
+
+        $cartItem->update(['units' => $request->units]);
+
+        return $this->cartResponse();
+    }
+
+    // Helper — retorna JSON (AJAX) ou redirect (requisição normal)
+    private function cartResponse(string $error = '', bool $success = true)
+    {
+        if (request()->ajax() || request()->wantsJson()) {
+            return response()->json([
+                'success' => $success,
+                'error'   => $error,
+            ]);
+        }
+
+        // Fallback para requisições normais (ex: cart/index)
+        return $success
+            ? redirect()->route('cart.index')
+            : redirect()->back()->with('error', $error);
     }
 }
