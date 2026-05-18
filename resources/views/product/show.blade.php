@@ -109,7 +109,13 @@
 
             {{-- Preço e botão de compra --}}
             <div class="finalizarCompra">
-                <p>R$ {{ number_format($product->price, 2, ',', '.') }}</p>
+
+                @if($product->tem_desconto)
+                    <p><s>R$ {{ number_format($product->price, 2, ',', '.') }}</s></p>
+                    <p class="precoOferta">R$ {{ number_format($product->preco_com_desconto, 2, ',', '.') }}</p>
+                @else
+                    <p class="precoOriginal">R$ {{ number_format($product->price, 2, ',', '.') }}</p>
+                @endif
 
                 <form action="/cart/store/{{ $product->id }}" method="POST">
                     @csrf
@@ -117,6 +123,7 @@
                         {{ $product->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
                     </button>
                 </form>
+
             </div>
 
         </section>

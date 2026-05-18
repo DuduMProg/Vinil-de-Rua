@@ -8,24 +8,41 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     public $fillable = [
-        'name',
-        'artist',
-        'description',
-        'price',
-        'stock',
-        'category_id',
-        'tag_id',
-        'slug',
-        'spotify_track_id',
-        'status',
+        'name', 'artist', 'description', 'price',
+        'stock', 'category_id', 'tag_id', 'slug',
+        'spotify_track_id', 'status',
     ];
 
-    // Gera slug automaticamente ao setar o nome
+    // ── Accessors ──────────────────────────────
+
+    // Chame com $product->preco_com_desconto
+    public function getPrecoComDescontoAttribute(): float
+    {
+        if ($this->tag && $this->tag->name === 'oferta') {
+            return $this->price * 0.85;
+        }
+        return $this->price;
+    }
+
+    // Chame com $product->tem_desconto
+    public function getTemDescontoAttribute(): bool
+    {
+        return $this->tag && $this->tag->name === 'oferta';
+    }
+
+    // ── Relacionamentos ────────────────────────
+
     protected static function booted(): void
     {
         static::creating(function ($product) {
             if (empty($product->slug)) {
-                $product->slug = Str::slug($product->name . '-' . $product->artist);
+                $base  = Str::slug($product->name . '-' . $product->artist);
+                $slug  = $base;
+                $count = 1;
+                while (static::where('slug', $slug)->exists()) {
+                    $slug = $base . '-' . $count++;
+                }
+                $product->slug = $slug;
             }
         });
     }
@@ -45,7 +62,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function Tags(){
-        return $this->belongsToMany(Tag::class);
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

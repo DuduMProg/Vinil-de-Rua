@@ -596,6 +596,16 @@ main {
   font-size: 20px;
 }
 
+.precoOriginal {
+    color: #7E7E7E;
+    text-decoration-line: line-through;
+}
+
+.precoOferta {
+    color: #e40000;
+    font-size: 24px;
+}
+
 
 .preçoEFavDisco {
   display: flex;

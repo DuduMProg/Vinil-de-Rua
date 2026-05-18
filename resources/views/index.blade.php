@@ -37,114 +37,35 @@
         </nav>
 
         <div class="icons">
-            <a href="/favorite">
-            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-            </a>
+    <a href="/favorite">
+        <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
+    </a>
 
-            {{-- de <a href="/cart"> para onclick --}}
-            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png"alt="shopping-cart"onclick="openSidebar('cart')"style="cursor:pointer">
-            <a href="/profile">
-                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-            </a>
-        </div>
+    <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
+
+    <a href="/profile">
+        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+    </a>
+</div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-        {{-- Sidebar --}}
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2 id="sidebar-title">Carrinho</h2>
-                <button onclick="closeSidebar()">✖</button>
-            </div>
-            <div class="sidebar-content">
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2 id="sidebar-title">Carrinho</h2>
+        <button id="btnFecharSidebar">✖</button>
+    </div>
 
-                @if(session('error'))
-                    <p style="color: red">{{ session('error') }}</p>
-                @endif
+    <div class="sidebar-content" id="sidebar-content">
+        {{-- preenchido via AJAX pelo JS --}}
+    </div>
 
-                @if($cart->items->isEmpty())
-                    <p>Seu carrinho está vazio.</p>
-
-                    <a href="/product">Se pudermos fazer algumas sugestões...</a>
-                @else
-
-                    @php $total = 0; @endphp
-
-                    @foreach($cart->items as $i)
-
-                        @php
-                            $subtotal = $i->units * $i->product->price;
-
-                            $total += $subtotal;
-
-                            $cover =
-                                $i->product->images->firstWhere('is_cover', true)
-                                ?? $i->product->images->first();
-                        @endphp
-
-                        <div class="produtoItem">
-                            @if($cover)
-                                <img src="{{ $cover->path }}" alt="{{ $i->product->name }}" class="imgProdCart">
-                            @endif
-
-                            <div class="nomeProd">
-                                <p>{{ $i->product->name }}</p>
-                                <div class="qntdProd">
-                                    {{-- decrementa --}}
-                                    <form action="/cart/decrement/{{ $i->product_id }}" method="POST">
-                                        @csrf
-                                        <button type="submit">-</button>
-                                    </form>
-
-                                    <span>{{ $i->units }}</span>
-
-                                    {{-- incrementa --}}
-                                    <form action="/cart/store/{{ $i->product_id }}" method="POST">
-                                        @csrf
-
-                                        <button type="submit">+</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="deletePrice">
-
-                                <form action="/cart/delete/{{ $i->product_id }}" method="POST"
-                                    onsubmit="return confirm('Remover {{ $i->product->name }}?')">
-                                    @csrf
-
-                                    <button type="submit" class="deleteBtn"><img src="https://i.ibb.co/Zzdfgwmf/delete.png"
-                                            class="deleteIcon" alt="deletar"></button>
-
-                                </form>
-
-                                <p>R$ {{ number_format($subtotal, 2, ',', '.') }}</p>
-
-                            </div>
-                        </div>
-
-                    @endforeach
-
-                    <div class="cartTotal">
-
-                        <h3>Total: R$ {{ number_format($total, 2, ',', '.') }}</h3>
-
-                    </div>
-
-                @endif
-
-            </div>
-
-            <div class="btnResumo">
-
-                <a href="/checkout">
-
-                    <button>Resumo da compra</button>
-
-                </a>
-
-            </div>
-
-        </div>
+    <div class="btnResumo">
+        <a href="/checkout">
+            <button>Resumo da compra</button>
+        </a>
+    </div>
+</div>
     </header>
 
     <main>
@@ -178,7 +99,7 @@
 
                 <div class="linkEImg">
                     <div class="offEimg">
-                        <h1>ATE 70% OFF LIMITADO!</h1>
+                        <h1>COM 15% OFF, LIMITADO!</h1>
                         <a href="/tag/show/oferta" class="offDisco">VEJA MAIS AQUI</a>
                     </div>
                     <img src="https://i.ibb.co/yckTbjhV/paleta.png" alt="">
@@ -214,7 +135,20 @@
 
                         <div class="infoDisco">
                             <p class="nomeDisco">{{ $p->name }} - {{ $p->artist }}</p>
-                            <p class="precoDisco">R$ {{ number_format($p->price, 2, ',', '.') }}</p>
+                            <div class="precoDisco">
+                                @if($p->tem_desconto)
+                                    <p class="precoOriginal">
+                                        <s>R$ {{ number_format($p->price, 2, ',', '.') }}</s>
+                                    </p>
+                                    <p class="precoOferta">
+                                        R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }} !
+                                    </p>
+                                @else
+                                    <p class="precoDisco">
+                                        R$ {{ number_format($p->price, 2, ',', '.') }}
+                                    </p>
+                                @endif
+                            </div>          
                         </div>
 
                         <div class="precoEFavDisco">

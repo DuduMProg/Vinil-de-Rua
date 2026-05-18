@@ -135,11 +135,11 @@
         justify-content: center;
     }
 
- 
 
-    
-    
-    .cadaImgMini{
+
+
+
+    .cadaImgMini {
         border: 1px solid #000000;
         padding: 12px;
     }
@@ -176,8 +176,8 @@
     .img-overlay img:hover {
         transform: scale(2.2);
     }
-    
-        
+
+
 
     .telaCompra {
         display: flex;
@@ -208,9 +208,16 @@
         font-family: var(--fontePrimaria);
     }
 
-    .finalizarCompra p {
+  
+    .precoOriginal {
+        color: #000000;
         font-size: 26px;
         margin-bottom: 15px;
+    }
+
+    .precoOferta {
+        color: #e40000;
+        font-size: 20px;
     }
 
     .finalizarCompra button {
@@ -235,7 +242,7 @@
 
     /* Spotify */
 
-    
+
 
     .spotifyErro {
         font-family: var(--fonteTerciaria);

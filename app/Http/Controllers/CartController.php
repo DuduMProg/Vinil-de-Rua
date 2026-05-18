@@ -9,22 +9,20 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    
-
-    // Exibe o carrinho do usuário
+    // Exibe a página do carrinho
     public function index()
     {
         $cart = Cart::with(['items.product.images'])
             ->firstOrCreate(['user_id' => auth()->id()]);
 
-        return $this->cartResponse();
+        return view('cart.index', ['cart' => $cart]);
     }
 
     // Adiciona produto ao carrinho
     public function store(Request $request, Product $product)
     {
         if ($product->stock <= 0) {
-            return $this->cartResponse('Produto fora de estoque.', false);
+            return response()->noContent(422);
         }
 
         $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
@@ -32,18 +30,19 @@ class CartController extends Controller
 
         if ($item) {
             if ($item->units >= $product->stock) {
-                return $this->cartResponse('Estoque insuficiente.', false);
+                return response()->noContent(422);
             }
             $item->increment('units');
         } else {
+            // CartController store()
             $cart->items()->create([
                 'product_id' => $product->id,
-                'units'      => 1,
-                'price'      => $product->price,
+                'units' => 1,
+                'price' => $product->preco_com_desconto, // ← já aplica desconto
             ]);
         }
 
-        return $this->cartResponse();
+        return response()->noContent(); // 204
     }
 
     // Decrementa quantidade — se chegar a 0, remove o item
@@ -53,14 +52,10 @@ class CartController extends Controller
         $item = $cart->items()->where('product_id', $product->id)->first();
 
         if ($item) {
-            if ($item->units <= 1) {
-                $item->delete();
-            } else {
-                $item->decrement('units');
-            }
+            $item->units <= 1 ? $item->delete() : $item->decrement('units');
         }
 
-        return $this->cartResponse();
+        return response()->noContent(); // 204
     }
 
     // Remove o item completamente
@@ -72,19 +67,10 @@ class CartController extends Controller
             $cart->items()->where('product_id', $product->id)->delete();
         }
 
-        return $this->cartResponse();
+        return response()->noContent(); // 204
     }
 
-    // Retorna HTML da sidebar via AJAX
-    public function sidebar()
-    {
-        $cart = Cart::with(['items.product.images'])
-            ->firstOrCreate(['user_id' => auth()->id()]);
-
-        return $this->cartResponse();
-    }
-
-    // Atualiza quantidade de um item
+    // Atualiza quantidade manualmente
     public function update(Request $request, CartItem $cartItem)
     {
         $request->validate(['units' => 'required|integer|min:1']);
@@ -94,27 +80,20 @@ class CartController extends Controller
         }
 
         if ($request->units > $cartItem->product->stock) {
-            return $this->cartResponse('Estoque insuficiente.', false);
+            return response()->noContent(422);
         }
 
         $cartItem->update(['units' => $request->units]);
 
-        return $this->cartResponse();
+        return response()->noContent(); // 204
     }
 
-    // Helper — retorna JSON (AJAX) ou redirect (requisição normal)
-    private function cartResponse(string $error = '', bool $success = true)
+    // Retorna HTML da sidebar para o AJAX
+    public function sidebar()
     {
-        if (request()->ajax() || request()->wantsJson()) {
-            return response()->json([
-                'success' => $success,
-                'error'   => $error,
-            ]);
-        }
+        $cart = Cart::with(['items.product.images'])
+            ->firstOrCreate(['user_id' => auth()->id()]);
 
-        // Fallback para requisições normais (ex: cart/index)
-        return $success
-            ? redirect()->route('cart.index')
-            : redirect()->back()->with('error', $error);
+        return view('cart.sidebar', ['cart' => $cart]);
     }
 }

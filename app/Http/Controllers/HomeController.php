@@ -10,14 +10,15 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
         $tagDestaque = Tag::where('name', 'destaque')->first();
         $destaques = $tagDestaque
-            ? Product::where('tag_id', $tagDestaque->id)->with('images')->get()
+            ? Product::where('tag_id', $tagDestaque->id)->with(['images', 'tag'])->get()
             : collect();
 
         $tagOferta = Tag::where('name', 'oferta')->first();
         $ofertas = $tagOferta
-            ? Product::where('tag_id', $tagOferta->id)->with('images')->take(4)->get()
+            ? Product::where('tag_id', $tagOferta->id)->with(['images', 'tag'])->take(4)->get()
             : collect();
 
         $categories = Category::all();

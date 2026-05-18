@@ -4,65 +4,66 @@ window.addEventListener("scroll", function () {
     if (header) header.classList.toggle("scrolled", window.scrollY > 1);
 });
 
-// ── Sidebar ──
-window.openSidebar = function () {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const title   = document.getElementById("sidebar-title");
+const content = document.getElementById("sidebar-content");
 
+function openSidebar(type) {
     sidebar.classList.add("active");
     overlay.classList.add("active");
 
-    atualizarSidebar(); // carrega conteúdo atualizado ao abrir
+    if (type === "cart") {
+        title.innerText = "Carrinho";
+        content.innerHTML = "<p>Carregando...</p>";
+
+        fetch("/cart/sidebar")
+            .then(res => res.text())
+            .then(html => content.innerHTML = html)
+            .catch(() => content.innerHTML = "<p>Erro ao carregar carrinho.</p>");
+    }
+
+    if (type === "wishlist") {
+        title.innerText = "Wishlist";
+        content.innerHTML = "<p>Você ainda não possui favoritos.</p>";
+    }
 }
 
-window.closeSidebar = function () {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-
+function closeSidebar() {
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
 }
+// Recarrega sidebar após ações do carrinho
+document.addEventListener("click", function(e) {
+    const btn = e.target.closest(".qntdProd button, .deleteBtn");
+    if (!btn) return;
 
-// ── Atualiza conteúdo da sidebar via AJAX ──
-async function atualizarSidebar() {
-    const res = await fetch("/cart/sidebar", {
-        headers: {
-            "X-Requested-With": "XMLHttpRequest",
-            "Accept": "text/html"
-        }
-    });
-    const html = await res.text();
-    const content = document.querySelector(".sidebar-content");
-    if (content) content.innerHTML = html;
-}
+    const form = btn.closest("form");
+    if (!form) return;
 
-// ── Inicialização ──
-document.addEventListener("DOMContentLoaded", function () {
-    const sidebar = document.getElementById("sidebar");
-    if (!sidebar) return;
+    e.preventDefault();
 
-    // Impede que cliques dentro da sidebar fechem ela
-    sidebar.addEventListener("click", function (e) {
-        e.stopPropagation();
-    });
-
-    // Intercepta forms da sidebar via AJAX
-    sidebar.addEventListener("submit", async function (e) {
-        const form = e.target;
-
-        // Deixa o checkout funcionar normalmente
-        if (form.closest(".btnResumo")) return;
-
-        e.preventDefault();
-
-        // Espera o POST terminar antes de atualizar
-        await fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-            headers: { "X-Requested-With": "XMLHttpRequest" }
-        });
-
-        // Busca HTML atualizado e injeta na sidebar
-        await atualizarSidebar();
+    fetch(form.action, {
+        method: "POST",
+        body: new FormData(form)
+    })
+    .then(() => {
+        // Recarrega o conteúdo da sidebar
+        fetch("/cart/sidebar")
+            .then(res => res.text())
+            .then(html => content.innerHTML = html);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Abre sidebar do carrinho
+    document.getElementById("btnCart")?.addEventListener("click", function () {
+        openSidebar("cart");
+    });
+
+    // Fecha sidebar
+    document.getElementById("overlay")?.addEventListener("click", closeSidebar);
+
+});
+document.getElementById("btnFecharSidebar")?.addEventListener("click", closeSidebar);

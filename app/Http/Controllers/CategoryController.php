@@ -67,6 +67,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        $category->products()->with(['images', 'tag'])->get();
         return view('category.show', [
             'category' => $category,
             'products' => $category->products()->with('images')->get(),

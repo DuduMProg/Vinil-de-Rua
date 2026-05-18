@@ -11,6 +11,8 @@ class ProductController extends Controller
 {
     public function index()
     {
+        Product::with(['images', 'category', 'tag'])->withCount('images')->get();
+
         return view('product.index', [
             'products' => Product::with(['images', 'category'])->withCount('images')->get()
         ]);
@@ -130,7 +132,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with(['images', 'category', 'tag'])->findOrFail($id);
 
         return view('product.show', compact('product'));
     }

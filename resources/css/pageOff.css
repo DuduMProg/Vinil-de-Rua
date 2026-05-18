@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 :root {
@@ -14,6 +13,8 @@
     --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
     --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
     --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    --gradienteCards: #D9D9D9;
+
     /* drop shadow discos */
     --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
 }
@@ -31,7 +32,6 @@
     z-index: 9999;
 }
 
-
 header {
     width: 100%;
     height: 110px;
@@ -39,7 +39,7 @@ header {
     align-items: center;
     padding: 0 25px;
     justify-content: space-between;
-    background-color: transparent;
+    background-color: #7E7E7E;
     position: fixed;
     top: 0;
     left: 0;
@@ -95,7 +95,9 @@ header .icons img {
     gap: 14px;
 }
 
+
 /* ===== ESTADO APÓS ROLAR ===== */
+
 header.scrolled {
     background-color: #FFFFFF;
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
@@ -124,102 +126,50 @@ header.scrolled .icons img {
     filter: brightness(0);
 }
 
-
-main {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.conteiner {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 745px;
-}
-
-.conteiner img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 0;
-}
-
-.conteiner span {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    font-size: 94px;
-    font-weight: bold;
-    color: #000000;
-    font-family: var(--fontePrimaria);
-    background-color: #838383;
-    border-radius: 8px;
-    padding: 20px 34px;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-}
-
-
-/* PARTE CATALOGO */
-
 .fundoPrincipal {
     background: var(--gradienteVertical2);
+
 }
 
-.outrasCategorias {
-    padding-top: 50px;
+.bannerBlackFriday {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin: 0 210px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 150px;
+
+    padding-top: 150px;
+}
+
+.anuncioBlackFriday h1 {
     font-family: var(--fontePrimaria);
+    font-size: 64px;
+    margin: 0;
+    line-height: 1.1;
+    text-align: left;
+    margin-right: 40px;
 }
 
-.outrasCategorias h1 {
-    color: #000000;
-    font-size: 42px;
-
-}
-
-.categorias {
+.filtroOff {
     display: flex;
-    gap: 50px;
-}
-
-.categorias a {
-    position: relative;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 28px;
+    align-items: center;
+    gap: 10px;
+    background: #e3e3e3;
+    padding: 10px 20px;
+    border-radius: 4px;
     cursor: pointer;
-    display: inline-block;
+    font-family: var(--fontePrimaria);
+    text-transform: uppercase;
+    border: none;
+    font-size: 22px;
+    margin-top: 35px;
 }
 
-.categorias a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #1b1b1b;
-    transition: width 0.3s ease-in-out;
-}
-
-.categorias a:hover::after {
-    width: 100%;
+.filtroOff img {
+    width: 24px;
 }
 
 
-
-
-
-.catalogoCategoria {
+.catalogoOff {
     display: grid;
     grid-template-columns: repeat(4, 224px);
     gap: 150px;
@@ -229,13 +179,54 @@ main {
     margin: 0 210px;
 }
 
+.campoFiltro {
+    font-family: var(--fontePrimaria);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background-color: var(--gradienteCards);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    display: none;
+}
+
+.campoFiltro .valores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.campoFiltro button {
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding: 4px 14px;
+    font-size: 15px;
+    font-family: var(--fontePrimaria);
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.campoFiltro button:hover{
+    color: #ffffff;
+    border: 2.2px solid #ffffff;
+    transform: scale(1.0);
+    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+
 .cardDisco {
-    width: 224px;
-    height: 253px;
+    width: 250px;
+    height: 280px;
     background: var(--gradienteCardDiscos);
     font-family: var(--fontePrimaria);
     border-radius: 5px;
-    padding: 0px 7px;
+    padding: 0px 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -266,23 +257,12 @@ main {
 
 .infoDisco {
     font-size: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 
 .infoDisco .precoDisco {
     padding-top: 4px;
     font-weight: bold;
-    font-size: 20px;
-}
-
-.precoOriginal {
-    color: #7E7E7E;
-    font-size: 12px;
-    text-decoration-line: line-through;
-}
-
-.precoOferta {
-    color: #e40000;
     font-size: 20px;
 }
 
@@ -333,7 +313,15 @@ main {
     content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
 }
 
+.precoOriginal {
+    color: #7E7E7E;
+    text-decoration-line: line-through;
+}
 
+.precoOferta {
+    color: #e40000;
+    font-size: 24px;
+}
 
 
 
@@ -344,7 +332,6 @@ footer {
     color: white;
     padding: 30px;
     border-radius: 30px 30px 0px 0px;
-
 }
 
 .footerContainer {
@@ -387,13 +374,11 @@ footer {
     margin-bottom: 11px;
 }
 
-
 .social {
     font-size: 24px;
     margin-top: 23px;
     margin-bottom: 15px;
 }
-
 
 .socialLogo {
     display: flex;
