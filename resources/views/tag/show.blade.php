@@ -81,14 +81,20 @@
                             {{ $p->name }} - {{ $p->artist }}
                         </p>
 
-                        <p class="precoAntigo">
-                            R$ {{ number_format($oldPrice, 2, ',', '.') }}
-                        </p>
-
-                        <p class="precoDiscoOff">
-                            R$ {{ number_format($discountPrice, 2, ',', '.') }}
-                        </p>
-
+                        <div class="precoDisco">
+                            @if($p->tem_desconto)
+                                <p class="precoOriginal">
+                                    <s>R$ {{ number_format($p->price, 2, ',', '.') }}</s>
+                                </p>
+                                <p class="precoOferta">
+                                    R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }}!
+                                </p>
+                            @else
+                                <p class="precoDisco">
+                                    R$ {{ number_format($p->price, 2, ',', '.') }}
+                                </p>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="preçoEFavDisco">
