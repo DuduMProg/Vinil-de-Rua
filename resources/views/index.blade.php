@@ -267,6 +267,6 @@
     @vite('resources/js/loading.js')
 
 </body>
-￼
+
 
 </html>

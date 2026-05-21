@@ -1,78 +1,278 @@
 {{-- resources/views/product/create.blade.php --}}
 
-<h1>Novo Produto</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-@if($errors->any())
-    <ul style="color:red">
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM Page</title>
 
-<form action="/product" method="POST">
-    @csrf
+    <!-- FONTES -->
+    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
 
-    <div>
-        Nome do Álbum:
-        <input type="text" name="name" value="{{ old('name') }}">
+    <!-- CSS -->
+    @vite('resources/css/styleAdm.css')
+    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
+</head>
+
+<body>
+
+    <div id="preloader">
+        <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading" border="0">
     </div>
 
-    <div>
-        Artista:
-        <input type="text" name="artist" value="{{ old('artist') }}">
-    </div>
+    <div class="painelAdmin">
 
-    <div>
-        Descrição:
-        <input type="text" name="description" value="{{ old('description') }}">
-    </div>
+        <!-- MENU LATERAL -->
+        <aside class="menuLateral">
 
-    <div>
-        Categoria:
-        <select name="category_id">
-            <option value="">Sem categoria</option>
-            @foreach($categories as $c)
-                <option value="{{ $c->id }}" {{ old('category_id') == $c->id ? 'selected' : '' }}>
-                    {{ $c -> name }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+            <div class="areaLogo">
+                <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
+                <h1>Vinil de Rua</h1>
+            </div>
 
-    <div>
-        Tag:
-        <select name="tag_id">
-            <option value="">Sem tag</option>
-            @foreach($tags as $t)
-                <option value="{{ $t->id }}" {{ old('tag_id') == $t->id ? 'selected' : '' }}>
-                    {{ $t -> name }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+            <nav class="menuPrincipal">
 
-    <div>
-        Preço:
-        <input type="number" name="price" step="0.01" value="{{ old('price') }}">
-    </div>
+                <button class="itemMenu"
+                    onclick="window.location.href='/product'">
+                    Todos os produtos
+                </button>
 
-    <div>
-        Estoque:
-        <input type="number" name="stock" value="{{ old('stock', 0) }}">
-    </div>
+                <button class="itemMenu">
+                    Dashboard
+                </button>
 
-    <div>
-        Imagem Principal (URL):
-        <input type="text" name="main_img" placeholder="https://...">
-    </div>
+                <button class="itemMenuAtivo"
+                    onclick="window.location.href='/product/create'">
+                    Adicionar Produto
+                </button>
 
-    <div>
-        Imagens Secundárias (URLs):
-        <input type="text" name="images[]" placeholder="https://...">
-        <input type="text" name="images[]" placeholder="https://...">
-        <input type="text" name="images[]" placeholder="https://...">
-    </div>
+                <button class="itemMenu">
+                    Deletar Produto
+                </button>
 
-    <button type="submit">Criar Produto</button>
-</form>
+                <button class="itemMenu">
+                    Notificações
+                </button>
+
+            </nav>
+
+            <div class="menuCategorias">
+
+                <h1>Categorias</h1>
+
+                <ul>
+                    @foreach($categories as $c)
+                        <li>
+                            <span>{{ $c->name }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudoPrincipal">
+
+            <!-- MENU SUPERIOR -->
+            <header class="menuSuperior">
+
+                <div class="campoBusca">
+                    <input type="text" placeholder="Buscar produto...">
+
+                    <div class="btnBusca">
+                        <button>Buscar</button>
+                    </div>
+                </div>
+
+                <div class="areaUsuario">
+                    <i class="icon-user">
+                        <img src="https://i.ibb.co/v6qZmTGv/perfil-Icon.png" alt="">
+                    </i>
+                </div>
+
+            </header>
+
+            <!-- SEÇÃO -->
+            <section class="secaoProdutos">
+
+                <h1 class="tituloSecao">
+                    Adicione o seu produto!
+                </h1>
+
+                @if($errors->any())
+                    <ul style="color:red">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                <div class="formsEAddFoto">
+
+                    {{-- FORM PRINCIPAL --}}
+                    <div class="formsNovoProduto">
+
+                        <form action="/product" method="POST">
+                            @csrf
+
+                            <div class="infoForms">
+                                <label>Nome do produto:</label>
+
+                                <input type="text"
+                                    name="name"
+                                    placeholder="Nome do album..."
+                                    value="{{ old('name') }}">
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Nome do(a) artista:</label>
+
+                                <input type="text"
+                                    name="artist"
+                                    placeholder="Nome do artista..."
+                                    value="{{ old('artist') }}">
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Descrição:</label>
+
+                                <input type="text"
+                                    name="description"
+                                    placeholder="Descrição..."
+                                    value="{{ old('description') }}">
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Categoria:</label>
+
+                                <select name="category_id">
+
+                                    <option value="">
+                                        Sem categoria
+                                    </option>
+
+                                    @foreach($categories as $c)
+                                        <option value="{{ $c->id }}"
+                                            {{ old('category_id') == $c->id ? 'selected' : '' }}>
+                                            {{ $c->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Tag:</label>
+
+                                <select name="tag_id">
+
+                                    <option value="">
+                                        Sem tag
+                                    </option>
+
+                                    @foreach($tags as $t)
+                                        <option value="{{ $t->id }}"
+                                            {{ old('tag_id') == $t->id ? 'selected' : '' }}>
+                                            {{ $t->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Preço:</label>
+
+                                <input type="number"
+                                    name="price"
+                                    step="0.01"
+                                    placeholder="Preço..."
+                                    value="{{ old('price') }}">
+                            </div>
+
+                            <div class="infoForms">
+                                <label>Estoque:</label>
+
+                                <input type="number"
+                                    name="stock"
+                                    placeholder="Estoque..."
+                                    value="{{ old('stock', 0) }}">
+                            </div>
+
+                    </div>
+
+                    {{-- IMAGENS --}}
+                    <div class="addFoto">
+
+                        <div class="infoForms">
+
+                            <label>Imagem principal</label>
+
+                            <input type="text"
+                                name="main_img"
+                                placeholder="https://...">
+
+                        </div>
+
+                        <div class="infoForms">
+
+                            <label>Imagem secundária</label>
+
+                            <input type="text"
+                                name="images[]"
+                                placeholder="https://...">
+
+                        </div>
+
+                        <div class="infoForms">
+
+                            <label>Imagem secundária</label>
+
+                            <input type="text"
+                                name="images[]"
+                                placeholder="https://...">
+
+                        </div>
+
+                        <div class="infoForms">
+
+                            <label>Imagem secundária</label>
+
+                            <input type="text"
+                                name="images[]"
+                                placeholder="https://...">
+
+                        </div>
+
+                        <div class="btnAdicionarP">
+
+                            <button type="submit">
+                                Adicionar produto
+                            </button>
+
+                        </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+    @vite('resources/js/loading.js')
+
+
+</body>
+
+</html>

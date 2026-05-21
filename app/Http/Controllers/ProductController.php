@@ -14,9 +14,12 @@ class ProductController extends Controller
         Product::with(['images', 'category', 'tag'])->withCount('images')->get();
 
         return view('product.index', [
-            'products' => Product::with(['images', 'category'])->withCount('images')->get()
+            'products' => Product::with(['images', 'category', 'tag'])->withCount('images')->get(),
+            'categories' => Category::withCount('products')->get()
+
         ]);
     }
+   
 
 
 

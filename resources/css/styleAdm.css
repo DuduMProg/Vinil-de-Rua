@@ -1,0 +1,416 @@
+/* RESET GERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* fontes */
+    --fontePrimaria: 'Caesar Dressing', cursive;
+    --fonteSecundaria: 'Anton', sans-serif;
+    --fonteTerciaria: "Young Serif", serif;
+    /* Cores */
+    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* drop shadow discos */
+    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+
+/* --- Estrutura geral --- */
+
+.painelAdmin {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+
+/* --- Menu lateral --- */
+
+.menuLateral {
+    width: 240px;
+    background-color: #fff;
+    border-right: 2px solid #cfcfcf;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 10px;
+    font-family: var(--fonteTerciaria);
+}
+
+.areaLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    font-family: var(--fonteSecundaria);
+    font-weight: 100;
+}
+
+.areaLogo img {
+    width: 60px;
+    height: 60px;
+}
+
+.menuPrincipal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menuPrincipal button {
+    font-weight: normal;
+    font-size: 20px;
+    font-family: var(--fonteTerciaria);
+}
+
+.itemMenu {
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.itemMenu:hover {
+    background-color: #f0f0f0;
+}
+
+.itemMenuAtivo {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: start;
+}
+
+.menuCategorias {
+    padding: 10px;
+}
+
+.menuCategorias h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.menuCategorias ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menuCategorias li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menuCategorias li:hover {
+    background-color: #eee;
+}
+
+
+/* --- Conteúdo principal --- */
+
+.conteudoPrincipal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* --- Menu superior --- */
+
+.menuSuperior {
+    height: 60px;
+    background: #fff;
+    border-bottom: 2px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.campoBusca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.campoBusca input {
+    padding: 6px 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.btnBusca button {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 18px;
+}
+
+.btnBusca button:hover {
+    border-radius: 6px;
+    background: #adadad;
+    color: #313131;
+}
+
+.areaUsuario i {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* Seção de produtos */
+
+.secaoProdutos {
+    flex: 1;
+    padding: 30px;
+    background: var(--gradienteVertical1);
+    overflow-y: auto;
+    padding-left: 20px;
+
+}
+
+.tituloSecao {
+    text-align: center;
+    margin-bottom: 25px;
+    background: #d1d1d1;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+/* --- Grade e cards --- */
+
+.gradeProdutos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.cardProduto {
+    display: flex;
+    width: auto;
+    height: auto;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardProduto .infosProduto {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cardProduto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.precoProduto {
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.acoesProduto {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.acoesProduto button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.acoesProduto button:hover {
+    transform: scale(1.2);
+}
+
+
+/* NOTIFICAÇÃO SECTION */
+
+.secaoNotificacao {
+    flex: 1;
+    padding: 30px;
+    background: var(--gradienteVertical1);
+    overflow-y: auto;
+    padding-left: 20px;
+}
+
+.gradeNotificacao {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 45px;
+    gap: 25px;
+}
+
+.cardNotificacao {
+    display: flex;
+    width: 320px;
+    height: 290px;
+    background: #D2D2D2;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: var(--fonteTerciaria);
+}
+
+.cardNotificacao .infosNotificacao {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cardNotificacao:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ADD NOVO PRODUTO */
+
+
+.formsEAddFoto {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    font-family: var(--fonteTerciaria);
+    gap: 120px;
+}
+
+.formsEAddFoto label{
+    font-size: 24px;
+}
+
+.formsEAddFoto input {
+    font-size: 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+}
+
+.formsEAddFoto select{
+    font-size: 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+}
+
+.formsNovoProduto {
+    display: flex;
+}
+
+.formsNovoProduto form {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.addFoto form{
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    
+}
+
+.infoForms {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.btnAdicionarP button {
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding: 4px 18px;
+    font-family: var(--fonteTerciaria);
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.btnAdicionarP button:hover {
+    background-color: #acacac;
+    color: #ffffff;
+    border: 2.2px solid #ffffff;
+    transform: scale(1.0);
+    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+.addFoto {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+}
+
+.addFoto button {
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding: 4px 18px;
+    font-family: var(--fonteTerciaria);
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.addFoto button:hover {
+    background-color: #acacac;
+    color: #ffffff;
+    border: 2.2px solid #ffffff;
+    transform: scale(1.0);
+    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+}
