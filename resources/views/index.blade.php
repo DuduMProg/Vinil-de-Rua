@@ -32,7 +32,7 @@
 
         <nav>
             <a href="/#catalogo">Catalogo</a>
-            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="/tag/show/1">Ofertas</a>
             <a href="#contato">Contato</a>
         </nav>
 
@@ -100,7 +100,7 @@
                 <div class="linkEImg">
                     <div class="offEimg">
                         <h1>COM 15% OFF, LIMITADO!</h1>
-                        <a href="/tag/show/oferta" class="offDisco">VEJA MAIS AQUI</a>
+                        <a href="/tag/show/1" class="offDisco">VEJA MAIS AQUI</a>
                     </div>
                     <img src="https://i.ibb.co/yckTbjhV/paleta.png" alt="">
                 </div>

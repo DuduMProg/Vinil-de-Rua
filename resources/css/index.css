@@ -717,6 +717,10 @@ main {
   transition: 0.2s ease-in;
 }
 
+.cardCategorias p{
+  color: var(--pretoVdr);
+}
+
 .categorias button {
   border: none;
   background-color: none;
