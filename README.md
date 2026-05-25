@@ -1,58 +1,272 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+````md id="4l3h6x"
+# Vinil de Rua
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" width="180" alt="Logo Vinil de Rua">
 </p>
 
-## About Laravel
+<p align="center">
+  Plataforma web de e-commerce para venda de discos de vinil, desenvolvida como projeto acadêmico utilizando Laravel, Blade, JavaScript e SQLite.
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Sobre o projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O Vinil de Rua é uma plataforma de catálogo e venda de discos de vinil inspirada na cultura urbana, hip-hop e colecionismo musical.
 
-## Learning Laravel
+O sistema foi desenvolvido com foco em:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- experiência visual moderna;
+- organização de catálogo por categorias;
+- gerenciamento administrativo;
+- carrinho de compras dinâmico;
+- arquitetura MVC utilizando Laravel.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O projeto está sendo desenvolvido como atividade acadêmica da faculdade, aplicando conceitos de:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- desenvolvimento full stack;
+- banco de dados relacionais;
+- arquitetura MVC;
+- integração front-end + back-end;
+- responsividade;
+- manipulação de rotas e controllers;
+- CRUD completo.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+# Tecnologias utilizadas
+
+## Back-end
+- PHP
+- Laravel 13
+- Blade Engine
+- SQLite
+
+## Front-end
+- HTML5
+- CSS3
+- JavaScript Vanilla
+
+## Ferramentas
+- Git & GitHub
+- DBeaver
+- Figma
+- VS Code
+
+---
+
+# Layout do projeto
+
+## Página inicial
+- catálogo de produtos;
+- destaques;
+- categorias musicais;
+- visual inspirado em lojas de vinil urbanas.
+
+## Carrinho lateral (Sidebar Cart)
+- abertura dinâmica com JavaScript;
+- atualização de itens;
+- incremento/decremento de quantidade;
+- resumo da compra.
+
+## Sistema de categorias
+
+Categorias dinâmicas vindas do banco:
+
+- Grime
+- Drill
+- R&B
+- Boombap
+- 90's / Y2K
+
+Cada categoria possui:
+- banner próprio;
+- produtos filtrados;
+- visual personalizado.
+
+## Painel Administrativo
+
+Área responsável pelo gerenciamento do sistema:
+
+- listar produtos;
+- cadastrar produtos;
+- editar produtos;
+- deletar produtos;
+- controle de estoque;
+- categorias e tags;
+- upload de imagens por URL.
+
+---
+
+# Estrutura do projeto
 
 ```bash
-composer require laravel/boost --dev
+app/
+resources/
+ ├── views/
+ │    ├── product/
+ │    ├── category/
+ │    ├── cart/
+ │    └── layouts/
+public/
+database/
+routes/
+````
 
-php artisan boost:install
+---
+
+# Funcionalidades
+
+## Implementadas
+
+* CRUD de produtos
+* Sistema de categorias
+* Sistema de tags
+* Carrinho de compras
+* Sidebar dinâmica
+* Sistema de estoque
+* Página administrativa
+* Integração com banco SQLite
+* Relacionamentos Eloquent
+* Renderização dinâmica com Blade
+* Layout responsivo
+
+## Em desenvolvimento
+
+* Sistema de favoritos
+* Dashboard administrativa
+* Sistema de autenticação
+* Checkout completo
+* Upload local de imagens
+* Busca dinâmica
+
+---
+
+# Modelagem do banco
+
+## Relacionamentos
+
+### Product
+
+* pertence a uma Category
+* pertence a uma Tag
+* possui várias Images
+
+### Category
+
+* possui vários Products
+
+### Tag
+
+* possui vários Products
+
+---
+
+# Como rodar o projeto
+
+## 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/vinil-de-rua.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 2. Acesse a pasta
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cd vinil-de-rua
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 3. Instale as dependências
 
-## Security Vulnerabilities
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 4. Configure o `.env`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```env
+DB_CONNECTION=sqlite
+```
+
+---
+
+## 5. Gere a chave do projeto
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## 6. Rode as migrations
+
+```bash
+php artisan migrate
+```
+
+---
+
+## 7. Inicie o servidor
+
+```bash
+php artisan serve
+```
+
+---
+
+# Organização visual
+
+O projeto utiliza:
+
+* identidade visual inspirada em streetwear;
+* tipografia urbana;
+* componentes reutilizáveis;
+* sidebar administrativa;
+* cards dinâmicos;
+* grids responsivos.
+
+---
+
+# Aprendizados
+
+Durante o desenvolvimento deste projeto foram aplicados conhecimentos como:
+
+* Laravel MVC;
+* Eloquent ORM;
+* Blade Components;
+* manipulação de rotas;
+* integração entre front-end e back-end;
+* estruturação de banco de dados;
+* responsividade;
+* componentização visual;
+* experiência do usuário (UI/UX).
+
+---
+
+# Desenvolvedor
+
+### Eduardo José
+### Júlia Eduarda
+
+Estudante de Sistemas para Internet — Senac
+Focado em desenvolvimento full stack, redes e segurança.
+
+---
+
+# Licença
+
+Este projeto foi desenvolvido para fins acadêmicos e educacionais.
+
+---
+
+<p align="center">
+  Feito com Laravel.
+</p>
+```
