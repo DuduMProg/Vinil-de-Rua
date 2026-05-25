@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Cache;
 
 class SpotifyService
 {
-    private string $clientId;
-    private string $clientSecret;
+    private ?string $clientId;
+    private ?string $clientSecret;
 
     public function __construct()
     {
-        $this->clientId     = config('services.spotify.client_id');
-        $this->clientSecret = config('services.spotify.client_secret');
+        $this->clientId = 'e063c6224f3044e1bf137937f79a2d64'; // temporário
+        $this->clientSecret = 'd37c2e518dd644f9b425d1a1ea6b1e05'; // temporário
     }
 
     // Gera e cacheia o token de acesso (dura 1 hora)
@@ -37,8 +37,8 @@ class SpotifyService
 
         $response = Http::withToken($token)
             ->get('https://api.spotify.com/v1/search', [
-                'q'     => $query,
-                'type'  => 'album',
+                'q' => $query,
+                'type' => 'album',
                 'limit' => 5,
             ]);
 

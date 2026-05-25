@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <!-- SEPARAÇÃO -->
     @vite('resources/css/telaDeCompra.css')
     <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
@@ -61,7 +62,7 @@
         @endphp
 
         {{-- Coluna esquerda: imagens --}}
-        <section class="detalhesProduto">
+        <div class="detalhesProduto">
             <div class="nomeProduto">
                 <h1>{{ $product->name }} - {{ $product->artist }}</h1>
             </div>
@@ -69,7 +70,7 @@
 
                 {{-- Imagem principal (capa) --}}
                 @if($cover)
-                    <img src="{{ $cover->path }}" alt="Capa de {{ $product->name }}" id="imgPrincipal">
+                    <img src="{{ $cover->path }}" alt="Capa de {{ $product->name }}" id="imgPrincipal" class="imgPrincipal">
                 @endif
 
                 {{-- Miniaturas: apenas imagens secundárias (is_cover = false) --}}
@@ -84,21 +85,19 @@
 
             </div>
 
-
-
             <div class="descricaoProduto">
+                <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="">
                 <p>{{ $product->description }}</p>
             </div>
 
-        </section>
+        </div>
 
         {{-- Coluna direita: infos + Spotify + compra --}}
-        <section class="infosProduto">
-
+        <div class="infosProduto">
 
             {{-- Player Spotify dinâmico --}}
             <div class="tracklist">
-                <iframe id="spotifyEmbed" src="" width="400px" height="352" frameborder="0"
+                <iframe id="spotifyEmbed" src="" frameborder="0"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
                     style="border-radius:12px; display:none">
                 </iframe>
@@ -126,7 +125,7 @@
 
             </div>
 
-        </section>
+        </div>
 
     </section>
 

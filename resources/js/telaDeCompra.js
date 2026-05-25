@@ -38,19 +38,32 @@ async function buscarAlbum(nomeAlbum, nomeArtista) {
 
 // Atualiza o iframe com o álbum encontrado
 async function atualizarEmbed() {
-    const el = document.getElementById('spotifyData');
-    const album = el.dataset.album;
-    const artist = el.dataset.artist;
-    const iframe = document.getElementById('spotifyEmbed');
-    const erro = document.getElementById('spotifyErro');
+    try {
+        const el = document.getElementById('spotifyData');
+        console.log('1. spotifyData encontrado:', el);
+        console.log('2. album:', el?.dataset.album);
+        console.log('3. artist:', el?.dataset.artist);
 
-    const resultado = await buscarAlbum(album, artist);
+        const token = await getToken();
+        console.log('4. token recebido:', token ? 'ok' : 'VAZIO');
 
-    if (resultado) {
-        iframe.src = `https://open.spotify.com/embed/album/${resultado.id}?utm_source=generator&theme=0`;
-        iframe.style.display = 'block';
-    } else {
-        erro.style.display = 'block';
+        const resultado = await buscarAlbum(el.dataset.album, el.dataset.artist);
+        console.log('5. resultado Spotify:', resultado);
+
+        const iframe = document.getElementById('spotifyEmbed');
+        const erro   = document.getElementById('spotifyErro');
+
+        if (resultado) {
+            iframe.src = `https://open.spotify.com/embed/album/${resultado.id}?utm_source=generator&theme=0`;
+            iframe.style.display = 'block';
+            console.log('6. iframe src setado:', iframe.src);
+        } else {
+            erro.style.display = 'block';
+            console.log('6. album nao encontrado');
+        }
+
+    } catch(e) {
+        console.error('ERRO no atualizarEmbed:', e);
     }
 }
 
