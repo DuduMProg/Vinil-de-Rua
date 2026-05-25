@@ -1,4 +1,3 @@
-````md id="4l3h6x"
 # Vinil de Rua
 
 <p align="center">
@@ -112,9 +111,6 @@ resources/
 public/
 database/
 routes/
-````
-
----
 
 # Funcionalidades
 
