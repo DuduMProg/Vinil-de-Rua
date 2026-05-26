@@ -11,10 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <!-- SEPARAÇÃO -->
-    @vite('resources/css/stylePerfil.css')
-    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 
+    @vite('resources/css/stylePerfil.css')
+    <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 </head>
 
 <body>
@@ -24,18 +23,24 @@
     </div>
 
     <main>
-        <div class="form-container">
+        <div class="containerLogin">
 
-            {{-- ── Login ── --}}
-            <div class="login-box form-box">
+            {{-- Formulário --}}
+            <div class="login">
 
-                <div class="logoPerfil">
-                    <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
-                    <h1>VINIL <br> DE RUA</h1>
+                <div class="logoEmsg">
+                    <div class="logoPerfil">
+                        <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
+                        <h1>VINIL <br> DE RUA</h1>
+                    </div>
+                    <div class="welcomeBack">
+                        <p>Seja Bem Vindo (a) de volta!</p>
+                    </div>
                 </div>
 
+                {{-- Erros de validação --}}
                 @if($errors->any())
-                    <div class="mensagemErro">
+                    <div style="color:red; margin-bottom:10px">
                         @foreach($errors->all() as $error)
                             <p>{{ $error }}</p>
                         @endforeach
@@ -47,78 +52,79 @@
 
                     <div class="infoUser">
 
-                        <input type="email" name="email" placeholder="EMAIL"
-                               class="inputUser" value="{{ old('email') }}" required>
-
-                        <div id="input" class="inputSenha">
-                            <input type="password" name="password" placeholder="SENHA"
-                                   class="inputPass" id="inputSenhaField" required>
-                            <img src="https://i.ibb.co/0R4T4YRv/olhoDeR.png"
-                                 alt="mostrar senha" id="toggleSenha" style="cursor:pointer">
-                        </div>
-
-                        <label>
-                            <input type="checkbox" name="remember"> Lembrar de mim
+                        <label for="email">Email
+                            <input type="email" id="email" name="email" placeholder="EMAIL"
+                                   class="inputEmail" value="{{ old('email') }}" required>
                         </label>
 
-                    </div>
+                        <label for="password">Senha
+                            <input type="password" id="password" name="password"
+                                   placeholder="SENHA" class="inputSenha" required>
+                        </label>
 
-                    <div class="buttonLogin">
-                        <button href="{{ route('register') }}">Criar Conta</button>
-                        <button type="submit" id="login">LOGIN</button>
+                        <div class="anchorUser">
+                            <a href="#" id="linkEsqueceuSenha">Esqueci a senha</a>
+                        </div>
+
+                        <div class="buttonOk">
+                            <button type="submit" id="buttonOk">Entrar</button>
+                        </div>
+
+                        <div class="anchorUser">
+                            <a href="{{ route('register') }}">Criar conta</a>
+                        </div>
+
                     </div>
 
                 </form>
-
-                <div class="esqueceuSenha">
-                    <span><a href="#" id="linkEsqueceuSenha">Esqueceu a sua senha?</a></span>
-                </div>
 
             </div>
 
-            {{-- ── Recuperar Senha ── --}}
-            <div class="forgot-box form-box">
-
-                <div class="logoPerfil">
-                    <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
-                    <h1>VINIL <br> DE RUA</h1>
-                </div>
-
-                <div class="mensagemErro">
-                    <h1>Calma! Iremos recuperar sua senha.</h1>
-                </div>
-
-                @if(session('status'))
-                    <p style="color:green">{{ session('status') }}</p>
-                @endif
-
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
-
-                    <div class="infoUser">
-                        <input type="email" name="email" placeholder="EMAIL"
-                               class="inputUser" value="{{ old('email') }}" required>
-                    </div>
-
-                    <div class="buttonLogin">
-                        <button type="submit" id="recuperarSenha">ENVIAR</button>
-                    </div>
-
-                </form>
-
-                <div class="esqueceuSenha">
-                    <span><a href="#" id="linkVoltarLogin">Voltar ao login</a></span>
-                </div>
-
+            {{-- Área da imagem --}}
+            <div class="imgLogin">
+                <img src="https://i.ibb.co/XrVxZWss/bg-Escuro-L.png" alt="">
+                <img src="https://i.ibb.co/B57fVCwp/bg-Clarp-L.png" alt="">
+                <img src="https://i.ibb.co/vbDptCn/foto-Login.png" alt="Vinil de Rua">
             </div>
 
         </div>
+
+        {{-- Recuperar Senha — aparece via JS --}}
+        <div class="forgot-box" id="forgotBox" style="display:none">
+
+            <div class="logoPerfil">
+                <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
+                <h1>VINIL <br> DE RUA</h1>
+            </div>
+
+            <p>Calma! Iremos recuperar sua senha.</p>
+
+            @if(session('status'))
+                <p style="color:green">{{ session('status') }}</p>
+            @endif
+
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <label for="emailRecuperar">Email
+                    <input type="email" id="emailRecuperar" name="email"
+                           placeholder="EMAIL" class="inputEmail"
+                           value="{{ old('email') }}" required>
+                </label>
+                <div class="buttonOk">
+                    <button type="submit">ENVIAR</button>
+                </div>
+            </form>
+
+            <div class="anchorUser">
+                <a href="#" id="linkVoltarLogin">Voltar ao login</a>
+            </div>
+
+        </div>
+
     </main>
 
     @vite('resources/js/loading.js')
     @vite('resources/js/login.js')
-
-    
 
 </body>
 

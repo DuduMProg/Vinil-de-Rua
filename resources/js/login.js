@@ -49,3 +49,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+// Toggle esqueceu a senha
+document.getElementById('linkEsqueceuSenha')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('.containerLogin').style.display = 'none';
+    document.getElementById('forgotBox').style.display = 'block';
+});
+
+document.getElementById('linkVoltarLogin')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('forgotBox').style.display = 'none';
+    document.querySelector('.containerLogin').style.display = 'flex';
+});
+
+// Toggle mostrar/esconder senha
+const inputSenha  = document.getElementById('password');
+const toggleSenha = document.getElementById('toggleSenha');
+toggleSenha?.addEventListener('click', function() {
+    inputSenha.type = inputSenha.type === 'text' ? 'password' : 'text';
+});
