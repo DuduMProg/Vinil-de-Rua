@@ -8,18 +8,20 @@
 
     @foreach($cart->items as $i)
         @php
-            $subtotal = $i->units * $i->product->price;
-            $total   += $subtotal;
-            $cover    = $i->product->images->first();
+            $produto   = $i->product;
+            $preco     = $produto->preco_com_desconto; // já aplica 15% se tiver tag oferta
+            $subtotal  = $i->units * $preco;
+            $total    += $subtotal;
+            $cover     = $produto->images->first();
         @endphp
 
         <div class="produtoItem">
             @if($cover)
-                <img src="{{ $cover->path }}" alt="{{ $i->product->name }}" class="imgProdCart">
+                <img src="{{ $cover->path }}" alt="{{ $produto->name }}" class="imgProdCart">
             @endif
-
+            
             <div class="nomeProd">
-                <p>{{ $i->product->name }}</p>
+                <p>{{ $produto->name }}</p>
                 <div class="qntdProd">
                     <form action="/cart/decrement/{{ $i->product_id }}" method="POST">
                         @csrf
@@ -42,7 +44,15 @@
                         <img src="https://i.ibb.co/Zzdfgwmf/delete.png" class="deleteIcon" alt="deletar">
                     </button>
                 </form>
-                <p>R$ {{ number_format($subtotal, 2, ',', '.') }}</p>
+
+                {{-- Exibe preço com ou sem desconto --}}
+                @if($produto->tem_desconto)
+                    <p class="precoOriginal"><s>R$ {{ number_format($produto->price, 2, ',', '.') }}</s></p>
+                    <p class="precoOferta">R$ {{ number_format($preco, 2, ',', '.') }}</p>
+                @else
+                    <p>R$ {{ number_format($preco, 2, ',', '.') }}</p>
+                @endif
+
             </div>
         </div>
     @endforeach

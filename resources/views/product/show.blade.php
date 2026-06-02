@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
     <!-- SEPARAÇÃO -->
     @vite('resources/css/telaDeCompra.css')
     <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
@@ -36,7 +38,7 @@
 
         <nav>
             <a href="/#catalogo">Catalogo</a>
-            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="/tag/show/1">Ofertas</a>
             <a href="#contato">Contato</a>
         </nav>
 
@@ -44,12 +46,32 @@
             <a href="/favorite">
                 <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
             </a>
-            <a href="/cart">
-                <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart">
-            </a>
+
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                style="cursor:pointer">
+
             <a href="/profile">
                 <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
             </a>
+        </div>
+
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button id="btnFecharSidebar">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="sidebar-content">
+                {{-- preenchido via AJAX pelo JS --}}
+            </div>
+
+            <div class="btnResumo">
+                <a href="/checkout">
+                    <button>Resumo da compra</button>
+                </a>
+            </div>
         </div>
     </header>
 

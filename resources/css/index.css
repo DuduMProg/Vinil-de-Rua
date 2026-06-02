@@ -1,3 +1,5 @@
+
+
 * {
   padding: 0;
   margin: 0;
@@ -26,6 +28,10 @@ a* {
     --pretoVdr: #1D1D1D;
     /* drop shadow discos */
     --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+}
+
+.table-auto{
+  border: 2px solid red;
 }
 
 #preloader {

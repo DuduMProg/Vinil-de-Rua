@@ -34,25 +34,25 @@
             </div>
 
             <nav class="menuPrincipal">
-
+                
+                <button class="itemMenu" onclick="window.location.href='/dashboard'">
+                    Dashboard
+                </button>
+                
+                <button class="itemMenu" onclick="window.location.href='/product/create'">
+                    Adicionar Produto
+                </button>
+                
                 <button class="itemMenuAtivo" onclick="window.location.href='/product'">
                     Todos os produtos
                 </button>
 
-                <button class="itemMenu" onclick="window.location.href='/dashboard'">
-                    Dashboard
+                <button class="itemMenu" onclick="window.location.href='/product/edit'">
+                    Editar Produto
                 </button>
 
-                <button class="itemMenu" onclick="window.location.href='/product/create'">
-                    Adicionar Produto
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/product/remove'">
-                    Deletar Produto
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/notifications'">
-                    Notificações
+                <button class="itemMenu" onclick="window.location.href='/'">
+                    Pedidos
                 </button>
 
             </nav>
@@ -110,7 +110,6 @@
                 </tr>
 
                 @foreach($products as $p)
-
                     @php
                         $cover = $p->images->firstWhere('is_cover', true)
                             ?? $p->images->first();
