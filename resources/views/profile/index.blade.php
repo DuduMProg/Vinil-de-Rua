@@ -1,73 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações Pessoais</title>
+    <title>Perfil - Vinil de Rua</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
-    <!-- SEPARAÇÃO -->
-    @vite('resources/css/styelePerfil.css')
-    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 
-
+    @vite('resources/css/perfil.css')
+    <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 </head>
 
-
-<body>
+<body class="fundoPrincipal">
 
     <div id="preloader">
-        <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading" border="0">
+        <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading">
     </div>
 
+    {{-- Header --}}
+    <header>
+        <div class="logoHeader">
+            <a href="/">
+                <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="logo-Vinil-De-Rua">
+            </a>
+            <p>VINIL <br>DE RUA</p>
+        </div>
 
-    {{-- resources/views/profile/index.blade.php --}}
+        <nav>
+            <a href="/#catalogo">Catálogo</a>
+            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="#contato">Contato</a>
+        </nav>
 
+        <div class="icons">
+            <a href="/favorite">
+                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
+            </a>
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="/admin/dashboard">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @else
+                    <a href="/profile">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @endif
+            @else
+                <a href="/login">
+                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                </a>
+            @endauth
+        </div>
+    </header>
 
     <main>
 
         <hr>
 
+        {{-- Navegação do perfil --}}
         <div class="secoesUser">
-
-            <h1>
-                Perfil /
-                <span>Meu Perfil</span>
-            </h1>
-
+            <h1>Perfil/ <span>Meu Perfil</span></h1>
             <div class="linksSecao">
-
-                <a href="{{ route('profile.index') }}" class="pageOn">
-                    Gerenciar minha Conta
-                </a>
-
-                <a href="{{ route('profile.orders') }}" class="pageOff">
-                    Meus Pedidos
-                </a>
-
-                <a href="{{ route('profile.recent') }}" class="pageOff">
-                    Vistos Recentemente
-                </a>
-
+                <a href="/profile" class="pageOn">Gerenciar minha Conta</a>
+                <a href="/orders" class="pageOff">Meus Pedidos</a>
+                <a href="/recently-viewed" class="pageOff">Vistos Recentemente</a>
             </div>
-
         </div>
 
+        {{-- Informações do usuário --}}
         <div class="infoUser">
 
+            @if(session('status') === 'profile-updated')
+                <p style="color:green">Perfil atualizado com sucesso!</p>
+            @endif
+
             <div class="saudacaoUser">
-
-                <h1>
-                    Olá, {{ Auth::user()->name }}
-                </h1>
-
+                <h1>Olá, {{ auth()->user()->name }}</h1>
             </div>
 
             <div class="lado1E2">
@@ -75,47 +90,24 @@
                 <div class="lado1User">
 
                     <div class="campoInfo">
-
                         <h1>Nome de Usuário</h1>
-
-                        <p>
-                            {{ Auth::user()->name }}
-                        </p>
-
+                        <p>{{ auth()->user()->name }}</p>
                     </div>
 
                     <div class="campoInfo">
-
                         <h1>Telefone</h1>
-
-                        <p>
-                            {{ Auth::user()->phone ?? 'Não informado' }}
-                        </p>
-
+                        <p>{{ auth()->user()->telefone ?? '—' }}</p>
                     </div>
 
                     <div class="campoCom2">
-
                         <div class="campoInfo">
-
                             <h1>Cidade</h1>
-
-                            <p>
-                                {{ Auth::user()->city ?? 'Não informado' }}
-                            </p>
-
+                            <p>{{ auth()->user()->cidade ?? '—' }}</p>
                         </div>
-
                         <div class="campoInfo">
-
                             <h1>Endereço</h1>
-
-                            <p>
-                                {{ Auth::user()->address ?? 'Não informado' }}
-                            </p>
-
+                            <p>{{ auth()->user()->endereco ?? '—' }}</p>
                         </div>
-
                     </div>
 
                 </div>
@@ -123,37 +115,19 @@
                 <div class="lado2User">
 
                     <div class="campoInfo">
-
                         <h1>Email</h1>
-
-                        <p>
-                            {{ Auth::user()->email }}
-                        </p>
-
+                        <p>{{ auth()->user()->email }}</p>
                     </div>
 
                     <div class="campoCom2">
-
                         <div class="campoInfo">
-
                             <h1>CEP</h1>
-
-                            <p>
-                                {{ Auth::user()->cep ?? 'Não informado' }}
-                            </p>
-
+                            <p>{{ auth()->user()->cep ?? '—' }}</p>
                         </div>
-
                         <div class="campoInfo">
-
                             <h1>Estado</h1>
-
-                            <p>
-                                {{ Auth::user()->state ?? 'Não informado' }}
-                            </p>
-
+                            <p>{{ auth()->user()->estado ?? '—' }}</p>
                         </div>
-
                     </div>
 
                 </div>
@@ -161,248 +135,15 @@
             </div>
 
             <div class="botaoEdit">
-
-                <button onclick="window.location.href='{{ route('profile.edit') }}'">
-                    Editar informações
-                </button>
-
+                <button onclick="window.location.href='/profile/edit'">Editar informações</button>
             </div>
 
         </div>
 
     </main>
 
-
-
-    <footer id="contato">
-        <div class="footerLogo">
-            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
-            <h1>VINIL <br>DE RUA</h1>
-        </div>
-
-        <div class="avisosFooter">
-            <p>Duvidas? (11) 4002-8922 (SP)</p>
-            <p>Seg a Sex, 9h às 21h Sáb 10h às 18h</p>
-        </div>
-
-        <div class="termos">
-            <a id="openTerms" style="cursor: pointer;">Termos e Condições</a>
-        </div>
-    </footer>
-    <div id="popupOverlay" aria-hidden="true">
-        <div id="popupBox" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-            <button id="closePopup" aria-label="Fechar popup">&times;</button>
-            <div class="popupContent">
-                <h2 id="popupTitle">Termos e Condições</h2>
-                <p># **Termos e Condições de Uso – Vinil de Rua**
-
-                    **Última atualização: 21 de novembro de 2025**
-
-                    Site oficial: [**https://vinilderua.com**](https://vinilderua.com/)
-
-                    ---
-
-                    ## **1. Sobre o Vinil de Rua**
-
-                    O Vinil de Rua é um **e-commerce especializado em discos de vinil, vitrolas e conhecimentos
-                    musicais**.
-
-                    Todas as vendas realizadas no site são feitas **diretamente pelo Vinil de Rua**, não havendo
-                    intermediação de terceiros ou ambiente de marketplace.
-
-                    ---
-
-                    ## **2. Aceitação dos Termos**
-
-                    Ao acessar ou comprar no Vinil de Rua, você concorda com:
-
-                    - Estes Termos e Condições
-                    - Nossa Política de Privacidade
-                    - Nossas políticas de pagamento, entrega e trocas/devoluções
-
-                    Caso não concorde, não utilize o site.
-
-                    Podemos atualizar estes Termos periodicamente, sempre mantendo a versão mais recente em
-                    **vinilderua.com/termos**.
-
-                    ---
-
-                    ## **3. Uso do Site**
-
-                    O usuário se compromete a:
-
-                    - Não utilizar o site para fins ilegais
-                    - Não tentar acessar partes restritas ou sistemas internos
-                    - Não tentar interferir no funcionamento do site
-                    - Não reproduzir, copiar ou explorar conteúdo sem autorização
-
-                    ---
-
-                    ## **4. Cadastro e Conta**
-
-                    O cadastro é opcional, mas facilita o acompanhamento de pedidos.
-
-                    Ao se cadastrar, o usuário declara que:
-
-                    - Forneceu informações reais e atualizadas
-                    - É responsável pela segurança da senha
-                    - Não compartilhará seus dados de acesso
-
-                    Contas podem ser suspensas em caso de uso fraudulento, tentativa de golpe ou descumprimento
-                    destes Termos.
-
-                    ---</p>
-                <p>## **5. Produtos e Estoque**
-
-                    Trabalhamos com:
-
-                    - Novos e usados (quando aplicável)
-                    - Produtos com descrição, fotos e informações reais
-
-                    O Vinil de Rua se compromete a:
-
-                    - Manter informações atualizadas
-                    - Informar claramente quando um produto é usado
-                    - Descrever estado, prensagem ou edição da melhor forma possível
-
-                    Como trabalhamos com itens muitas vezes únicos, especialmente usados, o produto pode se esgotar
-                    rapidamente. A compra só é confirmada após o pagamento aprovado.
-
-                    ---
-
-                    ## **6. Preços e Pagamentos**
-
-                    Os preços exibidos no site:
-
-                    - Estão em reais (BRL)
-                    - Podem ser alterados sem aviso prévio
-                    - Podem conter promoções ou cupons por tempo limitado
-
-                    Aceitamos pagamentos por:
-
-                    - Cartão de crédito
-                    - Pix
-                    - Boleto bancário (se ativado)
-                    - Outras soluções de pagamento exibidas no checkout
-
-                    Pagamentos são processados por plataformas externas (como Mercado Pago, Stripe, PagSeguro etc.).
-                    Essas plataformas podem ter seus próprios termos e políticas.
-
-                    ---
-
-                    ## **7. Envio, Prazos e Entregas**
-
-                    Os envios são realizados por:
-
-                    - Correios
-                    - Transportadoras parceiras (quando aplicável)
-
-                    O prazo de entrega exibido no site é estimado.
-
-                    Após o envio, o usuário recebe o código de rastreamento.
-
-                    Não nos responsabilizamos por atrasos causados por:
-
-                    - Greves
-                    - Problemas nos Correios
-                    - Eventos climáticos
-                    - Dificuldades de entrega no endereço fornecido
-
-                    Caso o pedido retorne por **endereço incorreto ou ausência do destinatário**, poderá haver
-                    cobrança de novo frete para reenvio.
-
-                    ---
-
-                    ## **8. Trocas e Devoluções**
-
-                    O usuário tem direito a solicitar:
-
-                    ### **Devolução (arrependimento) – 7 dias corridos**
-
-                    Conforme o Código de Defesa do Consumidor.
-
-                    ### **Troca por defeito – 30 dias**
-
-                    Se o disco, CD ou item apresentar defeito não informado.
-
-                    Itens devem ser enviados:
-
-                    - Na embalagem original
-                    - Sem sinais de mau uso
-                    - Com todos os acessórios (se aplicável)
-
-                    Não aceitamos devolução de:
-
-                    - Discos usados cuja condição já foi claramente descrita
-                    - Produtos danificados por mau uso
-                    - Itens lacrados que foram abertos, salvo defeito
-
-                    ---
-
-                    ## **9. Limitação de Responsabilidade**
-
-                    O Vinil de Rua não se responsabiliza por:
-
-                    - Uso incorreto dos produtos
-                    - Perdas causadas por terceiros (ex: transportadora)
-                    - Informações inseridas incorretamente pelo cliente no cadastro ou no endereço
-                    - Atrasos ou erros decorrentes de serviços externos (pagamentos, logística, etc.)
-
-                    ---
-
-                    ## **10. Propriedade Intelectual**
-
-                    Todo o conteúdo de **vinilderua.com** — textos, fotos, vídeos, logotipo, layout, código e
-                    descrições — é protegido por direitos autorais.
-
-                    É proibido:
-
-                    - Copiar conteúdos
-                    - Reproduzir fotos ou descrições
-                    - Usar a marca Vinil de Rua sem autorização
-
-                    ---
-
-                    ## **11. Privacidade e Segurança**
-
-                    Tratamos dados pessoais conforme nossa **Política de Privacidade**, disponível em:
-
-                    ➡️ **vinilderua.com/privacidade**
-
-                    Coletamos apenas o necessário para processar pedidos, proporcionar uma boa experiência de
-                    navegação e cumprir obrigações legais.
-
-                    ---
-
-                    ## **12. Cancelamentos de Pedidos**
-
-                    O Vinil de Rua pode cancelar pedidos em caso de:
-
-                    - Falta de estoque
-                    - Erro de preço evidente
-                    - Suspeita de fraude
-                    - Pagamento não aprovado
-
-                    Em cenários de cancelamento por parte da loja, o cliente será integralmente reembolsado.
-
-                    ---
-
-                    ## **13. Foro e Lei Aplicável**
-
-                    Este documento é regido pelas leis brasileiras.
-
-                    Disputas serão resolvidas no **Foro da Comarca de São Paulo – SP**, salvo quando o consumidor
-                    optar pelo foro de seu domicílio, conforme o CDC.</p>
-            </div>
-        </div>
-    </div>
-
-    </section>
-
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
-    @vite('resources/js/telaDeCompra.js')
-    @vite('resources/js/popup.js')
 
 </body>
 

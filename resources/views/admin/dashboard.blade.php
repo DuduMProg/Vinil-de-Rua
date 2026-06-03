@@ -1,17 +1,191 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM Page</title>
+    <!-- FONTES USADASS -->
+    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    <!-- SEPARAÇÃO -->
+    @vite('resources/css/styleAdm.css')
+
+</head>
+
+<body>
+
+
+    @if(session('success'))
+        <p style="color: green">{{ session('success') }}</p>
+    @endif
+
+    <div class="painelAdmin">
+
+        <!-- MENU LATERAL -->
+        <aside class="menuLateral">
+
+            <div class="areaLogo">
+                <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
+                <h1>Vinil de Rua</h1>
             </div>
-        </div>
+
+            <nav class="menuPrincipal">
+                
+                <button class="itemMenu" onclick="window.location.href='/dashboard'">
+                    Dashboard
+                </button>
+                
+                <button class="itemMenu" onclick="window.location.href='/product/create'">
+                    Adicionar Produto
+                </button>
+                
+                <button class="itemMenuAtivo" onclick="window.location.href='/product'">
+                    Todos os produtos
+                </button>
+
+                <button class="itemMenu" onclick="window.location.href='/product/edit'">
+                    Editar Produto
+                </button>
+
+                <button class="itemMenu" onclick="window.location.href='/'">
+                    Pedidos
+                </button>
+
+            </nav>
+
+            <div class="menuCategorias">
+
+                <h1>Categorias</h1>
+
+                <ul>
+                    @foreach($categories as $category)
+                        <li>
+                            <span>{{ $category->name }}</span>
+                            <span>{{ $category->products_count }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudoPrincipal">
+
+            <!-- MENU SUPERIOR -->
+            <header class="menuSuperior">
+
+                <div class="campoBusca">
+
+                    <input type="text" placeholder="Buscar produto...">
+
+                    <div class="btnBusca">
+                        <button>Buscar</button>
+                    </div>
+
+                </div>
+
+            </header>
+
+            
+
+            <table border="1">
+
+                <tr>
+                    <th>Id</th>
+                    <th>Capa</th>
+                    <th>Produto</th>
+                    <th>Artista</th>
+                    <th>Categoria</th>
+                    <th>Tag</th>
+                    <th>Estoque</th>
+                    <th>Preço</th>
+                    <th>Imagens</th>
+                    <th>Ações</th>
+                </tr>
+
+                @foreach($products as $p)
+                    @php
+                        $cover = $p->images->firstWhere('is_cover', true)
+                            ?? $p->images->first();
+                    @endphp
+
+                    <tr>
+
+                        <td>{{ $p->id }}</td>
+
+                        <td>
+                            @if($cover)
+                                <img src="{{ $cover->path }}" width="60" alt="Capa">
+                            @else
+                                —
+                            @endif
+                        </td>
+
+                        <td>
+                            <a href="/categories/{{ $p->category->id }}">
+                                {{ $p->name }}
+                            </a>
+                        </td>
+
+                        <td>{{ $p->artist }}</td>
+
+                        <td>
+                            {{ $p->category->name ?? 'Sem categoria' }}
+                        </td>
+
+                        <td>
+                            @if($p->tag)
+                                <span>{{ $p->tag->name }}</span>
+                            @else
+                                Sem tag
+                            @endif
+                        </td>
+
+                        <td>{{ $p->stock }}</td>
+
+                        <td>
+                            R$ {{ number_format($p->price, 2, ',', '.') }}
+                        </td>
+
+                        <td>{{ $p->images_count }}</td>
+
+                        <td>
+
+                            <a href="/product/{{ $p->id }}/edit">
+                                Editar
+                            </a>
+
+                            |
+
+                            <form action="/product/{{ $p->id }}" method="POST" style="display:inline"
+                                onsubmit="return confirm('Deletar {{ $p->name }}?')">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit">
+                                    Deletar
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                @endforeach
+
+            </table>
+
+        </main>
+
     </div>
-</x-app-layout>
+</body>
+
+</html>
