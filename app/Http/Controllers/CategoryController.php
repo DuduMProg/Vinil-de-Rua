@@ -9,25 +9,25 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('category.index', [
+        return view('admin.categories.index', [
             'categories' => Category::withCount('products')->get()
         ]);
     }
 
     public function create()
     {
-        return view('category.create');
+        return view('admin.categories.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'   => 'required|string|max:255',
             'banner' => 'nullable|url',
         ]);
 
         Category::create([
-            'name' => $request->name,
+            'name'   => $request->name,
             'banner' => $request->banner,
         ]);
 
@@ -36,18 +36,18 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('category.edit', ['category' => $category]);
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'   => 'required|string|max:255',
             'banner' => 'nullable|url',
         ]);
 
         $category->update([
-            'name' => $request->name,
+            'name'   => $request->name,
             'banner' => $request->banner ?? $category->banner,
         ]);
 
@@ -59,18 +59,15 @@ class CategoryController extends Controller
         if ($category->banner) {
             \Storage::disk('public')->delete($category->banner);
         }
-
         $category->delete();
-
         return redirect('/category')->with('success', 'Categoria deletada!');
     }
 
     public function show(Category $category)
     {
-        $category->products()->with(['images', 'tag'])->get();
         return view('category.show', [
-            'category' => $category,
-            'products' => $category->products()->with('images')->get(),
+            'category'   => $category,
+            'products'   => $category->products()->with(['images', 'tag'])->get(),
             'categories' => Category::all(),
         ]);
     }

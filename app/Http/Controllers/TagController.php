@@ -9,31 +9,28 @@ class TagController extends Controller
 {
     public function index()
     {
-        return view('tag.index', ['tags' => Tag::all()]);
+        return view('admin.tags.index', ['tags' => Tag::all()]);
     }
 
     public function create()
     {
-        return view('tag.create');
+        return view('admin.tags.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'banner' => 'nullable|url',
         ]);
 
-        Tag::create([
-            'name' => $request->name,
-        ]);
+        Tag::create(['name' => $request->name]);
 
         return redirect('/tag')->with('success', 'Tag criada!');
     }
 
     public function edit(Tag $tag)
     {
-        return view('tag.edit', ['tag' => $tag]);
+        return view('admin.tags.edit', ['tag' => $tag]);
     }
 
     public function update(Request $request, Tag $tag)
@@ -42,9 +39,7 @@ class TagController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $tag->update([
-            'name' => $request->name,
-        ]);
+        $tag->update(['name' => $request->name]);
 
         return redirect('/tag')->with('success', 'Tag atualizada!');
     }
@@ -52,14 +47,14 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-
         return redirect('/tag')->with('success', 'Tag deletada!');
     }
 
+    // show é público — mantém na pasta tag
     public function show(Tag $tag)
     {
         return view('tag.show', [
-            'tag' => $tag,
+            'tag'      => $tag,
             'products' => $tag->products()->get()
         ]);
     }

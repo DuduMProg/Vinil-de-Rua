@@ -11,7 +11,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\SpotifyController;
 use App\Http\Controllers\HomeController;
 
-// ── PÚBLICAS — qualquer visitante acessa 
+// ── PÚBLICAS ──────────────────────────────────────────────────────────────────
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -22,10 +22,10 @@ Route::get('/product/{product}', [ProductController::class, 'show'])->name('prod
 // Categorias públicas
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');
 
-// Tags públicas (página de ofertas etc)
-Route::get('/tag/show/{tag}', [TagController::class, 'show']);
+// Tags públicas
+Route::get('/tag/show/{tag}', [TagController::class, 'show'])->name('tag.show');
 
-// Spotify token (JS precisa disso publicamente)
+// Spotify token
 Route::get('/spotify/token', [SpotifyController::class, 'token'])->name('spotify.token');
 
 // 2FA
@@ -34,16 +34,15 @@ Route::post('two-factor', [TwoFactorController::class, 'verify'])->name('2fa.ver
 Route::post('two-factor/resend', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 
 
-// ── AUTENTICADAS — precisa estar logado 
+// ── AUTENTICADAS ──────────────────────────────────────────────────────────────
 
 Route::middleware('auth')->group(function () {
 
-    // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    // Perfil do usuário
+    // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -63,20 +62,46 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// ── ADMIN — só administradores 
+// ── ADMIN ─────────────────────────────────────────────────────────────────────
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
-    // Produtos (CRUD completo)
+    // Dashboard
+    Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+
+    // Produtos
     Route::resource('product', ProductController::class)
-        ->except(['index', 'show']); // index e show são públicos
+        ->except(['index', 'show'])
+        ->names([
+            'create'  => 'product.create',
+            'store'   => 'product.store',
+            'edit'    => 'product.edit',
+            'update'  => 'product.update',
+            'destroy' => 'product.destroy',
+        ]);
 
-    // Categorias (CRUD completo)
+    // Categorias
     Route::resource('category', CategoryController::class)
-        ->except(['show']); // show é público
+        ->except(['show'])
+        ->names([
+            'index'   => 'category.index',
+            'create'  => 'category.create',
+            'store'   => 'category.store',
+            'edit'    => 'category.edit',
+            'update'  => 'category.update',
+            'destroy' => 'category.destroy',
+        ]);
 
-    // Tags (CRUD completo)
-    Route::resource('tag', TagController::class);
+    // Tags
+    Route::resource('tag', TagController::class)
+        ->names([
+            'index'   => 'tag.index',
+            'create'  => 'tag.create',
+            'store'   => 'tag.store',
+            'edit'    => 'tag.edit',
+            'update'  => 'tag.update',
+            'destroy' => 'tag.destroy',
+        ]);
 
 });
 
