@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
 
-    @vite('resources/css/stylePerfil.css')
+    @vite('resources/css/styleLoginRegister.css')
     <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 </head>
 

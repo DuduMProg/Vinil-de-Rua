@@ -43,9 +43,21 @@
 
     <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
 
-    <a href="/profile">
-        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-    </a>
+    @auth
+        @if(auth()->user()->role === 'admin')
+            <a href="/admin/dashboard">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </a>
+        @else
+            <a href="/profile">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </a>
+        @endif
+    @else
+        <a href="/login">
+            <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+        </a>
+    @endauth
 </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -185,32 +197,6 @@
 
         </section>
 
-        <table class="table-auto">
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-      <td>Malcolm Lockyer</td>
-      <td>1961</td>
-    </tr>
-    <tr>
-      <td>Witchy Woman</td>
-      <td>The Eagles</td>
-      <td>1972</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-    </tr>
-  </tbody>
-</table>
 
 
         {{-- Explorar Categorias --}}

@@ -43,10 +43,27 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     // Perfil
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Página principal do perfil (nova tela)
+    Route::get('/profile', function () {
+        return view('profile.index');
+    })->name('profile.index');
+
+    // Página de edição (mantém o Breeze)
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Novas páginas
+    Route::view('/profile/orders', 'profile.orders')
+        ->name('profile.orders');
+
+    Route::view('/profile/recent', 'profile.recent')
+        ->name('profile.recent');
+
+    Route::view('/profile/favorites', 'profile.favorites')
+        ->name('profile.favorites');
     // Carrinho
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/cart/sidebar', [CartController::class, 'sidebar'])->name('cart.sidebar');
@@ -73,10 +90,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('product', ProductController::class)
         ->except(['index', 'show'])
         ->names([
-            'create'  => 'product.create',
-            'store'   => 'product.store',
-            'edit'    => 'product.edit',
-            'update'  => 'product.update',
+            'create' => 'product.create',
+            'store' => 'product.store',
+            'edit' => 'product.edit',
+            'update' => 'product.update',
             'destroy' => 'product.destroy',
         ]);
 
@@ -84,22 +101,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('category', CategoryController::class)
         ->except(['show'])
         ->names([
-            'index'   => 'category.index',
-            'create'  => 'category.create',
-            'store'   => 'category.store',
-            'edit'    => 'category.edit',
-            'update'  => 'category.update',
+            'index' => 'category.index',
+            'create' => 'category.create',
+            'store' => 'category.store',
+            'edit' => 'category.edit',
+            'update' => 'category.update',
             'destroy' => 'category.destroy',
         ]);
 
     // Tags
     Route::resource('tag', TagController::class)
         ->names([
-            'index'   => 'tag.index',
-            'create'  => 'tag.create',
-            'store'   => 'tag.store',
-            'edit'    => 'tag.edit',
-            'update'  => 'tag.update',
+            'index' => 'tag.index',
+            'create' => 'tag.create',
+            'store' => 'tag.store',
+            'edit' => 'tag.edit',
+            'update' => 'tag.update',
             'destroy' => 'tag.destroy',
         ]);
 

@@ -46,9 +46,21 @@
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
 
-            <a href="/profile">
-                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-            </a>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="/admin/dashboard">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @else
+                    <a href="/profile">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @endif
+            @else
+                <a href="/login">
+                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                </a>
+            @endauth
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
