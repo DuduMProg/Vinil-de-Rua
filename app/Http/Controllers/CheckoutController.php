@@ -8,11 +8,6 @@ use App\Models\Order;
 
 class CheckoutController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     // Exibe a tela de checkout com os itens do carrinho
     public function index()
     {

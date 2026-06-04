@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADM Page</title>
-    <!-- FONTES USADASS -->
+    <title>Dashboard - Vinil de Rua ADM</title>
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <!-- SEPARAÇÃO -->
     @vite('resources/css/styleAdm.css')
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-
 
     @if(session('success'))
         <p style="color: green">{{ session('success') }}</p>
@@ -34,33 +31,22 @@
             </div>
 
             <nav class="menuPrincipal">
-                
-                <button class="itemMenu" onclick="window.location.href='/dashboard'">
+                <button class="itemMenuAtivo" onclick="window.location.href='/admin/dashboard'">
                     Dashboard
                 </button>
-                
                 <button class="itemMenu" onclick="window.location.href='/product/create'">
                     Adicionar Produto
                 </button>
-                
-                <button class="itemMenuAtivo" onclick="window.location.href='/product'">
+                <button class="itemMenu" onclick="window.location.href='/product'">
                     Todos os produtos
                 </button>
-
-                <button class="itemMenu" onclick="window.location.href='/product/edit'">
-                    Editar Produto
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/'">
+                <button class="itemMenu" onclick="window.location.href='/admin/orders'">
                     Pedidos
                 </button>
-
             </nav>
 
             <div class="menuCategorias">
-
                 <h1>Categorias</h1>
-
                 <ul>
                     @foreach($categories as $category)
                         <li>
@@ -69,7 +55,13 @@
                         </li>
                     @endforeach
                 </ul>
+            </div>
 
+            <div class="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
             </div>
 
         </aside>
@@ -79,113 +71,166 @@
 
             <!-- MENU SUPERIOR -->
             <header class="menuSuperior">
-
+                <h2>Dashboard</h2>
                 <div class="campoBusca">
-
                     <input type="text" placeholder="Buscar produto...">
-
                     <div class="btnBusca">
                         <button>Buscar</button>
                     </div>
-
                 </div>
-
             </header>
 
-            
+            <!-- CARDS DE RESUMO -->
+            <div class="cardsResumo">
 
-            <table border="1">
+                <div class="cardResumo">
+                    <p class="cardLabel">Total de Produtos</p>
+                    <h2 class="cardValor">{{ $totalProducts }}</h2>
+                </div>
 
-                <tr>
-                    <th>Id</th>
-                    <th>Capa</th>
-                    <th>Produto</th>
-                    <th>Artista</th>
-                    <th>Categoria</th>
-                    <th>Tag</th>
-                    <th>Estoque</th>
-                    <th>Preço</th>
-                    <th>Imagens</th>
-                    <th>Ações</th>
-                </tr>
+                <div class="cardResumo">
+                    <p class="cardLabel">Usuários Cadastrados</p>
+                    <h2 class="cardValor">{{ $totalUsers }}</h2>
+                </div>
 
-                @foreach($products as $p)
-                    @php
-                        $cover = $p->images->firstWhere('is_cover', true)
-                            ?? $p->images->first();
-                    @endphp
+                <div class="cardResumo">
+                    <p class="cardLabel">Pedidos Pendentes</p>
+                    <h2 class="cardValor">{{ $totalPendingOrders }}</h2>
+                </div>
 
+                <div class="cardResumo">
+                    <p class="cardLabel">Receita Total</p>
+                    <h2 class="cardValor">R$ {{ number_format($totalRevenue, 2, ',', '.') }}</h2>
+                </div>
+
+            </div>
+
+            <!-- GRÁFICOS -->
+            <div class="areaGraficos">
+
+                <!-- Pedidos por período -->
+                <div class="grafico">
+                    <h3>Pedidos por período</h3>
+                    <canvas id="graficoPedidos"></canvas>
+                </div>
+
+                <!-- Produtos mais vendidos -->
+                <div class="grafico">
+                    <h3>Produtos mais vendidos</h3>
+                    <canvas id="graficoMaisVendidos"></canvas>
+                </div>
+
+                <!-- Usuários cadastrados por mês -->
+                <div class="grafico">
+                    <h3>Usuários cadastrados por mês</h3>
+                    <canvas id="graficoUsuarios"></canvas>
+                </div>
+
+            </div>
+
+            <!-- TABELA DE PEDIDOS RECENTES -->
+            <div class="tabelaPedidos">
+                <h3>Pedidos Recentes</h3>
+                <table border="1">
                     <tr>
-
-                        <td>{{ $p->id }}</td>
-
-                        <td>
-                            @if($cover)
-                                <img src="{{ $cover->path }}" width="60" alt="Capa">
-                            @else
-                                —
-                            @endif
-                        </td>
-
-                        <td>
-                            <a href="/categories/{{ $p->category->id }}">
-                                {{ $p->name }}
-                            </a>
-                        </td>
-
-                        <td>{{ $p->artist }}</td>
-
-                        <td>
-                            {{ $p->category->name ?? 'Sem categoria' }}
-                        </td>
-
-                        <td>
-                            @if($p->tag)
-                                <span>{{ $p->tag->name }}</span>
-                            @else
-                                Sem tag
-                            @endif
-                        </td>
-
-                        <td>{{ $p->stock }}</td>
-
-                        <td>
-                            R$ {{ number_format($p->price, 2, ',', '.') }}
-                        </td>
-
-                        <td>{{ $p->images_count }}</td>
-
-                        <td>
-
-                            <a href="/product/{{ $p->id }}/edit">
-                                Editar
-                            </a>
-
-                            |
-
-                            <form action="/product/{{ $p->id }}" method="POST" style="display:inline"
-                                onsubmit="return confirm('Deletar {{ $p->name }}?')">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit">
-                                    Deletar
-                                </button>
-
-                            </form>
-
-                        </td>
-
+                        <th>#</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Pagamento</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
                     </tr>
-
-                @endforeach
-
-            </table>
+                    @forelse($recentOrders as $order)
+                        <tr>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->user->name }}</td>
+                            <td>R$ {{ number_format($order->total, 2, ',', '.') }}</td>
+                            <td>{{ $order->payment_label }}</td>
+                            <td>
+                                <span class="badge badge-{{ $order->status }}">
+                                    {{ $order->status_label }}
+                                </span>
+                            </td>
+                            <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                            <td>
+                                {{-- Aprovar --}}
+                                @if($order->status === 'pending')
+                                    <form action="/admin/orders/{{ $order->id }}/approve" method="POST" style="display:inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit">✅ Aprovar</button>
+                                    </form>
+                                    |
+                                    <form action="/admin/orders/{{ $order->id }}/cancel" method="POST" style="display:inline"
+                                          onsubmit="return confirm('Cancelar pedido #{{ $order->id }}?')">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit">❌ Cancelar</button>
+                                    </form>
+                                @else
+                                    {{ $order->status_label }}
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">Nenhum pedido ainda.</td>
+                        </tr>
+                    @endforelse
+                </table>
+            </div>
 
         </main>
 
     </div>
-</body>
 
+    <script>
+        // ── Pedidos por período (últimos 6 meses) ──
+        new Chart(document.getElementById('graficoPedidos'), {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($ordersByMonth->pluck('month')) !!},
+                datasets: [{
+                    label: 'Pedidos',
+                    data: {!! json_encode($ordersByMonth->pluck('total')) !!},
+                    borderColor: '#000',
+                    backgroundColor: 'rgba(0,0,0,0.1)',
+                    tension: 0.4,
+                    fill: true,
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+
+        // ── Produtos mais vendidos ──
+        new Chart(document.getElementById('graficoMaisVendidos'), {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($topProducts->pluck('name')) !!},
+                datasets: [{
+                    label: 'Unidades vendidas',
+                    data: {!! json_encode($topProducts->pluck('total_vendido')) !!},
+                    backgroundColor: '#1D1D1D',
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+
+        // ── Usuários por mês ──
+        new Chart(document.getElementById('graficoUsuarios'), {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($usersByMonth->pluck('month')) !!},
+                datasets: [{
+                    label: 'Usuários',
+                    data: {!! json_encode($usersByMonth->pluck('total')) !!},
+                    backgroundColor: '#7E7E7E',
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    </script>
+
+</body>
 </html>

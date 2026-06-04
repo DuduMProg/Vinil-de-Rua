@@ -32,8 +32,8 @@
         </div>
 
         <nav>
-            <a href="/#catalogo">Catálogo</a>
-            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="/#catalogo">Catalogo</a>
+            <a href="/tag/show/1">Ofertas</a>
             <a href="#contato">Contato</a>
         </nav>
 
@@ -41,22 +41,38 @@
             <a href="/favorite">
                 <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
             </a>
-            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
-            @auth
-                @if(auth()->user()->role === 'admin')
-                    <a href="/admin/dashboard">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @else
-                    <a href="/profile">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @endif
-            @else
-                <a href="/login">
-                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                style="cursor:pointer">
+
+            <a href="/profile">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </a>
+
+            {{-- Botão de sair --}}
+            <form method="POST" action="{{ route('logout') }}" style="display:inline">
+                @csrf
+                <button type="submit" class="btnLogout">Sair</button>
+            </form>
+        </div>
+
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button id="btnFecharSidebar">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="sidebar-content">
+                {{-- preenchido via AJAX pelo JS --}}
+            </div>
+
+            <div class="btnResumo">
+                <a href="/checkout">
+                    <button>Resumo da compra</button>
                 </a>
-            @endauth
+            </div>
         </div>
     </header>
 
@@ -68,9 +84,9 @@
         <div class="secoesUser">
             <h1>Perfil/ <span>Meu Perfil</span></h1>
             <div class="linksSecao">
-                <a href="/profile" class="pageOn">Gerenciar minha Conta</a>
-                <a href="/orders" class="pageOff">Meus Pedidos</a>
-                <a href="/recently-viewed" class="pageOff">Vistos Recentemente</a>
+                <a href="/profile/index" class="pageOn">Gerenciar minha Conta</a>
+                <a href="/profile/orders" class="pageOff">Meus Pedidos</a>
+                <a href="/profile/recently-viewed" class="pageOff">Vistos Recentemente</a>
             </div>
         </div>
 

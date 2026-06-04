@@ -37,7 +37,6 @@ Route::post('two-factor/resend', [TwoFactorController::class, 'resend'])->name('
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -75,6 +74,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::patch('/orders/{order}/approve', [AdminController::class, 'approveOrder'])->name('orders.approve');
+    Route::patch('/orders/{order}/cancel', [AdminController::class, 'cancelOrder'])->name('orders.cancel');
 
     Route::resource('product', ProductController::class)
         ->except(['index', 'show'])

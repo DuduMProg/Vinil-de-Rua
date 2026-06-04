@@ -12,10 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
 
-    @vite('resources/css/styelePerfil.css')
+    @vite('resources/css/perfil.css')
 
-    <link rel="shortcut icon" type="imagex/png"
-        href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
+    <link rel="shortcut icon" type="imagex/png" href="https://i.ibb.co/kstCS19B/Icon-Logo.png">
 </head>
 
 <body>
@@ -24,33 +23,76 @@
         <img src="https://i.ibb.co/qYwvJYpw/loading.gif" alt="loading">
     </div>
 
+    <header>
+        <div class="logoHeader">
+            <a href="/">
+                <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="logo-Vinil-De-Rua">
+            </a>
+            <p>VINIL <br>DE RUA</p>
+        </div>
+
+        <nav>
+            <a href="/#catalogo">Catalogo</a>
+            <a href="/tag/show/1">Ofertas</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="icons">
+            <a href="/favorite">
+                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
+            </a>
+
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                style="cursor:pointer">
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="/admin/dashboard">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @else
+                    <a href="/profile">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @endif
+            @else
+                <a href="/login">
+                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                </a>
+            @endauth
+        </div>
+
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button id="btnFecharSidebar">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="sidebar-content">
+                {{-- preenchido via AJAX pelo JS --}}
+            </div>
+
+            <div class="btnResumo">
+                <a href="/checkout">
+                    <button>Resumo da compra</button>
+                </a>
+            </div>
+        </div>
+    </header>
+
     <main>
 
         <hr>
 
         <div class="secoesUser">
-
-            <h1>
-                Perfil /
-                <span>Editar Perfil</span>
-            </h1>
-
+            <h1>Perfil/ <span>Meu Perfil</span></h1>
             <div class="linksSecao">
-
-                <a href="{{ route('profile.index') }}" class="pageOff">
-                    Gerenciar minha Conta
-                </a>
-
-                <a href="{{ route('profile.orders') }}" class="pageOff">
-                    Meus Pedidos
-                </a>
-
-                <a href="{{ route('profile.recent') }}" class="pageOff">
-                    Vistos Recentemente
-                </a>
-
+                <a href="/profile/index" class="pageOn">Gerenciar minha Conta</a>
+                <a href="/profile/orders" class="pageOff">Meus Pedidos</a>
+                <a href="/profile/recently-viewed" class="pageOff">Vistos Recentemente</a>
             </div>
-
         </div>
 
         <div class="infoUser">
@@ -117,9 +159,7 @@
     <footer id="contato">
 
         <div class="footerLogo">
-            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png"
-                alt="Vinil de Rua"
-                class="logo">
+            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
 
             <h1>
                 VINIL <br>DE RUA
@@ -145,4 +185,5 @@
     @vite('resources/js/popup.js')
 
 </body>
+
 </html>

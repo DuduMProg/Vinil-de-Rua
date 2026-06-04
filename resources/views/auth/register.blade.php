@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="buttonOk">
-                            <button type="submit" id="buttonOk">CADASTRAR</button>
+                            <button type="submit" id="buttonOk" onclick="open.window('/index')">CADASTRAR</button>
                         </div>
 
                         <div class="anchorUser">
