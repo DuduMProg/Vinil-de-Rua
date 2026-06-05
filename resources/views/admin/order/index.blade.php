@@ -31,7 +31,7 @@
             </div>
 
             <nav class="menuPrincipal">
-                <button class="itemMenuAtivo" onclick="window.location.href='/admin/dashboard'">
+                <button class="itemMenu" onclick="window.location.href='/admin/dashboard'">
                     Dashboard
                 </button>
 
@@ -43,7 +43,7 @@
                     Todos os produtos
                 </button>
 
-                <button class="itemMenu" onclick="window.location.href='/admin/orders'">
+                <button class="itemMenuAtivo" onclick="window.location.href='/admin/orders'">
                     Pedidos
                 </button>
             </nav>
@@ -103,54 +103,6 @@
 
             </header>
 
-            <!-- CARDS DE RESUMO -->
-            <div class="cardsResumo">
-
-                <div class="cardResumo">
-                    <p class="cardLabel">Total de Produtos</p>
-                    <h2 class="cardValor">{{ $totalProducts }}</h2>
-                </div>
-
-                <div class="cardResumo">
-                    <p class="cardLabel">Usuários Cadastrados</p>
-                    <h2 class="cardValor">{{ $totalUsers }}</h2>
-                </div>
-
-                <div class="cardResumo">
-                    <p class="cardLabel">Pedidos Pendentes</p>
-                    <h2 class="cardValor">{{ $totalPendingOrders }}</h2>
-                </div>
-
-                <div class="cardResumo">
-                    <p class="cardLabel">Receita Total</p>
-                    <h2 class="cardValor">R$ {{ number_format($totalRevenue, 2, ',', '.') }}</h2>
-                </div>
-
-            </div>
-
-            <!-- GRÁFICOS -->
-            <div class="areaGraficos">
-
-                <!-- Pedidos por período -->
-                <div class="grafico">
-                    <h3>Pedidos por período</h3>
-                    <canvas id="graficoPedidos"></canvas>
-                </div>
-
-                <!-- Produtos mais vendidos -->
-                <div class="grafico">
-                    <h3>Produtos mais vendidos</h3>
-                    <canvas id="graficoMaisVendidos"></canvas>
-                </div>
-
-                <!-- Usuários cadastrados por mês -->
-                <div class="grafico">
-                    <h3>Usuários cadastrados por mês</h3>
-                    <canvas id="graficoUsuarios"></canvas>
-                </div>
-
-            </div>
-
             <!-- TABELA DE PEDIDOS RECENTES -->
             <div class="tabelaPedidos">
                 <h3>Pedidos Recentes</h3>
@@ -164,7 +116,7 @@
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
-                    @forelse($recentOrders as $order)
+                    @forelse($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->name }}</td>
@@ -202,101 +154,19 @@
                     @endforelse
                 </table>
             </div>
-
+            <form method="GET">
+                <select name="status" onchange="this.form.submit()">
+                    <option value="">Todos</option>
+                    <option value="pending" @selected(request('status') === 'pending')>Pendentes</option>
+                    <option value="approved" @selected(request('status') === 'approved')>Aprovados</option>
+                    <option value="cancelled" @selected(request('status') === 'cancelled')>Cancelados</option>
+                </select>
+            </form>
         </main>
 
     </div>
 
-    <script>
-        // ── Pedidos por período (últimos 6 meses) ──
-        new Chart(document.getElementById('graficoPedidos'), {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($ordersByMonth->pluck('month')) !!},
-                datasets: [{
-                    label: 'Pedidos',
-                    data: {!! json_encode($ordersByMonth->pluck('total')) !!},
-                    borderColor: '#000',
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                    tension: 0.4,
-                    fill: true,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
 
-        // ── Produtos mais vendidos (pizza) ──
-        new Chart(document.getElementById('graficoMaisVendidos'), {
-            type: 'pie',
-            data: {
-                labels: {!! json_encode($topProducts->pluck('name')) !!},
-                datasets: [{
-                    data: {!! json_encode($topProducts->pluck('total_vendido')) !!},
-                    backgroundColor: [
-                        '#1D1D1D',
-                        '#3D3D3D',
-                        '#5E5E5E',
-                        '#7E7E7E',
-                        '#9E9E9E',
-                        '#BEBEBE',
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Produtos mais vendidos',
-                    }
-                }
-            }
-        });
-
-        // ── Usuários por mês (linha empilhada) ──
-        new Chart(document.getElementById('graficoUsuarios'), {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($usersByMonth->pluck('month')) !!},
-                datasets: [{
-                    label: 'Usuários',
-                    data: {!! json_encode($usersByMonth->pluck('total')) !!},
-                    backgroundColor: 'rgba(126, 126, 126, 0.4)',
-                    borderColor: '#7E7E7E',
-                    fill: true,
-                    tension: 0.4,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Usuários cadastrados por mês',
-                    },
-                    legend: {
-                        display: false,
-                    }
-                },
-                scales: {
-                    y: {
-                        stacked: true,
-                        beginAtZero: true,
-                    }
-                }
-            }
-        });
-    </script>
     @vite('resources/js/loading.js')
     @vite('resources/js/admin.js')
 </body>

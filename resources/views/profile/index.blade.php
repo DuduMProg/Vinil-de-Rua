@@ -49,11 +49,12 @@
                 <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
             </a>
 
-            {{-- Botão de sair --}}
-            <form method="POST" action="{{ route('logout') }}" style="display:inline">
-                @csrf
-                <button type="submit" class="btnLogout">Sair</button>
-            </form>
+            <div class="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
+            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -84,9 +85,19 @@
         <div class="secoesUser">
             <h1>Perfil/ <span>Meu Perfil</span></h1>
             <div class="linksSecao">
-                <a href="/profile/index" class="pageOn">Gerenciar minha Conta</a>
-                <a href="/profile/orders" class="pageOff">Meus Pedidos</a>
-                <a href="/profile/recently-viewed" class="pageOff">Vistos Recentemente</a>
+
+                <a href="{{ route('profile.index') }}" class="pageOn">
+                    Gerenciar minha Conta
+                </a>
+
+                <a href="{{ route('profile.orders') }}" class="pageOff">
+                    Meus Pedidos
+                </a>
+
+                <a href="{{ route('profile.recent') }}" class="pageOff">
+                    Vistos Recentemente
+                </a>
+
             </div>
         </div>
 

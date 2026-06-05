@@ -34,27 +34,21 @@
             </div>
 
             <nav class="menuPrincipal">
-                
-                <button class="itemMenu" onclick="window.location.href='/dashboard'">
+                <button class="itemMenu" onclick="window.location.href='/admin/dashboard'">
                     Dashboard
                 </button>
-                
-                <button class="itemMenu" onclick="window.location.href='/product/create'">
+
+                <button class="itemMenu" onclick="window.location.href='/admin/product/create'">
                     Adicionar Produto
                 </button>
-                
-                <button class="itemMenuAtivo" onclick="window.location.href='/product'">
+
+                <button class="itemMenuAtivo" onclick="window.location.href='/admin/product'">
                     Todos os produtos
                 </button>
 
-                <button class="itemMenu" onclick="window.location.href='/product/edit'">
-                    Editar Produto
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/'">
+                <button class="itemMenu" onclick="window.location.href='/admin/orders'">
                     Pedidos
                 </button>
-
             </nav>
 
             <div class="menuCategorias">
@@ -90,9 +84,22 @@
 
                 </div>
 
+                <div class="areaUsuario">
+                    <i class="icon-user" id="btnUsuario">
+                        <img src="https://i.ibb.co/v6qZmTGv/perfil-Icon.png" alt="">
+                    </i>
+
+                    <div class="menuLogout" id="menuLogout">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="itemMenu">Sair</button>
+                        </form>
+                    </div>
+                </div>
+
             </header>
 
-            
+
 
             <table border="1">
 

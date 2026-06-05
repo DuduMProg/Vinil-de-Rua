@@ -62,6 +62,12 @@
                     <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
                 </a>
             @endauth
+            <div class="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
+            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>

@@ -69,3 +69,5 @@ const toggleSenha = document.getElementById('toggleSenha');
 toggleSenha?.addEventListener('click', function() {
     inputSenha.type = inputSenha.type === 'text' ? 'password' : 'text';
 });
+
+

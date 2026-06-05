@@ -9,16 +9,17 @@ use App\Models\Tag;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
         // ── Cards de resumo ──
-        $totalProducts     = Product::count();
-        $totalUsers        = User::count();
+        $totalProducts = Product::count();
+        $totalUsers = User::count();
         $totalPendingOrders = Order::where('status', 'pending')->count();
-        $totalRevenue      = Order::where('status', 'approved')->sum('total');
+        $totalRevenue = Order::where('status', 'approved')->sum('total');
 
         // ── Pedidos recentes ──
         $recentOrders = Order::with('user')
@@ -41,7 +42,7 @@ class AdminController extends Controller
             ->take(5)
             ->get()
             ->map(fn($item) => [
-                'name'         => $item->product->name ?? '—',
+                'name' => $item->product->name ?? '—',
                 'total_vendido' => $item->total_vendido,
             ]);
 
@@ -81,4 +82,25 @@ class AdminController extends Controller
         $order->update(['status' => 'cancelled']);
         return redirect()->back()->with('success', 'Pedido #' . $order->id . ' cancelado.');
     }
+    public function orders(Request $request)
+    {
+        $orders = Order::with('user')
+            ->when($request->status, fn($q) => $q->where('status', $request->status))
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        $categories = Category::withCount('products')->get();
+
+        $recentOrders = Order::with('user')
+            ->latest()
+            ->take(10)
+            ->get();
+
+        return view('admin.order.index', compact(
+            'orders',
+            'categories'
+        ));
+    }
+
+    
 }

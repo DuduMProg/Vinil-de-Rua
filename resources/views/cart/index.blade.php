@@ -80,7 +80,7 @@
                 @if($cart->items->isEmpty())
                     <p>Seu carrinho está vazio.</p>
 
-                    <a href="/product">Se pudermos fazer algumas sugestões...</a>
+                    <a href="#">Se pudermos fazer algumas sugestões...</a>
                 @else
 
                     @php $total = 0; @endphp

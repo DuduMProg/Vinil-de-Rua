@@ -37,29 +37,21 @@
             </div>
 
             <nav class="menuPrincipal">
-
-                <button class="itemMenu"
-                    onclick="window.location.href='/product'">
-                    Todos os produtos
-                </button>
-
-                <button class="itemMenu">
+                <button class="itemMenu" onclick="window.location.href='/admin/dashboard'">
                     Dashboard
                 </button>
 
-                <button class="itemMenuAtivo"
-                    onclick="window.location.href='/product/create'">
+                <button class="itemMenuAtivo" onclick="window.location.href='/admin/product/create'">
                     Adicionar Produto
                 </button>
 
-                <button class="itemMenu">
-                    Deletar Produto
+                <button class="itemMenu" onclick="window.location.href='/admin/product'">
+                    Todos os produtos
                 </button>
 
-                <button class="itemMenu">
-                    Notificações
+                <button class="itemMenu" onclick="window.location.href='/admin/orders'">
+                    Pedidos
                 </button>
-
             </nav>
 
             <div class="menuCategorias">
@@ -85,17 +77,26 @@
             <header class="menuSuperior">
 
                 <div class="campoBusca">
+
                     <input type="text" placeholder="Buscar produto...">
 
                     <div class="btnBusca">
                         <button>Buscar</button>
                     </div>
+
                 </div>
 
                 <div class="areaUsuario">
-                    <i class="icon-user">
+                    <i class="icon-user" id="btnUsuario">
                         <img src="https://i.ibb.co/v6qZmTGv/perfil-Icon.png" alt="">
                     </i>
+
+                    <div class="menuLogout" id="menuLogout">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="itemMenu">Sair</button>
+                        </form>
+                    </div>
                 </div>
 
             </header>
@@ -126,27 +127,20 @@
                             <div class="infoForms">
                                 <label>Nome do produto:</label>
 
-                                <input type="text"
-                                    name="name"
-                                    placeholder="Nome do album..."
-                                    value="{{ old('name') }}">
+                                <input type="text" name="name" placeholder="Nome do album..." value="{{ old('name') }}">
                             </div>
 
                             <div class="infoForms">
                                 <label>Nome do(a) artista:</label>
 
-                                <input type="text"
-                                    name="artist"
-                                    placeholder="Nome do artista..."
+                                <input type="text" name="artist" placeholder="Nome do artista..."
                                     value="{{ old('artist') }}">
                             </div>
 
                             <div class="infoForms">
                                 <label>Descrição:</label>
 
-                                <input type="text"
-                                    name="description"
-                                    placeholder="Descrição..."
+                                <input type="text" name="description" placeholder="Descrição..."
                                     value="{{ old('description') }}">
                             </div>
 
@@ -160,8 +154,7 @@
                                     </option>
 
                                     @foreach($categories as $c)
-                                        <option value="{{ $c->id }}"
-                                            {{ old('category_id') == $c->id ? 'selected' : '' }}>
+                                        <option value="{{ $c->id }}" {{ old('category_id') == $c->id ? 'selected' : '' }}>
                                             {{ $c->name }}
                                         </option>
                                     @endforeach
@@ -179,8 +172,7 @@
                                     </option>
 
                                     @foreach($tags as $t)
-                                        <option value="{{ $t->id }}"
-                                            {{ old('tag_id') == $t->id ? 'selected' : '' }}>
+                                        <option value="{{ $t->id }}" {{ old('tag_id') == $t->id ? 'selected' : '' }}>
                                             {{ $t->name }}
                                         </option>
                                     @endforeach
@@ -191,19 +183,14 @@
                             <div class="infoForms">
                                 <label>Preço:</label>
 
-                                <input type="number"
-                                    name="price"
-                                    step="0.01"
-                                    placeholder="Preço..."
+                                <input type="number" name="price" step="0.01" placeholder="Preço..."
                                     value="{{ old('price') }}">
                             </div>
 
                             <div class="infoForms">
                                 <label>Estoque:</label>
 
-                                <input type="number"
-                                    name="stock"
-                                    placeholder="Estoque..."
+                                <input type="number" name="stock" placeholder="Estoque..."
                                     value="{{ old('stock', 0) }}">
                             </div>
 
@@ -216,9 +203,7 @@
 
                             <label>Imagem principal</label>
 
-                            <input type="text"
-                                name="main_img"
-                                placeholder="https://...">
+                            <input type="text" name="main_img" placeholder="https://...">
 
                         </div>
 
@@ -226,9 +211,7 @@
 
                             <label>Imagem secundária</label>
 
-                            <input type="text"
-                                name="images[]"
-                                placeholder="https://...">
+                            <input type="text" name="images[]" placeholder="https://...">
 
                         </div>
 
@@ -236,9 +219,7 @@
 
                             <label>Imagem secundária</label>
 
-                            <input type="text"
-                                name="images[]"
-                                placeholder="https://...">
+                            <input type="text" name="images[]" placeholder="https://...">
 
                         </div>
 
@@ -246,9 +227,7 @@
 
                             <label>Imagem secundária</label>
 
-                            <input type="text"
-                                name="images[]"
-                                placeholder="https://...">
+                            <input type="text" name="images[]" placeholder="https://...">
 
                         </div>
 
@@ -271,7 +250,7 @@
         </main>
     </div>
     @vite('resources/js/loading.js')
-
+    @vite('resources/js/admin.js')
 
 </body>
 

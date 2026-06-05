@@ -74,37 +74,41 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
     Route::patch('/orders/{order}/approve', [AdminController::class, 'approveOrder'])->name('orders.approve');
     Route::patch('/orders/{order}/cancel', [AdminController::class, 'cancelOrder'])->name('orders.cancel');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+
 
     Route::resource('product', ProductController::class)
         ->except(['index', 'show'])
         ->names([
-            'create'  => 'product.create',
-            'store'   => 'product.store',
-            'edit'    => 'product.edit',
-            'update'  => 'product.update',
+            'create' => 'product.create',
+            'store' => 'product.store',
+            'edit' => 'product.edit',
+            'update' => 'product.update',
             'destroy' => 'product.destroy',
         ]);
 
     Route::resource('category', CategoryController::class)
         ->except(['show'])
         ->names([
-            'index'   => 'category.index',
-            'create'  => 'category.create',
-            'store'   => 'category.store',
-            'edit'    => 'category.edit',
-            'update'  => 'category.update',
+            'index' => 'category.index',
+            'create' => 'category.create',
+            'store' => 'category.store',
+            'edit' => 'category.edit',
+            'update' => 'category.update',
             'destroy' => 'category.destroy',
         ]);
 
     Route::resource('tag', TagController::class)
         ->names([
-            'index'   => 'tag.index',
-            'create'  => 'tag.create',
-            'store'   => 'tag.store',
-            'edit'    => 'tag.edit',
-            'update'  => 'tag.update',
+            'index' => 'tag.index',
+            'create' => 'tag.create',
+            'store' => 'tag.store',
+            'edit' => 'tag.edit',
+            'update' => 'tag.update',
             'destroy' => 'tag.destroy',
         ]);
 

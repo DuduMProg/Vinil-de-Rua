@@ -194,9 +194,35 @@
     color: #313131;
 }
 
-.areaUsuario i {
-    font-size: 22px;
+
+.menuLogout {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 8px;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    z-index: 999;
+}
+
+.menuLogout.ativo {
+    display: block;
+}
+
+.menuLogout button {
+    border: none;
+    background: transparent;
     cursor: pointer;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+}
+
+.menuLogout button:hover {
+    background: #f5f5f5;
 }
 
 
@@ -497,4 +523,142 @@
 .menuLogout {
     margin-top: auto;
     padding: 20px;
+}
+
+/* ── Tabela de Pedidos ── */
+.tabelaPedidos {
+    padding: 1.5rem 0;
+}
+
+.tabelaPedidos h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7E7E7E;
+    margin-bottom: 1rem;
+}
+
+.tabelaPedidos table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    font-size: 13px;
+}
+
+.tabelaPedidos thead tr {
+    border-bottom: 2px solid #1D1D1D;
+}
+
+.tabelaPedidos th {
+    text-align: left;
+    padding: 0 12px 10px 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7E7E7E;
+}
+
+.tabelaPedidos th:last-child {
+    text-align: right;
+}
+
+.tabelaPedidos tbody tr {
+    border-bottom: 0.5px solid #E0E0E0;
+    transition: background 0.15s;
+}
+
+.tabelaPedidos tbody tr:hover {
+    background: #F8F8F8;
+}
+
+.tabelaPedidos td {
+    padding: 12px 12px 12px 0;
+    color: #1D1D1D;
+    vertical-align: middle;
+}
+
+.tabelaPedidos td:last-child {
+    text-align: right;
+}
+
+.tabelaPedidos .col-id {
+    font-weight: 700;
+    font-size: 12px;
+    color: #7E7E7E;
+    width: 40px;
+}
+
+.tabelaPedidos .col-total {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Badges de status ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.badge-pending {
+    background: #FAEEDA;
+    color: #633806;
+}
+
+.badge-approved {
+    background: #EAF3DE;
+    color: #27500A;
+}
+
+.badge-cancelled {
+    background: #FCEBEB;
+    color: #791F1F;
+}
+
+.badge-canceled {
+    background: #FCEBEB;
+    color: #791F1F;
+}
+
+/* ── Botões de ação ── */
+.tabelaPedidos button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 0.5px solid;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: inherit;
+}
+
+.tabelaPedidos form:first-of-type button {
+    border-color: #3B6D11;
+    color: #27500A;
+}
+
+.tabelaPedidos form:first-of-type button:hover {
+    background: #EAF3DE;
+}
+
+.tabelaPedidos form:last-of-type button {
+    border-color: #A32D2D;
+    color: #791F1F;
+    margin-left: 6px;
+}
+
+.tabelaPedidos form:last-of-type button:hover {
+    background: #FCEBEB;
 }
