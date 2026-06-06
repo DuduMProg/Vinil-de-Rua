@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class CheckoutController extends Controller
 {
@@ -22,9 +24,9 @@ class CheckoutController extends Controller
         $total = $cart->items->sum(fn($i) => $i->units * $i->product->preco_com_desconto);
 
         return view('checkout.index', [
-            'cart'  => $cart,
+            'cart' => $cart,
             'total' => $total,
-            'user'  => auth()->user(),
+            'user' => auth()->user(),
         ]);
     }
 
@@ -43,32 +45,64 @@ class CheckoutController extends Controller
             return redirect('/cart')->with('error', 'Seu carrinho está vazio.');
         }
 
-        $total = $cart->items->sum(fn($i) => $i->units * $i->product->preco_com_desconto);
+        $total = $cart->items->sum(
+            fn($i) => $i->units * $i->product->preco_com_desconto
+        );
 
-        // Cria o pedido
+        // Cria pedido pendente
         $order = Order::create([
-            'user_id'        => auth()->id(),
-            'status'         => 'pending',
+            'user_id' => auth()->id(),
+            'status' => 'pending',
             'payment_method' => $request->payment_method,
-            'total'          => $total,
+            'total' => $total,
         ]);
 
-        // Copia os itens do carrinho para o pedido
         foreach ($cart->items as $item) {
+
             $order->items()->create([
                 'product_id' => $item->product_id,
-                'units'      => $item->units,
-                'price'      => $item->product->preco_com_desconto,
+                'units' => $item->units,
+                'price' => $item->product->preco_com_desconto,
             ]);
-
-            // Decrementa o estoque
-            $item->product->decrement('stock', $item->units);
         }
 
-        // Limpa o carrinho
-        $cart->items()->delete();
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-        return redirect('/orders/success/' . $order->id);
+        $lineItems = [];
+
+        foreach ($cart->items as $item) {
+
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => 'brl',
+                    'product_data' => [
+                        'name' => $item->product->name,
+                    ],
+                    'unit_amount' => intval(
+                        $item->product->preco_com_desconto * 100
+                    ),
+                ],
+                'quantity' => $item->units,
+            ];
+        }
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+
+            'success_url' =>
+                url('/orders/success/' . $order->id),
+
+            'cancel_url' =>
+                url('/checkout'),
+
+            'metadata' => [
+                'order_id' => $order->id,
+            ],
+        ]);
+
+        return redirect($session->url);
     }
 
     // Tela de confirmação do pedido
@@ -83,4 +117,6 @@ class CheckoutController extends Controller
 
         return view('checkout.success', ['order' => $order]);
     }
+
+
 }

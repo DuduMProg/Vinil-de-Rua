@@ -6,7 +6,7 @@ window.addEventListener("scroll", function () {
 
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
-const title   = document.getElementById("sidebar-title");
+const title = document.getElementById("sidebar-title");
 const content = document.getElementById("sidebar-content");
 
 function openSidebar(type) {
@@ -33,8 +33,9 @@ function closeSidebar() {
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
 }
+
 // Recarrega sidebar após ações do carrinho
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
     const btn = e.target.closest(".qntdProd button, .deleteBtn");
     if (!btn) return;
 
@@ -47,26 +48,33 @@ document.addEventListener("click", function(e) {
         method: "POST",
         body: new FormData(form)
     })
-    .then(() => {
-        // Recarrega o conteúdo da sidebar
-        fetch("/cart/sidebar")
-            .then(res => res.text())
-            .then(html => content.innerHTML = html);
-    });
+        .then(() => {
+            fetch("/cart/sidebar")
+                .then(res => res.text())
+                .then(html => content.innerHTML = html);
+        });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Abre sidebar do carrinho
+    // Ícone do carrinho no header
     document.getElementById("btnCart")?.addEventListener("click", function () {
         openSidebar("cart");
     });
 
-    // Fecha sidebar
+    // Link "Editar" no checkout
+    document.getElementById("btnEditarPedido")?.addEventListener("click", function (e) {
+        e.preventDefault();
+        openSidebar("cart");
+    });
+
+    // Fecha ao clicar no overlay
     document.getElementById("overlay")?.addEventListener("click", closeSidebar);
 
+    // Fecha ao clicar no X
+    document.getElementById("btnFecharSidebar")?.addEventListener("click", closeSidebar);
 });
-document.getElementById("btnFecharSidebar")?.addEventListener("click", closeSidebar);
+
 
 
 //esconder / aparecer sair do adm

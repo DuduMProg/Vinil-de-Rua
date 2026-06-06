@@ -223,6 +223,15 @@ header .icons img {
     align-items: end;
 }
 
+.deletePrice .precoOriginal{
+  font-size: 15px;
+}
+
+.deletePrice .precoOferta {
+  font-size: 20px;
+  color: #e40000;
+}
+
 .deleteIcon {
     width: 40px;
     height: auto;

@@ -29,16 +29,21 @@
             </a>
             <p>VINIL <br>DE RUA</p>
         </div>
+
         <nav>
-            <a href="/#catalogo">Catálogo</a>
-            <a href="/tag/show/oferta">Ofertas</a>
+            <a href="/#catalogo">Catalogo</a>
+            <a href="/tag/show/1">Ofertas</a>
             <a href="#contato">Contato</a>
         </nav>
+
         <div class="icons">
             <a href="/favorite">
                 <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
             </a>
-            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
+
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                style="cursor:pointer">
+
             @auth
                 @if(auth()->user()->role === 'admin')
                     <a href="/admin/dashboard">
@@ -49,7 +54,30 @@
                         <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
                     </a>
                 @endif
+            @else
+                <a href="/login">
+                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                </a>
             @endauth
+        </div>
+
+        <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button id="btnFecharSidebar">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="sidebar-content">
+                {{-- preenchido via AJAX pelo JS --}}
+            </div>
+
+            <div class="btnResumo">
+                <a href="/checkout">
+                    <button>Resumo da compra</button>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -109,7 +137,7 @@
                 <div class="cardResumo">
                     <div class="tituloEditar">
                         <h1>Seu pedido</h1>
-                        <a href="/cart">Editar</a>
+                        <a href="#" id="btnEditarPedido">Editar</a>
                     </div>
 
                     <div class="produtosFinais">
@@ -223,13 +251,14 @@
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
+    @vite('resources/js/cartao.js')
 
     <script>
         // Mostra/esconde área de pagamento conforme seleção
         document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
             radio.addEventListener('change', function () {
-                document.getElementById('areaPix').style.display     = 'none';
-                document.getElementById('areaCartao').style.display  = 'none';
+                document.getElementById('areaPix').style.display = 'none';
+                document.getElementById('areaCartao').style.display = 'none';
 
                 if (this.value === 'pix') {
                     document.getElementById('areaPix').style.display = 'block';

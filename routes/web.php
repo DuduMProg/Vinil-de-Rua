@@ -12,6 +12,7 @@ use App\Http\Controllers\SpotifyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StripeWebhookController;
 
 
 
@@ -56,8 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 
     //CHECKOUT
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+   Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
     Route::get('/orders/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
 
