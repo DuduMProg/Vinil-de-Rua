@@ -2,12 +2,12 @@
 
 <h1>Meus Favoritos</h1>
 
-@if($favorites->isEmpty())
+@if($whishlists->isEmpty())
     <p>Você ainda não tem favoritos.</p>
     <a href="/product">Ver produtos</a>
 @else
     <div>
-        @foreach($favorites as $fav)
+        @foreach($whishlists as $fav)
             @php
                 $p = $fav->product;
                 $cover = $p->images->firstWhere('is_cover', true) ?? $p->images->first();
@@ -38,7 +38,7 @@
                     </form>
 
                     {{-- Remover dos favoritos --}}
-                    <form action="/favorite/delete/{{ $p->id }}" method="POST">
+                    <form action="/whishlist/delete/{{ $p->id }}" method="POST">
                         @csrf
                         <button type="submit">
                             <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="remover favorito">

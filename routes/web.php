@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/whishlist', [WishlistController::class, 'index'])->name('whishlist.index');
     Route::post('/whishlist/store/{product}', [WishlistController::class, 'store'])->name('whishlist.store');
     Route::post('/whishlist/delete/{product}', [WishlistController::class, 'delete'])->name('whishlist.delete');
+    Route::get('/whishlist/sidebar', [WishlistController::class, 'sidebar'])->name('whishlist.sidebar');
 
 });
 

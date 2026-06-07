@@ -9,6 +9,13 @@ const overlay = document.getElementById("overlay");
 const title = document.getElementById("sidebar-title");
 const content = document.getElementById("sidebar-content");
 
+// Menu mobile
+
+document.getElementById('btnMenu')?.addEventListener('click', function () {
+    const mobileNav = document.getElementById('mobileNav');
+    mobileNav.classList.toggle('active');
+});
+
 function openSidebar(type) {
     sidebar.classList.add("active");
     overlay.classList.add("active");
@@ -31,6 +38,7 @@ function openSidebar(type) {
 
 function closeSidebar() {
     sidebar.classList.remove("active");
+    document.getElementById('sidebarFavorite')?.classList.remove('active');
     overlay.classList.remove("active");
 }
 
@@ -75,11 +83,59 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btnFecharSidebar")?.addEventListener("click", closeSidebar);
 });
 
+// Wishlist
+// Abre sidebar de favoritos
+document.getElementById('btnFavorite')?.addEventListener('click', function () {
+    document.getElementById('sidebarFavorite').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    atualizarFavoritos();
+});
+
+// Fecha sidebar de favoritos
+document.getElementById('btnFecharFavorite')?.addEventListener('click', function () {
+    document.getElementById('sidebarFavorite').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+});
+
+// Carrega conteúdo dos favoritos via AJAX
+async function atualizarFavoritos() {
+    const res = await fetch('/whishlist/sidebar');
+    const html = await res.text();
+    const content = document.getElementById('favorite-content');
+    if (content) content.innerHTML = html;
+}
+
+// Intercepta forms de desfavoritar dentro da sidebar
+document.getElementById('sidebarFavorite')?.addEventListener('submit', async function (e) {
+    const form = e.target;
+    e.preventDefault();
+
+    await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+
+    await atualizarFavoritos();
+});
+
 
 
 //esconder / aparecer sair do adm
 const btnUsuario = document.getElementById('btnUsuario');
 const menuLogout = document.getElementById('menuLogout');
+
+if (btnUsuario && menuLogout) {
+    btnUsuario.addEventListener('click', () => {
+        menuLogout.classList.toggle('ativo');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.areaUsuario')) {
+            menuLogout.classList.remove('ativo');
+        }
+    });
+}
 
 btnUsuario.addEventListener('click', () => {
     menuLogout.classList.toggle('ativo');

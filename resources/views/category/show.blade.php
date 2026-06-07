@@ -178,11 +178,14 @@
                         </div>
 
                         <div class="favorite">
+                            <form action="/whishlist/store/{{ $p->id }}" method="POST">
+                                @csrf
 
-                            <a href="/whishlist">
-                                <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-                            </a>
+                                <button type="submit" class="addFav" {{ $p->stock <= 0 ? 'disabled' : '' }}>
+                                    <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
+                                </button>
 
+                            </form>
                         </div>
 
                     </div>

@@ -53,4 +53,13 @@ class WishlistController extends Controller
 
         return redirect()->route('whishlist.index');
     }
+
+    public function sidebar()
+    {
+        $favorites = Wishlist::with(['product.images', 'product.tag'])
+            ->where('user_id', auth()->id())
+            ->get();
+
+        return view('wishlist.sidebar', ['favorites' => $favorites]);
+    }
 }

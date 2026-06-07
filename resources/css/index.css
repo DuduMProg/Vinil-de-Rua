@@ -1,5 +1,3 @@
-
-
 * {
   padding: 0;
   margin: 0;
@@ -12,27 +10,24 @@ a* {
 }
 
 :root {
-    /* FONTES */
-    --fontePrimaria: 'Caesar Dressing', cursive;
-    --fonteSecundaria: 'Anton', sans-serif;
-    --fonteTerciaria: "Young Serif", serif;
-    --fonteDescricao: "Zilla Slab", serif;
-    --fonteNumeros: "Sahitya", serif;
-    /* CORES E GRADIENTES */
-    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    --gradienteCards: #D9D9D9;
-    --brancoVdr: #FDFDFD;
-    --vermelhoVdr: #6C2121;
-    --pretoVdr: #1D1D1D;
-    /* drop shadow discos */
-    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+  /* FONTES */
+  --fontePrimaria: 'Caesar Dressing', cursive;
+  --fonteSecundaria: 'Anton', sans-serif;
+  --fonteTerciaria: "Young Serif", serif;
+  --fonteDescricao: "Zilla Slab", serif;
+  --fonteNumeros: "Sahitya", serif;
+  /* CORES E GRADIENTES */
+  --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+  --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+  --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --gradienteCards: #D9D9D9;
+  --brancoVdr: #FDFDFD;
+  --vermelhoVdr: #6C2121;
+  --pretoVdr: #1D1D1D;
+  /* drop shadow discos */
+  --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
 }
 
-.table-auto{
-  border: 2px solid red;
-}
 
 #preloader {
   position: fixed;
@@ -227,7 +222,7 @@ header .icons img {
   align-items: end;
 }
 
-.deletePrice .precoOriginal{
+.deletePrice .precoOriginal {
   font-size: 15px;
 }
 
@@ -295,34 +290,127 @@ header .icons img {
   width: 100%;
 }
 
+/* FAVORITOS */
+
+/* Ícone desfavoritar com hover */
+.btnDesfavoritar img {
+  width: 24px;
+  height: 24px;
+  content: url("https://i.ibb.co/5mHR0sq/favorite-Black.png");
+  transition: content 0.2s ease;
+  cursor: pointer;
+}
+
+.btnDesfavoritar:hover img {
+  content: url("https://i.ibb.co/9HR1wYgm/desfavoritar.png");
+  transform: scale(1.2);
+}
+
+/* Item de favorito na sidebar */
+.favoritoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #d0d0d0;
+  font-family: var(--fontePrimaria);
+}
+
+.favoritoItem .imgFav {
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.infoFav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.infoFav p {
+  font-size: 16px;
+}
+
+.infoFav .precoFav {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.acoessFav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnVerProduto {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-family: var(--fontePrimaria);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btnVerProduto:hover {
+  background: #7E7E7E;
+}
+
+.btnDesfavoritar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.semFavoritos {
+  text-align: center;
+  font-family: var(--fonteTerciaria);
+  margin-top: 30px;
+  color: #7E7E7E;
+}
+
+.semFavoritos a {
+  color: #000;
+  text-decoration: underline;
+}
+
+
 .menuLogout {
-    position: absolute;
-    top: 55px;
-    right: 0;
-    background: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 8px;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    z-index: 999;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  z-index: 999;
 }
 
 .menuLogout.ativo {
-    display: block;
+  display: block;
 }
 
 .menuLogout button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    width: 100%;
-    padding: 8px 16px;
-    text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
 }
 
 .menuLogout button:hover {
-    background: #f5f5f5;
+  background: #f5f5f5;
 }
 
 
@@ -646,13 +734,13 @@ main {
 }
 
 .precoOriginal {
-    color: #7E7E7E;
-    text-decoration-line: line-through;
+  color: #7E7E7E;
+  text-decoration-line: line-through;
 }
 
 .precoOferta {
-    color: #e40000;
-    font-size: 24px;
+  color: #e40000;
+  font-size: 24px;
 }
 
 
@@ -761,7 +849,7 @@ main {
   transition: 0.2s ease-in;
 }
 
-.cardCategorias p{
+.cardCategorias p {
   color: var(--pretoVdr);
 }
 
@@ -905,4 +993,477 @@ footer {
   margin-bottom: 10px;
   padding: 20px;
   border-radius: 8px;
+}
+
+/* Desktop — esconde o hamburguer */
+.mobileMenuBtn {
+  display: none;
+}
+
+.mobileNav {
+  display: none;
+}
+
+
+/* ==================================================
+   TABLETS (até 1024px)
+================================================== */
+@media (max-width: 1024px) {
+
+  /* ---------- Hero ---------- */
+
+  .banner {
+    width: 400px;
+    height: 400px;
+  }
+
+  .artist {
+    width: 500px;
+  }
+
+  .vinyl {
+    width: 260px;
+  }
+
+  /* ---------- Ofertas + Catálogo ---------- */
+
+  .offECatalogo {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .catalogoIndex {
+    grid-template-columns: repeat(3, 224px);
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footerContainer {
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+
+  .socialConteiner {
+    margin-right: 0;
+  }
+
+  /* ---------- SideBar ---------- */
+
+  sidebar {
+    width: 400px;
+    max-width: 95%;
+    right: -100%;
+    padding: 0 15px;
+  }
+
+  .sidebar-content .produtoItem {
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  .produtoItem .imgProdCart {
+    width: 100px;
+  }
+
+  .qntdProd {
+    gap: 10px;
+  }
+
+  .qntdProd button {
+    font-size: 18px;
+  }
+
+  .deletePrice {
+    gap: 12px;
+  }
+
+  .deletePrice .precoOriginal {
+    font-size: 13px;
+  }
+
+  .deletePrice .precoOferta {
+    font-size: 18px;
+  }
+
+  .deleteIcon {
+    width: 28px;
+  }
+
+  .btnResumo {
+    margin: 30px 0;
+  }
+
+  .btnResumo button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .verMaisCart a {
+    font-size: 18px;
+  }
+}
+
+
+
+
+
+
+
+/* ==================================================
+   CELULARES (até 768px)
+================================================== */
+@media (max-width: 768px) {
+
+  /* ---------- Header ---------- */
+
+  header {
+    height: 80px;
+    padding: 0 15px;
+    gap: 10px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .logoHeader {
+    font-size: 22px;
+  }
+
+  header img {
+    width: 55px;
+    height: 55px;
+  }
+
+  header .icons img {
+    width: 35px;
+    height: 35px;
+  }
+
+  header.scrolled {
+    background-color: #FFFFFF;
+    padding: 0 15px;
+  }
+
+  header.scrolled .logoHeader img {
+    content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
+    width: 55px;
+    height: 55px;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+
+    font-size: 34px;
+    color: white;
+
+    cursor: pointer;
+  }
+
+  header.scrolled .mobileMenuBtn {
+    color: black;
+  }
+
+  /* esconde nav desktop */
+  nav {
+    display: none;
+  }
+
+  /* menu mobile fechado */
+  .mobileNav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #7E7E7E;
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    /* altura do header mobile */
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  /* menu mobile aberto */
+  .mobileNav.active {
+    display: flex;
+  }
+
+  .mobileNav a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "Caesar Dressing", system-ui;
+    font-size: 28px;
+  }
+
+  /* ---------- Sidebar Carrinho ---------- */
+
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+    right: -100%;
+    border-radius: 0;
+    padding: 0 10px;
+  }
+
+  .sidebar-header {
+    padding: 15px 10px;
+  }
+
+  .sidebar-header h2 {
+    font-size: 22px;
+  }
+
+  .sidebar-content .produtoItem {
+    gap: 10px;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .produtoItem .imgProdCart {
+    width: 75px;
+  }
+
+  .qntdProd {
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .qntdProd button {
+    font-size: 16px;
+  }
+
+  .deletePrice {
+    gap: 8px;
+  }
+
+  .deletePrice .precoOriginal {
+    font-size: 12px;
+  }
+
+  .deletePrice .precoOferta {
+    font-size: 16px;
+  }
+
+  .deleteIcon {
+    width: 24px;
+  }
+
+  .btnResumo {
+    margin: 20px 0;
+  }
+
+  .btnResumo button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .verMaisCart a {
+    font-size: 16px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .banner,
+  .artist,
+  .vinyl,
+  .shape {
+    display: none;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 140px 20px 60px;
+  }
+
+  /* ---------- Ofertas ---------- */
+
+  .offECatalogo {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .offECatalogo .cardOff {
+    width: 95%;
+    max-width: 450px;
+    margin-top: 40px;
+  }
+
+  .offEimg h1 {
+    font-size: 24px;
+  }
+
+  .linkEImg {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ---------- Catálogo ---------- */
+
+  .catalogoIndex {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 224px));
+    gap: 20px;
+    padding: 50px 15px;
+    justify-content: center;
+  }
+
+  .cardDisco {
+    width: 100%;
+    max-width: 224px;
+    margin: 0 auto;
+  }
+
+  .infoDisco {
+    font-size: 14px;
+  }
+
+  .infoDisco .precoDisco {
+    font-size: 18px;
+  }
+
+  .precoOferta {
+    font-size: 20px;
+  }
+
+  /* ---------- Botão Ver Mais ---------- */
+
+  .btnVerMais {
+    justify-content: center;
+    padding: 30px 15px;
+  }
+
+  /* ---------- Categorias ---------- */
+
+  .explorarCategorias {
+    padding: 0 15px;
+  }
+
+  .explorarCategorias h1 {
+    font-size: 28px;
+    text-align: center;
+    padding-bottom: 60px;
+  }
+
+  .categorias {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .categorias img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+
+  .cardCategorias p {
+    font-size: 20px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 25px 15px;
+  }
+
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .socialConteiner {
+    margin-right: 0;
+  }
+
+  .formasPagamentoImg {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .copyrightVdR {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
+  }
+}
+
+
+/* ==================================================
+   CELULARES PEQUENOS (até 480px)
+================================================== */
+@media (max-width: 480px) {
+
+  /* ---------- Header ---------- */
+
+  .logoHeader p {
+    font-size: 18px;
+  }
+
+  header .icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* ---------- Catálogo ---------- */
+
+  .catalogoIndex {
+    grid-template-columns: 1fr;
+  }
+
+  .cardDisco {
+    max-width: 280px;
+  }
+
+  /* ---------- Ofertas ---------- */
+
+  .offEimg h1 {
+    font-size: 20px;
+  }
+
+  .cardOff .listaDiscos {
+    padding-right: 10px;
+  }
+
+  .offECatalogo .cardOff {
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .qntdProd {
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Categorias ---------- */
+
+  .cardCategorias p {
+    font-size: 18px;
+    padding: 5px 20px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footerLogo img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .footerLogo h1 {
+    font-size: 28px;
+  }
+
+  .copyrightVdR {
+    font-size: 14px;
+  }
 }

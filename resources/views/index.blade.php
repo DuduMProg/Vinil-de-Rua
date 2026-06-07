@@ -36,10 +36,12 @@
             <a href="#contato">Contato</a>
         </nav>
 
+        <div class="mobileMenuBtn" id="btnMenu">
+            ☰
+        </div>
+
         <div class="icons">
-    <a href="/favorite">
-        <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-    </a>
+    <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite"style="cursor:pointer">
 
     <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
 
@@ -62,24 +64,40 @@
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h2 id="sidebar-title">Carrinho</h2>
-        <button id="btnFecharSidebar">✖</button>
-    </div>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 id="sidebar-title">Carrinho</h2>
+                <button id="btnFecharSidebar">✖</button>
+            </div>
 
-    <div class="sidebar-content" id="sidebar-content">
-        {{-- preenchido via AJAX pelo JS --}}
-    </div>
+            <div class="sidebar-content" id="sidebar-content">
+                {{-- preenchido via AJAX pelo JS --}}
+            </div>
 
-    <div class="btnResumo">
-        <a href="/checkout">
-            <button>Resumo da compra</button>
-        </a>
-    </div>
-</div>
+            <div class="btnResumo">
+                <a href="/checkout">
+                    <button>Resumo da compra</button>
+                </a>
+            </div>
+        </div>
+
+        {{-- Sidebar Favoritos --}}
+        <div class="sidebar" id="sidebarFavorite">
+            <div class="sidebar-header">
+                <h2>Favoritos</h2>
+                <button id="btnFecharFavorite">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="favorite-content">
+                {{-- preenchido via AJAX --}}
+            </div>
+        </div>
     </header>
-
+        <div class="mobileNav" id="mobileNav">
+            <a href="/#catalogo">Catálogo</a>
+            <a href="/tag/show/1">Ofertas</a>
+            <a href="#contato">Contato</a>
+        </div>
     <main>
         <section class="conteiner">
             <div class="textConteiner">
@@ -279,6 +297,7 @@
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
+    @vite('resources/js/index.js')
 
 </body>
 
