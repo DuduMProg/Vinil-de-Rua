@@ -88,7 +88,7 @@
                 </a>
             </div>
         </div>
-    </header>   
+    </header>
 
 
     <h1>{{ $tag->name }}</h1>
@@ -101,114 +101,150 @@
             <div class="anuncioBlackFriday">
                 <h1>DESCONTOS EM DISCOS COM 15% OFF!!</h1>
             </div>
-            <button class="filtroOff">
-                <img src=" https://i.ibb.co/5XmYQG0x/filtro-Icon.png" alt="">
-                <p>Filtrar</p>
-            </button>
-
-            <div class="campoFiltro">
-                <p>Preço</p>
-
-                <p id="valorFiltro">Até R$ 500</p>
-
-                <div class="valores">
-                    <p>Min: <br> R$ 0</p>
-                    <p>Max: <br> R$ 500</p>
-                </div>
-
-                <div class="rangeInput">
-                    <input type="range" name="filtro" id="filtroPreco" min="0" max="500" value="500">
-                </div>
-
-                <button id="btnFiltrarPreco">Filtrar</button>
-            </div>
 
         </div>
 
-        <section class="catalogoOff">
+        <section class="filtroECat">
+            <aside class="sidebarFiltro" id="sidebarFiltro">
 
-            @forelse($products as $p)
+                <div class="filtroTitulo">
+                    <img src="https://i.ibb.co/r2nBVtd4/vinil-Rodando.png" class="vinyl">
+                    <h2>Filtros</h2>
+                </div>
 
-                @php
-                    $cover = $p->images->firstWhere('is_cover', true)
-                        ?? $p->images->first();
+                <div class="grupoFiltro">
 
-                    $oldPrice = $p->price;
-                    $discountPrice = $p->price * 0.6;
-                @endphp
+                    <h3>Preço</h3>
 
-                <div class="cardDisco" preco="{{ $discountPrice }}">
+                    <label>
+                        <input type="checkbox" class="filtroPreco" value="100">
+                        Até R$100
+                    </label>
 
-                    @if($cover)
+                    <label>
+                        <input type="checkbox" class="filtroPreco" value="200">
+                        R$100 - R$200
+                    </label>
 
-                        <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}" class="imgCard">
+                    <label>
+                        <input type="checkbox" class="filtroPreco" value="300">
+                        R$200 - R$300
+                    </label>
 
-                    @endif
-
-                    <div class="infoDisco">
-
-                        <p class="nomeDisco">
-                            {{ $p->name }} - {{ $p->artist }}
-                        </p>
-
-                        <div class="precoDisco">
-                            @if($p->tem_desconto)
-                                <p class="precoOriginal">
-                                    <s>R$ {{ number_format($p->price, 2, ',', '.') }}</s>
-                                </p>
-                                <p class="precoOferta">
-                                    R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }}!
-                                </p>
-                            @else
-                                <p class="precoDisco">
-                                    R$ {{ number_format($p->price, 2, ',', '.') }}
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="preçoEFavDisco">
-
-                        <button class="btnComprarAgora"
-                            onclick="window.location.href='{{ route('product.show', $p->id) }}'">
-                            {{ $p->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
-                        </button>
-
-                        <div class="cart">
-
-                            <form action="/cart/store/{{ $p->id }}" method="POST">
-
-                                @csrf
-
-                                <button type="submit" class="addCarrinho" {{ $p->stock <= 0 ? 'disabled' : '' }}>
-
-                                    <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
-
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                        <div class="favorite">
-
-                            <a href="/src/assets/pages/favorito.html">
-
-                                <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-
-                            </a>
-
-                        </div>
-
-                    </div>
+                    <label>
+                        <input type="checkbox" class="filtroPreco" value="400">
+                        R$300 - R$400
+                    </label>
 
                 </div>
 
-            @empty
+                <div class="grupoFiltro">
 
-                <p>Nenhum produto nessa categoria.</p>
+                    <h3>Categorias</h3>
+                    @foreach($categories as $category)
+                        <label>
+                            <input type="checkbox" class="filtroCategoria" value="{{ strtolower($category->name) }}">
+                            <span>{{ $category->name }}</span>
+                        </label>
+                    @endforeach
 
-            @endforelse
+                </div>
+                <div class="btnsfiltro">
+
+                    <button class="btnLimpar">
+                        Limpar filtros
+                    </button>
+                    <button class="btnFiltrar">
+                        Aplicar filtros
+                    </button>
+                </div>
+
+            </aside>
+
+            <section class="catalogoOff">
+                @forelse($products as $p)
+
+                    @php
+                        $cover = $p->images->firstWhere('is_cover', true)
+                            ?? $p->images->first();
+
+                        $oldPrice = $p->price;
+                        $discountPrice = $p->price * 0.6;
+                    @endphp
+
+                    <div class="cardDisco" preco="{{ $discountPrice }}" preco="{{ $discountPrice }}" categoria="{{ strtolower($p->category->name) }}">
+
+                        @if($cover)
+
+                            <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}" class="imgCard">
+
+                        @endif
+
+                        <div class="infoDisco">
+
+                            <p class="nomeDisco">
+                                {{ $p->name }} - {{ $p->artist }}
+                            </p>
+
+                            <div class="precoDisco">
+                                @if($p->tem_desconto)
+                                    <p class="precoOriginal">
+                                        <s>R$ {{ number_format($p->price, 2, ',', '.') }}</s>
+                                    </p>
+                                    <p class="precoOferta">
+                                        R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }}!
+                                    </p>
+                                @else
+                                    <p class="precoDisco">
+                                        R$ {{ number_format($p->price, 2, ',', '.') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="preçoEFavDisco">
+
+                            <button class="btnComprarAgora"
+                                onclick="window.location.href='{{ route('product.show', $p->id) }}'">
+                                {{ $p->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
+                            </button>
+
+                            <div class="cart">
+
+                                <form action="/cart/store/{{ $p->id }}" method="POST">
+
+                                    @csrf
+
+                                    <button type="submit" class="addCarrinho" {{ $p->stock <= 0 ? 'disabled' : '' }}>
+
+                                        <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            <div class="favorite">
+
+                                <a href="/src/assets/pages/favorito.html">
+
+                                    <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                @empty
+
+                    <p>Nenhum produto nessa categoria.</p>
+
+                @endforelse
+            </section>
 
         </section>
         <footer id="contato">

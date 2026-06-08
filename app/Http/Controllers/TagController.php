@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use App\Models\Category;
+
 
 class TagController extends Controller
 {
@@ -55,6 +57,7 @@ class TagController extends Controller
     {
         return view('tag.show', [
             'tag'      => $tag,
+            'categories' => Category::withCount('products')->get(),
             'products' => $tag->products()->get()
         ]);
     }

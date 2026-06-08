@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Verificação em duas etapas</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+
 </head>
 @vite('resources/css/styleLoginRegister.css')
 
@@ -24,7 +31,7 @@
                     @endforeach
                 </ul>
             @endif
-            <form method="POST" action="{{ route('2fa.verify') }}">
+            <form method="POST" action="{{ route('2fa.verify') }}" class="formCodigo">
                 @csrf
                 <label>Código:</label>
 
@@ -43,7 +50,7 @@
 
             </form>
 
-            <form method="POST" action="{{ route('2fa.resend') }}">
+            <form method="POST" action="{{ route('2fa.resend') }}" class="formReenviar">
                 @csrf
                 <button type="submit">Reenviar código</button>
             </form>

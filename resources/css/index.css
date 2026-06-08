@@ -370,6 +370,25 @@ header .icons img {
   padding: 0;
 }
 
+.wishlistCart{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnAdicionarCarrinho {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btnAdicionarCarrinho img {
+  width: 20px;
+  height: 20px;
+  transition: content 0.2s ease;
+}
+
 .semFavoritos {
   text-align: center;
   font-family: var(--fonteTerciaria);

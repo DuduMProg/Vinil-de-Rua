@@ -45,10 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Subpáginas do perfil
-    Route::get('/profile/orders', fn() => view('profile.orders'))->name('profile.orders');
-    Route::get('/profile/recent', fn() => view('profile.recently-viewed'))->name('profile.recent');
 
+    // Subpáginas do perfil
+    Route::get('/profile/recent', [ProfileController::class, 'recent'])->name('profile.recent');
+    Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+
+    
     // Carrinho
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/cart/sidebar', [CartController::class, 'sidebar'])->name('cart.sidebar');
@@ -57,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
 
     //CHECKOUT
-   Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 

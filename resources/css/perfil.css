@@ -105,6 +105,17 @@ header .icons img {
     cursor: pointer;
 }
 
+.icons{
+    display: flex;
+}
+
+.icons .areaUsuario {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -466,6 +477,8 @@ header.scrolled .icons img {
 
 }
 
+/* PARTE DE EDITAR PERFIL */
+
 .botaoEdit {
     background-color: rgba(219, 219, 219, 0.3);
     padding: 10px;
@@ -491,78 +504,217 @@ header.scrolled .icons img {
 main {
     flex: 1;
     height: 100vh;
+    border: 20px solid red;
 }
 
+/* Inputs do perfil */
+.inputPerfil {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    background-color: #f5f5f5;
+    font-family: var(--fonteTerciaria);
+    font-size: 15px;
+    margin-top: 6px;
+    transition: border 0.2s ease;
+}
+
+.inputPerfil:focus {
+    outline: none;
+    border-color: #000;
+    background-color: #fff;
+}
+
+/* Botão salvar */
+.btnSalvar {
+    margin-top: 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-family: var(--fontePrimaria);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnSalvar:hover {
+    background-color: #7E7E7E;
+}
+
+/* Botão deletar */
+.btnDeletar {
+    background-color: #842029;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-family: var(--fontePrimaria);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnDeletar:hover {
+    background-color: #c0392b;
+}
+
+/* Botão cancelar */
+.btnCancelar {
+    background-color: #f0f0f0;
+    color: #000;
+    border: 1px solid #d0d0d0;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-family: var(--fontePrimaria);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnCancelar:hover {
+    background-color: #d0d0d0;
+}
+
+/* Zona de perigo */
+.zonaPerigo {
+    padding: 20px;
+    border: 1px solid #F8D7DA;
+    border-radius: 10px;
+    background-color: #fff5f5;
+    max-width: 600px;
+}
+
+/* Coluna de produtos */
 
 
-/* parte mmeus pedidos */
 .meusPedidos {
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.semPedidos {
+    text-align: center;
+    font-family: var(--fonteTerciaria);
+    color: #7E7E7E;
     margin-top: 40px;
 }
 
-table {
+.btnVerProdutos {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-family: var(--fontePrimaria);
+    color: #000;
+    text-decoration: underline;
+}
+
+.tabelaPedidos {
     width: 100%;
     border-collapse: collapse;
+    font-family: var(--fonteTerciaria);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-th,
-td {
-    border: 1px solid #dddddd;
-    padding: 12px;
+.tabelaPedidos thead tr {
+    background-color: #1D1D1D;
+    color: #fff;
+}
+
+.tabelaPedidos th {
+    padding: 14px 16px;
     text-align: left;
+    font-family: var(--fontePrimaria);
+    font-size: 15px;
+    font-weight: normal;
+    border: none;
 }
 
-th {
-    background-color: #f2f2f2;
+.tabelaPedidos td {
+    padding: 14px 16px;
+    border: none;
+    border-bottom: 1px solid #ebebeb;
+    vertical-align: middle;
     color: #333;
 }
 
-.itensCarrinho {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 65px;
-    justify-content: center;
-    font-family: var(--fonteTerciaria);
-    margin: 0 310px;
+.tabelaPedidos tbody tr:last-child td {
+    border-bottom: none;
 }
 
-.itemCar {
-    display: flex;
-    gap: 25px;
-    align-items: center;
+.tabelaPedidos tbody tr:hover {
+    background-color: #f9f9f9;
 }
 
-.itemCar .imgCar {
-    border: 2.5px solid #000000;
-    padding: 8px 5px;
-    border-radius: 0 100px 100px 0;
-    background-color: #D9D9D9;
-}
-
-.itemCar .infoCarrinho {
-    background-color: #D9D9D9;
-    border: 2.5px solid #000000;
-    padding: 15px 34px;
-    display: flex;
-    gap: 40px;
-}
-
-
-
-.itemCar .infoCarrinho .info {
+.tdProdutos {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin: 0 10px;
+    gap: 8px;
 }
 
-
-.infoQuantidade {
+.itemPedido {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 24px;
+    gap: 10px;
+}
+
+.itemPedido img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.itemPedido a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.itemPedido a:hover {
+    color: #7E7E7E;
+}
+
+.itemPedido span {
+    font-size: 12px;
+    color: #999;
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+/* Badge de status */
+.statusPedido {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: var(--fontePrimaria);
+    display: inline-block;
+}
+
+.status-pending {
+    background: #FFF3CD;
+    color: #856404;
+}
+
+.status-approved {
+    background: #D1E7DD;
+    color: #0A3622;
+}
+
+.status-cancelled {
+    background: #F8D7DA;
+    color: #842029;
+}
+
+.status-delivered {
+    background: #CFE2FF;
+    color: #084298;
 }
 
 

@@ -1,64 +1,87 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
+{{-- resources/views/profile/partials/update-profile-information-form.blade.php --}}
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
+<form method="POST" action="{{ route('profile.update') }}">
+    @csrf
+    @method('PATCH')
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
+    @if(session('status') === 'profile-updated')
+        <p style="color:green; margin-bottom:10px">Perfil atualizado com sucesso!</p>
+    @endif
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
+    <div class="campoInfo">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name"
+               value="{{ old('name', $user->name) }}"
+               class="inputPerfil" required>
+        @error('name')
+            <p style="color:red; font-size:13px">{{ $message }}</p>
+        @enderror
+    </div>
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+    <div class="campoInfo">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"
+               value="{{ old('email', $user->email) }}"
+               class="inputPerfil" required>
+        @error('email')
+            <p style="color:red; font-size:13px">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="campoInfo">
+        <label for="telefone">Telefone</label>
+        <input type="tel" id="telefone" name="telefone"
+               value="{{ old('telefone', $user->telefone) }}"
+               class="inputPerfil">
+    </div>
+
+    <div class="campoCom2">
+        <div class="campoInfo">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep"
+                   value="{{ old('cep', $user->cep) }}"
+                   class="inputPerfil" maxlength="9">
         </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+        <div class="campoInfo">
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" name="estado"
+                   value="{{ old('estado', $user->estado) }}"
+                   class="inputPerfil" maxlength="2">
         </div>
+    </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
+    <div class="campoCom2">
+        <div class="campoInfo">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade"
+                   value="{{ old('cidade', $user->cidade) }}"
+                   class="inputPerfil">
         </div>
-    </form>
-</section>
+        <div class="campoInfo">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" name="endereco"
+                   value="{{ old('endereco', $user->endereco) }}"
+                   class="inputPerfil">
+        </div>
+    </div>
+
+    <button type="submit" class="btnSalvar">Salvar alterações</button>
+
+</form>
+
+<script>
+    // ViaCEP — preenche automaticamente ao sair do campo CEP
+    document.getElementById('cep')?.addEventListener('blur', function () {
+        const cep = this.value.replace(/\D/g, '');
+        if (cep.length !== 8) return;
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.erro) return;
+                document.getElementById('endereco').value = data.logradouro;
+                document.getElementById('cidade').value   = data.localidade;
+                document.getElementById('estado').value   = data.uf;
+            });
+    });
+</script>

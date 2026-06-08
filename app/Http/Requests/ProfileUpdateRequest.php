@@ -18,14 +18,12 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
+            'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'telefone' => ['nullable', 'string', 'max:20'],
+            'cep' => ['nullable', 'string', 'max:9'],
+            'endereco' => ['nullable', 'string', 'max:255'],
+            'cidade' => ['nullable', 'string', 'max:255'],
+            'estado' => ['nullable', 'string', 'max:2'],
         ];
     }
 }

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
+    <title>Vistos Recentemente</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -45,21 +45,16 @@
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
 
-            @auth
-                @if(auth()->user()->role === 'admin')
-                    <a href="/admin/dashboard">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @else
-                    <a href="/profile">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @endif
-            @else
-                <a href="/login">
-                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                </a>
-            @endauth
+            <button class="areaUsuario" id="btnUsuario">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </button>
+
+            <div class="menuLogout" id="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
+            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -106,172 +101,92 @@
             </div>
         </div>
 
+        {{-- substitui a section .vistoRecente --}}
         <section class="vistoRecente">
-
             <div class="recente2Lados">
 
                 <div class="recenteLado1">
-
                     <h1>Discos Recentes</h1>
 
                     <div class="discosRecentes">
+                        @forelse($produtos as $p)
+                            @php $cover = $p->images->first(); @endphp
 
-                        {{-- Exemplo estático.
-                        Depois você pode trocar por um @foreach dos produtos visualizados --}}
-                        <div class="cardDisco">
+                            <div class="cardDisco">
 
-                            <img src="https://i.ibb.co/wrN6N3y8/sosLP.png" alt="Capa do álbum SOS - SZA"
-                                class="imgCard">
+                                <div class="imgCard">
+                                    @if($cover)
+                                        <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}">
+                                    @endif
+                                </div>
 
-                            <div class="infoDisco">
-                                <p class="nomeDisco">SOS - SZA</p>
-                                <p class="precoDisco">R$ 430</p>
-                            </div>
+                                <div class="infoDisco">
+                                    <p class="nomeDisco">{{ $p->name }} - {{ $p->artist }}</p>
+                                    @if($p->tem_desconto)
+                                        <p class="precoDisco" style="text-decoration:line-through; color:#999; font-size:14px">
+                                            R$ {{ number_format($p->price, 2, ',', '.') }}
+                                        </p>
+                                        <p class="precoDisco">
+                                            R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }}
+                                        </p>
+                                    @else
+                                        <p class="precoDisco">
+                                            R$ {{ number_format($p->price, 2, ',', '.') }}
+                                        </p>
+                                    @endif
+                                </div>
 
-                            <div class="preçoEFavDisco">
-
-                                <button class="btnComprarAgora">
-                                    Comprar agora
-                                </button>
-
-                                <div class="cart">
-                                    <button class="addCarrinho">
-                                        <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
+                                <div class="preçoEFavDisco">
+                                    <button class="btnComprarAgora" onclick="window.location.href='/product/{{ $p->id }}'">
+                                        Comprar agora
                                     </button>
-                                </div>
 
-                                <div class="favorite">
-                                    <a href="#">
-                                        <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-                                    </a>
-                                </div>
+                                    <div class="cart">
+                                        <form action="/cart/store/{{ $p->id }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="addCarrinho">
+                                                <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
+                                            </button>
+                                        </form>
+                                    </div>
 
-                            </div>
-
-                        </div>
-
-                        <div class="cardDisco">
-
-                            <img src="https://i.ibb.co/PsWFFQdv/blond-Vinyl.png"
-                                alt="Capa do álbum Blonde - Frank Ocean" class="imgCard">
-
-                            <div class="infoDisco">
-                                <p class="nomeDisco">Blonde - Frank Ocean</p>
-                                <p class="precoDisco">R$ 500</p>
-                            </div>
-
-                            <div class="preçoEFavDisco">
-
-                                <button class="btnComprarAgora">
-                                    Comprar agora
-                                </button>
-
-                                <div class="cart">
-                                    <button class="addCarrinho">
-                                        <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
-                                    </button>
-                                </div>
-
-                                <div class="favorite">
-                                    <a href="#">
-                                        <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-                                    </a>
+                                    <div class="favorite">
+                                        <form action="/whishlist/store/{{ $p->id }}" method="POST">
+                                            @csrf
+                                            <button type="submit" style="background:none; border:none; cursor:pointer">
+                                                <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
 
                             </div>
-
-                        </div>
-
-                        <div class="cardDisco">
-
-                            <img src="https://i.ibb.co/ccjr6sXh/deParaLP.png" alt="Capa do álbum De: Para: - Sant"
-                                class="imgCard">
-
-                            <div class="infoDisco">
-                                <p class="nomeDisco">De: Para: - Sant</p>
-                                <p class="precoDisco">R$ 100</p>
-                            </div>
-
-                            <div class="preçoEFavDisco">
-
-                                <button class="btnComprarAgora">
-                                    Comprar agora
-                                </button>
-
-                                <div class="cart">
-                                    <button class="addCarrinho">
-                                        <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
-                                    </button>
-                                </div>
-
-                                <div class="favorite">
-                                    <a href="#">
-                                        <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-                                    </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="cardDisco">
-
-                            <img src="https://i.ibb.co/jZq6YsFN/amlLP.png"
-                                alt="Capa do álbum Awaken, my love - Childish Gambino" class="imgCard">
-
-                            <div class="infoDisco">
-                                <p class="nomeDisco">Awaken, my love - Childish Gambino</p>
-                                <p class="precoDisco">R$ 275</p>
-                            </div>
-
-                            <div class="preçoEFavDisco">
-
-                                <button class="btnComprarAgora">
-                                    Comprar agora
-                                </button>
-
-                                <div class="cart">
-                                    <button class="addCarrinho">
-                                        <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
-                                    </button>
-                                </div>
-
-                                <div class="favorite">
-                                    <a href="#">
-                                        <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-                                    </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                        @empty
+                            <p>Nenhum disco visto recentemente.</p>
+                        @endforelse
                     </div>
-
                 </div>
 
                 <div class="recenteLado2">
-
                     <h1>Categorias Recentes</h1>
 
                     <div class="categoriasRecentes">
-
-                        <button class="cardCategorias">
-
-                            <img src="https://i.ibb.co/vCmKYsJF/grimeImg.png" alt="Imagem categoria Grime">
-
-                            <span>
-                                <p>GRIME</p>
-                            </span>
-
-                        </button>
-
+                        @forelse($categorias as $c)
+                            <a href="{{ route('category.show', $c->id) }}" class="cardCategorias">
+                                @if($c->banner)
+                                    <img src="{{ $c->banner }}" alt="Imagem categoria {{ $c->name }}">
+                                @endif
+                                <span>
+                                    <p>{{ strtoupper($c->name) }}</p>
+                                </span>
+                            </a>
+                        @empty
+                            <p>Nenhuma categoria vista recentemente.</p>
+                        @endforelse
                     </div>
-
                 </div>
 
             </div>
-
         </section>
 
     </main>

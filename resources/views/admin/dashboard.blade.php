@@ -181,14 +181,14 @@
                                     <form action="/admin/orders/{{ $order->id }}/approve" method="POST" style="display:inline">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit">✅ Aprovar</button>
+                                        <button type="submit">Aprovar</button>
                                     </form>
                                     |
                                     <form action="/admin/orders/{{ $order->id }}/cancel" method="POST" style="display:inline"
                                         onsubmit="return confirm('Cancelar pedido #{{ $order->id }}?')">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit">❌ Cancelar</button>
+                                        <button type="submit">Cancelar</button>
                                     </form>
                                 @else
                                     {{ $order->status_label }}

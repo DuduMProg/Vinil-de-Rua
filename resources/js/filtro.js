@@ -1,34 +1,63 @@
-const botaoFiltro = document.querySelector('.filtroOff');
-const campoFiltro = document.querySelector('.campoFiltro');
-const rangePreco = document.getElementById('filtroPreco');
-const visorValor = document.getElementById('valorFiltro');
-const btnFiltrar = document.getElementById('btnFiltrarPreco');
-const discos = document.querySelectorAll('.cardDisco');
+const btnFiltrar = document.querySelector(".btnFiltrar");
+const btnLimpar = document.querySelector(".btnLimpar");
 
-// 1. Mostrar/ocultar filtro ao clicar no botão principal
-botaoFiltro.addEventListener('click', () => {
-    campoFiltro.style.display = 
-        campoFiltro.style.display === "none" || campoFiltro.style.display === ""
-        ? "block"
-        : "none";
-});
+const cards = document.querySelectorAll(".cardDisco");
+const filtrosPreco = document.querySelectorAll(".filtroPreco");
 
-// 2. Atualizar visor com valor atual do range
-rangePreco.addEventListener('input', () => {
-    visorValor.textContent = "Até R$ " + rangePreco.value;
-});
+btnFiltrar.addEventListener("click", () => {
 
-// 3. Filtrar produtos
-btnFiltrar.addEventListener('click', () => {
-    const precoMax = Number(rangePreco.value);
+    const selecionados = [...filtrosPreco]
+        .filter(cb => cb.checked)
+        .map(cb => Number(cb.value));
 
-    discos.forEach(disco => {
-        const preco = Number(disco.getAttribute('preco'));
+    // nenhum filtro marcado
+    if (selecionados.length === 0) {
 
-        if (preco <= precoMax) {
-            disco.style.display = "flex"; 
-        } else {
-            disco.style.display = "none";
-        }
+        cards.forEach(card => {
+            card.style.display = "flex";
+        });
+
+        return;
+    }
+
+    cards.forEach(card => {
+
+        const preco = Number(card.getAttribute("preco"));
+
+        let mostrar = false;
+
+        selecionados.forEach(valor => {
+
+            if (valor === 100 && preco <= 100) {
+                mostrar = true;
+            }
+
+            if (valor === 200 && preco > 100 && preco <= 200) {
+                mostrar = true;
+            }
+
+            if (valor === 300 && preco > 200 && preco <= 300) {
+                mostrar = true;
+            }
+            if (valor === 400 && preco > 300 && preco <= 400) {
+                mostrar = true;
+            }
+
+        });
+
+        card.style.display = mostrar ? "flex" : "none";
+
     });
+
+});
+btnLimpar.addEventListener("click", () => {
+
+    filtrosPreco.forEach(cb => {
+        cb.checked = false;
+    });
+
+    cards.forEach(card => {
+        card.style.display = "flex";
+    });
+
 });

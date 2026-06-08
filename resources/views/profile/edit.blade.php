@@ -45,21 +45,16 @@
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
 
-            @auth
-                @if(auth()->user()->role === 'admin')
-                    <a href="/admin/dashboard">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @else
-                    <a href="/profile">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @endif
-            @else
-                <a href="/login">
-                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                </a>
-            @endauth
+            <button class="areaUsuario" id="btnUsuario">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </button>
+
+            <div class="menuLogout" id="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
+            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>

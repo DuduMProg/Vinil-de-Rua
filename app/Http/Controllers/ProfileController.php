@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Category;
+use App\Models\Product;
 
 class ProfileController extends Controller
 {
@@ -68,6 +70,44 @@ class ProfileController extends Controller
     public function show(Request $request): View
     {
         return view('profile.view', [
+            'user' => $request->user(),
+
+        ]);
+    }
+
+    public function recent(): View
+    {
+        $produtosIds = session()->get('produtos_vistos', []);
+        $categoriasIds = session()->get('categorias_vistas', []);
+
+        $produtos = empty($produtosIds)
+            ? collect()
+            : Product::with(['images', 'tag'])
+                ->whereIn('id', $produtosIds)
+                ->get()
+                ->sortBy(fn($p) => array_search($p->id, $produtosIds));
+
+        $categorias = empty($categoriasIds)
+            ? collect()
+            : Category::whereIn('id', $categoriasIds)
+                ->get()
+                ->sortBy(fn($c) => array_search($c->id, $categoriasIds));
+
+        return view('profile.recently-viewed', [
+            'produtos' => $produtos,
+            'categorias' => $categorias,
+        ]);
+    }
+
+    public function orders(Request $request): View
+    {
+        $orders = \App\Models\Order::with(['items.product.images'])
+            ->where('user_id', $request->user()->id)
+            ->latest()
+            ->get();
+
+        return view('profile.orders', [
+            'orders' => $orders,
             'user' => $request->user(),
         ]);
     }

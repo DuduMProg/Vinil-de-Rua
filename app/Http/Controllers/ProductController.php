@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('admin.products.index', [
-            'products'   => Product::with(['images', 'category', 'tag'])->withCount('images')->get(),
+            'products' => Product::with(['images', 'category', 'tag'])->withCount('images')->get(),
             'categories' => Category::withCount('products')->get()
         ]);
     }
@@ -21,37 +21,37 @@ class ProductController extends Controller
     {
         return view('admin.products.create', [
             'categories' => Category::all(),
-            'tags'       => Tag::all()
+            'tags' => Tag::all()
         ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'artist'      => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'artist' => 'required|string|max:255',
             'description' => 'required|string',
-            'price'       => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
-            'tag_id'      => 'nullable|exists:tag,id',
-            'stock'       => 'nullable|integer|min:0',
-            'main_img'    => 'nullable|url',
-            'images.*'    => 'nullable|url',
+            'tag_id' => 'nullable|exists:tag,id',
+            'stock' => 'nullable|integer|min:0',
+            'main_img' => 'nullable|url',
+            'images.*' => 'nullable|url',
         ]);
 
         $product = Product::create([
-            'name'        => $request->name,
-            'artist'      => $request->artist,
+            'name' => $request->name,
+            'artist' => $request->artist,
             'description' => $request->description,
-            'price'       => $request->price,
+            'price' => $request->price,
             'category_id' => $request->category_id,
-            'tag_id'      => $request->tag_id,
-            'stock'       => $request->stock ?? 0,
+            'tag_id' => $request->tag_id,
+            'stock' => $request->stock ?? 0,
         ]);
 
         if ($request->filled('main_img')) {
             $product->images()->create([
-                'path'     => $request->main_img,
+                'path' => $request->main_img,
                 'is_cover' => true,
             ]);
         }
@@ -60,7 +60,7 @@ class ProductController extends Controller
             foreach ($request->images as $img) {
                 if (!empty($img)) {
                     $product->images()->create([
-                        'path'     => $img,
+                        'path' => $img,
                         'is_cover' => false,
                     ]);
                 }
@@ -75,22 +75,22 @@ class ProductController extends Controller
         $product->load('images');
 
         return view('admin.products.edit', [
-            'product'    => $product,
+            'product' => $product,
             'categories' => Category::all(),
-            'tags'       => Tag::all()
+            'tags' => Tag::all()
         ]);
     }
 
     public function update(Request $request, Product $product)
     {
         $product->update([
-            'name'        => $request->name,
-            'artist'      => $request->artist,
+            'name' => $request->name,
+            'artist' => $request->artist,
             'description' => $request->description,
-            'price'       => $request->price,
+            'price' => $request->price,
             'category_id' => $request->category_id,
-            'tag_id'      => $request->tag_id,
-            'stock'       => $request->stock ?? $product->stock,
+            'tag_id' => $request->tag_id,
+            'stock' => $request->stock ?? $product->stock,
         ]);
 
         $novas = array_filter(array_merge(
@@ -102,7 +102,7 @@ class ProductController extends Controller
             $product->images()->delete();
             foreach ($novas as $index => $img) {
                 $product->images()->create([
-                    'path'     => $img,
+                    'path' => $img,
                     'is_cover' => $index === 0,
                 ]);
             }
@@ -122,6 +122,14 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with(['images', 'category', 'tag'])->findOrFail($id);
+
+        // Salva na sessão os últimos 10 vistos
+        $vistos = session()->get('produtos_vistos', []);
+        $vistos = array_filter($vistos, fn($v) => $v !== $id);
+        array_unshift($vistos, $id);
+        session()->put('produtos_vistos', array_slice($vistos, 0, 10));
+
+        // return SEMPRE no final
         return view('product.show', compact('product'));
     }
 }

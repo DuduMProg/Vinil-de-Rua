@@ -70,5 +70,17 @@ class CategoryController extends Controller
             'products'   => $category->products()->with(['images', 'tag'])->get(),
             'categories' => Category::all(),
         ]);
+
+         // Salva na sessão as últimas 3 categorias vistas
+    $vistas = session()->get('categorias_vistas', []);
+    $vistas = array_filter($vistas, fn($v) => $v !== $category->id);
+    array_unshift($vistas, $category->id);
+    session()->put('categorias_vistas', array_slice($vistas, 0, 3));
+
+    return view('category.show', [
+        'category'   => $category,
+        'products'   => $category->products()->with(['images', 'tag'])->get(),
+        'categories' => Category::all(),
+    ]);
     }
 }

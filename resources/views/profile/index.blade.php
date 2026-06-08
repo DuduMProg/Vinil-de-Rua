@@ -45,11 +45,11 @@
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
 
-            <a href="/profile">
+            <button class="areaUsuario" id="btnUsuario">
                 <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-            </a>
+            </button>
 
-            <div class="menuLogout">
+            <div class="menuLogout" id="menuLogout">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="itemMenu">Sair</button>

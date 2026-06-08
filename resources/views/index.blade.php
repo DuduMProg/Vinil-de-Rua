@@ -144,7 +144,13 @@
                             @endif
                             <div class="infoDisco">
                                 <p class="nomeDisco">{{ $o->name }} - {{ $o->artist }}</p>
-                                <p class="offDisco">R$ {{ number_format($o->price, 2, ',', '.') }}</p>
+                                <div class="precoDisco">
+                                
+                                    <p class="precoOferta">
+                                        R$ {{ number_format($o->preco_com_desconto, 2, ',', '.') }}!
+                                    </p>
+                                
+                            </div>
                             </div>
                         </div>
                     @empty

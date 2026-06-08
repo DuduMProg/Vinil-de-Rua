@@ -126,23 +126,21 @@ const btnUsuario = document.getElementById('btnUsuario');
 const menuLogout = document.getElementById('menuLogout');
 
 if (btnUsuario && menuLogout) {
-    btnUsuario.addEventListener('click', () => {
+
+    btnUsuario.addEventListener('click', (e) => {
+        e.stopPropagation();
         menuLogout.classList.toggle('ativo');
     });
 
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.areaUsuario')) {
+
+        if (
+            !e.target.closest('#btnUsuario') &&
+            !e.target.closest('#menuLogout')
+        ) {
             menuLogout.classList.remove('ativo');
         }
+
     });
+
 }
-
-btnUsuario.addEventListener('click', () => {
-    menuLogout.classList.toggle('ativo');
-});
-
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.areaUsuario')) {
-        menuLogout.classList.remove('ativo');
-    }
-});

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
+    <title>Meus Pedidos</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -45,21 +45,16 @@
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
 
-            @auth
-                @if(auth()->user()->role === 'admin')
-                    <a href="/admin/dashboard">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @else
-                    <a href="/profile">
-                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                    </a>
-                @endif
-            @else
-                <a href="/login">
-                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-                </a>
-            @endauth
+            <button class="areaUsuario" id="btnUsuario">
+                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+            </button>
+
+            <div class="menuLogout" id="menuLogout">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="itemMenu">Sair</button>
+                </form>
+            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -113,51 +108,54 @@
 
         <div class="meusPedidos">
 
-            <table>
+            @if($orders->isEmpty())
+                <p class="semPedidos">Você ainda não fez nenhum pedido.</p>
+                <a href="/product" class="btnVerProdutos">Ver produtos</a>
+            @else
+                <table class="tabelaPedidos">
+                    <thead>
+                        <tr>
+                            <th>Produto(s)</th>
+                            <th>Total</th>
+                            <th>Pagamento</th>
+                            <th>Data</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($orders as $order)
+                            <tr>
+                                <td class="tdProdutos">
+                                    @foreach($order->items as $item)
+                                        @php $cover = $item->product->images->first(); @endphp
+                                        <div class="itemPedido">
+                                            @if($cover)
+                                                <img src="{{ $cover->path }}" alt="{{ $item->product->name }}">
+                                            @endif
+                                            <a href="/product/{{ $item->product->id }}">
+                                                {{ Str::limit($item->product->name, 20) }}
+                                            </a>
+                                            <span>x{{ $item->units }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
 
-                <thead>
-                    <tr>
-                        <th>Produtos</th>
-                        <th>Valor/Quantidade</th>
-                        <th>Data</th>
-                        <th>Situação</th>
-                    </tr>
-                </thead>
+                                <td>R$ {{ number_format($order->total, 2, ',', '.') }}</td>
 
-                <tbody>
+                                <td>{{ $order->payment_label }}</td>
 
-                    {{-- Exemplo estático.
-                    Depois você pode trocar por um @foreach($orders as $order) --}}
+                                <td>{{ $order->created_at->format('d/m/Y') }}</td>
 
-                    <tr>
-
-                        <td>
-
-                            <img src="https://i.ibb.co/TDgn4yg6/oacLP.png" alt="Produto">
-
-                            <a href="#">
-                                Onde as histórias...
-                            </a>
-
-                        </td>
-
-                        <td>
-                            R$85,00/Qntd.: 1
-                        </td>
-
-                        <td>
-                            26/03/26
-                        </td>
-
-                        <td>
-                            Pedido já saiu para rota
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
+                                <td>
+                                    <span class="statusPedido status-{{ $order->status }}">
+                                        {{ $order->status_label }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
 
         </div>
 
