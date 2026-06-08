@@ -70,4 +70,28 @@ toggleSenha?.addEventListener('click', function() {
     inputSenha.type = inputSenha.type === 'text' ? 'password' : 'text';
 });
 
+// ── Máscara CEP (formata enquanto digita) ──
+document.getElementById('cep')?.addEventListener('input', function () {
+    let valor = this.value.replace(/\D/g, '');
 
+    if (valor.length > 5) {
+        valor = valor.slice(0, 5) + '-' + valor.slice(5, 8);
+    }
+
+    this.value = valor;
+});
+
+// ── ViaCEP — preenche endereço automaticamente ──
+document.getElementById('cep')?.addEventListener('blur', function () {
+    const cep = this.value.replace(/\D/g, '');
+    if (cep.length !== 8) return;
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.erro) return;
+            document.getElementById('endereco').value    = data.logradouro;
+            document.getElementById('cidade').value      = data.localidade;
+            document.getElementById('estadoInput').value = data.uf;
+        });
+});

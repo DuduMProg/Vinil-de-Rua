@@ -36,10 +36,12 @@
             <a href="#contato">Contato</a>
         </nav>
 
+        <div class="mobileMenuBtn" id="btnMenu">
+            ☰
+        </div>
+
         <div class="icons">
-            <a href="/favorite">
-                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-            </a>
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
 
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
@@ -79,7 +81,24 @@
                 </a>
             </div>
         </div>
+
+        {{-- Sidebar Favoritos --}}
+        <div class="sidebar" id="sidebarFavorite">
+            <div class="sidebar-header">
+                <h2>Favoritos</h2>
+                <button id="btnFecharFavorite">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="favorite-content">
+                {{-- preenchido via AJAX --}}
+            </div>
+        </div>
     </header>
+    <div class="mobileNav" id="mobileNav">
+        <a href="/#catalogo">Catálogo</a>
+        <a href="/tag/show/1">Ofertas</a>
+        <a href="#contato">Contato</a>
+    </div>
 
     <section class="fundoPrincipal">
 
@@ -251,7 +270,6 @@
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
-    @vite('resources/js/cartao.js')
 
     <script>
         // Mostra/esconde área de pagamento conforme seleção
@@ -262,9 +280,6 @@
 
                 if (this.value === 'pix') {
                     document.getElementById('areaPix').style.display = 'block';
-                }
-                if (this.value === 'credit_card') {
-                    document.getElementById('areaCartao').style.display = 'block';
                 }
             });
         });

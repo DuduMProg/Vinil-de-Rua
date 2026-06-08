@@ -38,9 +38,7 @@
         </nav>
 
         <div class="icons">
-            <a href="/favorite">
-                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-            </a>
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
 
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
@@ -75,7 +73,25 @@
                 </a>
             </div>
         </div>
+
+        {{-- Sidebar Favoritos --}}
+        <div class="sidebar" id="sidebarFavorite">
+            <div class="sidebar-header">
+                <h2>Favoritos</h2>
+                <button id="btnFecharFavorite">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="favorite-content">
+                {{-- preenchido via AJAX --}}
+            </div>
+        </div>
     </header>
+
+    <div class="mobileNav" id="mobileNav">
+        <a href="/#catalogo">Catálogo</a>
+        <a href="/tag/show/1">Ofertas</a>
+        <a href="#contato">Contato</a>
+    </div>
 
     <main>
 
@@ -161,33 +177,11 @@
 
     </main>
 
-    <footer id="contato">
-
-        <div class="footerLogo">
-            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
-
-            <h1>
-                VINIL <br>DE RUA
-            </h1>
-        </div>
-
-        <div class="avisosFooter">
-            <p>Duvidas? (11) 4002-8922 (SP)</p>
-            <p>Seg a Sex, 9h às 21h Sáb 10h às 18h</p>
-        </div>
-
-        <div class="termos">
-            <a id="openTerms" style="cursor:pointer;">
-                Termos e Condições
-            </a>
-        </div>
-
-    </footer>
+    
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
-    @vite('resources/js/telaDeCompra.js')
-    @vite('resources/js/popup.js')
+    
 
 </body>
 

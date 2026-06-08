@@ -60,55 +60,51 @@
                     <div class="infoUser">
 
                         <label for="name">Nome de Usuário
-                            <input type="text" id="name" name="name" placeholder="NOME"
-                                   class="inputNome" value="{{ old('name') }}" required>
+                            <input type="text" id="name" name="name" placeholder="NOME" class="inputNome"
+                                value="{{ old('name') }}" required>
                         </label>
 
                         <label for="email">Email
-                            <input type="email" id="email" name="email" placeholder="EMAIL"
-                                   class="inputEmail" value="{{ old('email') }}" required>
+                            <input type="email" id="email" name="email" placeholder="EMAIL" class="inputEmail"
+                                value="{{ old('email') }}" required>
                         </label>
 
                         <label for="password">Senha
-                            <input type="password" id="password" name="password"
-                                   placeholder="SENHA" class="inputSenha" required>
+                            <input type="password" id="password" name="password" placeholder="SENHA" class="inputSenha"
+                                required>
                         </label>
 
                         <label for="password_confirmation">Confirmar Senha
-                            <input type="password" id="password_confirmation"
-                                   name="password_confirmation"
-                                   placeholder="CONFIRME A SENHA" class="inputSenha" required>
+                            <input type="password" id="password_confirmation" name="password_confirmation"
+                                placeholder="CONFIRME A SENHA" class="inputSenha" required>
                         </label>
 
                         <label for="telefone">Telefone
-                            <input type="tel" id="telefone" name="telefone" placeholder="TELEFONE"
-                                   class="inputTelefone" value="{{ old('telefone') }}">
+                            <input type="tel" id="telefone" name="telefone" placeholder="TELEFONE" class="inputTelefone"
+                                value="{{ old('telefone') }}">
                         </label>
 
                         <div class="campoCom2">
                             <label for="cep">CEP
-                                <input type="text" id="cep" name="cep" placeholder="CEP"
-                                       class="inputGps" value="{{ old('cep') }}"
-                                       maxlength="9">
+                                <input type="text" id="cep" name="cep" placeholder="CEP" class="inputGps"
+                                    value="{{ old('cep') }}" maxlength="9">
                             </label>
 
                             <label for="estado">Estado
-                                <input type="text" id="estadoInput" name="estado"
-                                       placeholder="ESTADO" class="inputGps"
-                                       value="{{ old('estado') }}" maxlength="2">
+                                <input type="text" id="estadoInput" name="estado" placeholder="ESTADO" class="inputGps"
+                                    value="{{ old('estado') }}" maxlength="2">
                             </label>
                         </div>
 
                         <div class="campoCom2">
                             <label for="cidade">Cidade
-                                <input type="text" id="cidade" name="cidade" placeholder="CIDADE"
-                                       class="inputGps" value="{{ old('cidade') }}">
+                                <input type="text" id="cidade" name="cidade" placeholder="CIDADE" class="inputGps"
+                                    value="{{ old('cidade') }}">
                             </label>
 
                             <label for="endereco">Endereço
-                                <input type="text" id="endereco" name="endereco"
-                                       placeholder="ENDEREÇO" class="inputGps"
-                                       value="{{ old('endereco') }}">
+                                <input type="text" id="endereco" name="endereco" placeholder="ENDEREÇO" class="inputGps"
+                                    value="{{ old('endereco') }}">
                             </label>
                         </div>
 
@@ -130,8 +126,21 @@
     </main>
 
     @vite('resources/js/loading.js')
+    @vite('resources/js/login.js')
 
     <script>
+
+        // ── Máscara CEP (formata enquanto digita) ──
+        document.getElementById('cep')?.addEventListener('input', function () {
+            let valor = this.value.replace(/\D/g, '');
+
+            if (valor.length > 5) {
+                valor = valor.slice(0, 5) + '-' + valor.slice(5, 8);
+            }
+
+            this.value = valor;
+        });
+
         // ── ViaCEP — preenche endereço automaticamente ──
         document.getElementById('cep')?.addEventListener('blur', function () {
             const cep = this.value.replace(/\D/g, '');
@@ -141,13 +150,13 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.erro) return;
-                    document.getElementById('endereco').value  = data.logradouro;
-                    document.getElementById('cidade').value    = data.localidade;
+                    document.getElementById('endereco').value = data.logradouro;
+                    document.getElementById('cidade').value = data.localidade;
                     document.getElementById('estadoInput').value = data.uf;
                 });
         });
-    </script>
 
+    </script>
 </body>
 
 </html>

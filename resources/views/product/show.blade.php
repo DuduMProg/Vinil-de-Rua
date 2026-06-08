@@ -42,10 +42,12 @@
             <a href="#contato">Contato</a>
         </nav>
 
+        <div class="mobileMenuBtn" id="btnMenu">
+            ☰
+        </div>
+
         <div class="icons">
-            <a href="/favorite">
-                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-            </a>
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
 
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
@@ -85,7 +87,24 @@
                 </a>
             </div>
         </div>
+
+        {{-- Sidebar Favoritos --}}
+        <div class="sidebar" id="sidebarFavorite">
+            <div class="sidebar-header">
+                <h2>Favoritos</h2>
+                <button id="btnFecharFavorite">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="favorite-content">
+                {{-- preenchido via AJAX --}}
+            </div>
+        </div>
     </header>
+    <div class="mobileNav" id="mobileNav">
+        <a href="/#catalogo">Catálogo</a>
+        <a href="/tag/show/1">Ofertas</a>
+        <a href="#contato">Contato</a>
+    </div>
 
 
     <section class="telaCompra">
@@ -100,19 +119,19 @@
             <div class="nomeProduto">
                 <h1>{{ $product->name }} - {{ $product->artist }}</h1>
             </div>
+
             <div class="imgProduto">
 
-                {{-- Imagem principal (capa) --}}
+                {{-- Imagem principal (capa) — JS abre o lightbox no índice 0 --}}
                 @if($cover)
-                    <img src="{{ $cover->path }}" alt="Capa de {{ $product->name }}" id="imgPrincipal" class="imgPrincipal">
+                    <img src="{{ $cover->path }}" alt="Capa de {{ $product->name }}" class="imgPrincipal">
                 @endif
 
-                {{-- Miniaturas: apenas imagens secundárias (is_cover = false) --}}
+                {{-- Miniaturas secundárias — JS as pega como índices 1, 2, 3... --}}
                 @if($secundarias->count() > 0)
                     <div class="imgProdutoMini">
                         @foreach($secundarias as $img)
-                            <img src="{{ $img->path }}" alt="Imagem de {{ $product->name }}" class="cadaImgMini"
-                                style="cursor:pointer">
+                            <img src="{{ $img->path }}" alt="Imagem de {{ $product->name }}" class="cadaImgMini">
                         @endforeach
                     </div>
                 @endif
@@ -123,70 +142,86 @@
                 <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="">
                 <p>{{ $product->description }}</p>
             </div>
-
         </div>
 
-        {{-- Coluna direita: infos + Spotify + compra --}}
-        <div class="infosProduto">
-
-            {{-- Player Spotify dinâmico --}}
-            <div class="tracklist">
-                <iframe id="spotifyEmbed" src="" frameborder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
-                    style="border-radius:12px; display:none">
-                </iframe>
-                <p id="spotifyErro" class="spotifyErro" style="display:none">
-                    Álbum não encontrado no Spotify :(
-                </p>
+        {{-- ↓ LIGHTBOX — coloca aqui, logo antes do
+            </body> da view ↓ --}}
+            <div class="lb-fundo" id="lb">
+                <div class="lb-topo">
+                    <span class="lb-contador" id="lb-contador">1 / 1</span>
+                    <button class="lb-fechar" id="lb-fechar">✕</button>
+                </div>
+                <div class="lb-centro">
+                    <button class="lb-nav lb-prev" id="lb-prev">&#8592;</button>
+                    <div class="lb-img-wrap" id="lb-wrap">
+                        <img class="lb-img" id="lb-img" src="" alt="">
+                    </div>
+                    <button class="lb-nav lb-next" id="lb-next">&#8594;</button>
+                </div>
+                <div class="lb-miniaturas" id="lb-minis"></div>
             </div>
 
-            {{-- Preço e botão de compra --}}
-            <div class="finalizarCompra">
+{{-- Coluna direita: infos + Spotify + compra --}}
+    <div class="infosProduto">
 
-                @if($product->tem_desconto)
-                    <p><s>R$ {{ number_format($product->price, 2, ',', '.') }}</s></p>
-                    <p class="precoOferta">R$ {{ number_format($product->preco_com_desconto, 2, ',', '.') }}</p>
-                @else
-                    <p class="precoOriginal">R$ {{ number_format($product->price, 2, ',', '.') }}</p>
-                @endif
-
-                <form action="/cart/store/{{ $product->id }}" method="POST">
-                    @csrf
-                    <button type="submit" {{ $product->stock <= 0 ? 'disabled' : '' }}>
-                        {{ $product->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
-                    </button>
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    {{-- Dados do produto para o JS ler — sem hardcode --}}
-    <div id="spotifyData" data-album="{{ $product->name }}" data-artist="{{ $product->artist }}" style="display:none">
+    {{-- Player Spotify dinâmico --}}
+    <div class="tracklist">
+        <iframe id="spotifyEmbed" src="" frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+            style="border-radius:12px; display:none">
+        </iframe>
+        <p id="spotifyErro" class="spotifyErro" style="display:none">
+            Álbum não encontrado no Spotify :(
+        </p>
     </div>
 
-    <footer id="contato">
-        <div class="footerLogo">
-            <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
-            <h1>VINIL <br>DE RUA</h1>
-        </div>
+    {{-- Preço e botão de compra --}}
+    <div class="finalizarCompra">
 
-        <div class="avisosFooter">
-            <p>Duvidas? (11) 4002-8922 (SP)</p>
-            <p>Seg a Sex, 9h às 21h Sáb 10h às 18h</p>
+        @if($product->tem_desconto)
+            <p><s>R$ {{ number_format($product->price, 2, ',', '.') }}</s></p>
+            <p class="precoOferta">R$ {{ number_format($product->preco_com_desconto, 2, ',', '.') }}</p>
+        @else
+            <p class="precoOriginal">R$ {{ number_format($product->price, 2, ',', '.') }}</p>
+        @endif
 
-        </div>
-        <div class="termos">
-            <a href="">Termos e Condições</a>
-        </div>
+        <form action="/cart/store/{{ $product->id }}" method="POST">
+            @csrf
+            <button type="submit" {{ $product->stock <= 0 ? 'disabled' : '' }}>
+                {{ $product->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
+            </button>
+        </form>
 
-    </footer>
+    </div>
 
-    @vite('resources/js/navbar.js')
-    @vite('resources/js/loading.js')
-    @vite('resources/js/telaDeCompra.js')
+</div>
+
+</section>
+
+{{-- Dados do produto para o JS ler — sem hardcode --}}
+<div id="spotifyData" data-album="{{ $product->name }}" data-artist="{{ $product->artist }}" style="display:none">
+</div>
+
+<footer id="contato">
+    <div class="footerLogo">
+        <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
+        <h1>VINIL <br>DE RUA</h1>
+    </div>
+
+    <div class="avisosFooter">
+        <p>Duvidas? (11) 4002-8922 (SP)</p>
+        <p>Seg a Sex, 9h às 21h Sáb 10h às 18h</p>
+
+    </div>
+    <div class="termos">
+        <a href="">Termos e Condições</a>
+    </div>
+
+</footer>
+
+@vite('resources/js/navbar.js')
+@vite('resources/js/loading.js')
+@vite('resources/js/telaDeCompra.js')
 
 </body>
 

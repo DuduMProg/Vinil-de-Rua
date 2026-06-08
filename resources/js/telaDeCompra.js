@@ -1,16 +1,107 @@
-document.querySelectorAll('.imgProduto img').forEach(img => {
-    img.addEventListener('click', function () {
-        // Cria o overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'img-overlay';
-        overlay.innerHTML = `<img src="${this.src}" alt="${this.alt}">`;
-        document.body.appendChild(overlay);
-
-        overlay.addEventListener('click', function () {
-            overlay.remove();
-        });
+(function () {
+    // Coleta todas as imagens do produto em ordem
+    const imagens = [];
+    document.querySelectorAll('.imgProduto img').forEach(img => {
+        imagens.push({ src: img.src, alt: img.alt });
     });
-});
+
+    if (imagens.length === 0) return;
+
+    let atual  = 0;
+    let zoomed = false;
+
+    const lb     = document.getElementById('lb');
+    const lbImg  = document.getElementById('lb-img');
+    const lbWrap = document.getElementById('lb-wrap');
+    const lbCont = document.getElementById('lb-contador');
+    const lbMinis= document.getElementById('lb-minis');
+
+    // Monta as miniaturas no rodapé do lightbox
+    function buildMinis() {
+        lbMinis.innerHTML = '';
+        imagens.forEach((im, i) => {
+            const m = document.createElement('img');
+            m.src = im.src;
+            m.alt = im.alt;
+            m.className = 'lb-mini' + (i === atual ? ' ativa' : '');
+            m.addEventListener('click', () => irPara(i));
+            lbMinis.appendChild(m);
+        });
+    }
+
+    // Troca de imagem com slide suave
+    function irPara(idx, dir = 'right') {
+        if (idx === atual) return;
+        zerarZoom();
+        lbImg.classList.add('trocando', dir === 'left' ? 'esq' : '');
+
+        setTimeout(() => {
+            atual = idx;
+            lbImg.src = imagens[atual].src;
+            lbImg.alt = imagens[atual].alt;
+            lbCont.textContent = (atual + 1) + ' / ' + imagens.length;
+            lbImg.classList.remove('trocando', 'esq');
+            document.querySelectorAll('.lb-mini').forEach((m, i) =>
+                m.classList.toggle('ativa', i === atual)
+            );
+        }, 200);
+    }
+
+    function abrirLb(idx) {
+        atual = idx;
+        lbImg.src = imagens[atual].src;
+        lbImg.alt = imagens[atual].alt;
+        lbCont.textContent = (atual + 1) + ' / ' + imagens.length;
+        buildMinis();
+        lb.classList.add('aberto');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function fecharLb() {
+        lb.classList.remove('aberto');
+        zerarZoom();
+        document.body.style.overflow = '';
+    }
+
+    function zerarZoom() {
+        zoomed = false;
+        lbImg.classList.remove('zoomed');
+        lbWrap.classList.remove('zoomed');
+    }
+
+    // Clique na imagem principal = zoom 2.2×
+    lbWrap.addEventListener('click', () => {
+        zoomed = !zoomed;
+        lbImg.classList.toggle('zoomed', zoomed);
+        lbWrap.classList.toggle('zoomed', zoomed);
+    });
+
+    // Setas de navegação
+    document.getElementById('lb-prev').addEventListener('click', () =>
+        irPara((atual - 1 + imagens.length) % imagens.length, 'left')
+    );
+    document.getElementById('lb-next').addEventListener('click', () =>
+        irPara((atual + 1) % imagens.length)
+    );
+
+    // Fechar pelo botão ou clicando fora
+    document.getElementById('lb-fechar').addEventListener('click', fecharLb);
+    lb.addEventListener('click', e => { if (e.target === lb) fecharLb(); });
+
+    // Teclado: ESC fecha, setas navegam
+    document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('aberto')) return;
+        if (e.key === 'Escape')      fecharLb();
+        if (e.key === 'ArrowRight')  irPara((atual + 1) % imagens.length);
+        if (e.key === 'ArrowLeft')   irPara((atual - 1 + imagens.length) % imagens.length, 'left');
+    });
+
+    // Abre ao clicar em qualquer imagem do produto
+    document.querySelectorAll('.imgProduto img').forEach((img, i) => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => abrirLb(i));
+    });
+})();
 
 
 // ── Spotify ──

@@ -1,353 +1,465 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 a* {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 :root {
-    /* FONTES */
-    --fontePrimaria: 'Caesar Dressing', cursive;
-    --fonteSecundaria: 'Anton', sans-serif;
-    --fonteTerciaria: "Young Serif", serif;
-    --fonteDescricao: "Zilla Slab", serif;
-    --fonteNumeros: "Sahitya", serif;
-    /* CORES E GRADIENTES */
-    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    --gradienteCards: #D9D9D9;
-    --brancoVdr: #FDFDFD;
-    --vermelhoVdr: #6C2121;
-    --pretoVdr: #1D1D1D;
-    /* drop shadow discos */
-    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+  /* FONTES */
+  --fontePrimaria: 'Caesar Dressing', cursive;
+  --fonteSecundaria: 'Anton', sans-serif;
+  --fonteTerciaria: "Young Serif", serif;
+  --fonteDescricao: "Zilla Slab", serif;
+  --fonteNumeros: "Sahitya", serif;
+  /* CORES E GRADIENTES */
+  --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+  --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+  --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --gradienteCards: #D9D9D9;
+  --brancoVdr: #FDFDFD;
+  --vermelhoVdr: #6C2121;
+  --pretoVdr: #1D1D1D;
+  /* drop shadow discos */
+  --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
 }
 
+
 #preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 
 header {
-    width: 100%;
-    height: 110px;
-    display: flex;
-    align-items: center;
-    padding: 0 25px;
-    justify-content: space-between;
-    background-color: #7E7E7E;
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  justify-content: space-between;
+  background-color: #7E7E7E;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 nav {
-    display: flex;
-    gap: 78px;
+  display: flex;
+  gap: 78px;
 }
 
 nav a {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-family: "Caesar Dressing", system-ui;
-    font-size: 32px;
-    transition: color 0.8 ease-in-out;
+  text-decoration: none;
+  color: #FFFFFF;
+  font-family: "Caesar Dressing", system-ui;
+  font-size: 32px;
+  transition: color 0.8 ease-in-out;
 }
 
 header img {
-    width: 87px;
-    height: 87px;
+  width: 87px;
+  height: 87px;
 }
 
 .logoHeader {
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    font-family: "Anton", sans-serif;
-    font-size: 35px;
-    transition: color 0.8 ease-in-out;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-family: "Anton", sans-serif;
+  font-size: 35px;
+  transition: color 0.8 ease-in-out;
 }
 
 .logoHeader a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .logoHeader p {
-    margin-left: 7px;
+  margin-left: 7px;
 }
 
 header .icons img {
-    width: 47px;
-    height: 47px;
-    filter: brightness(0) invert(1);
-    transition: filter 0.8 ease-in-out;
-    cursor: pointer;
+  width: 47px;
+  height: 47px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.8 ease-in-out;
+  cursor: pointer;
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
 
-    transition: 0.3s;
-    z-index: 998;
+  transition: 0.3s;
+  z-index: 998;
 }
 
 /* Sidebar */
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: -500px;
+  position: fixed;
+  top: 0;
+  right: -500px;
 
-    width: 500px;
-    max-width: 90%;
-    height: 100vh;
+  width: 500px;
+  max-width: 90%;
+  height: 100vh;
 
-    background-color: #D9D9D9;
+  background-color: #D9D9D9;
 
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
 
-    transition: 0.3s ease;
-    z-index: 999;
+  transition: 0.3s ease;
+  z-index: 999;
 
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px 0px 0px 10px;
-    padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px 0px 0px 10px;
+  padding: 0 20px;
 }
 
 .sidebar.active {
-    right: 0;
+  right: 0;
 }
 
 .overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .sidebar-header button {
-    border: none;
-    background: none;
-    font-size: 20px;
-    cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .sidebar-content {
-    overflow-y: auto;
-    min-height: 0;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .sidebar-content::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .sidebar-content::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .sidebar-content::-webkit-scrollbar-thumb {
-    background: #000000;
-    border-radius: 10px;
+  background: #000000;
+  border-radius: 10px;
 }
 
 
 .sidebar-content .produtoItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 60px;
-    font-family: var(--fontePrimaria);
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  font-family: var(--fontePrimaria);
+  font-size: 20px;
 
 }
 
 .produtoItem button {
-    cursor: pointer;
-    font-size: 24px;
-    background: transparent;
-    border: none;
+  cursor: pointer;
+  font-size: 24px;
+  background: transparent;
+  border: none;
 }
 
 .produtoItem .imgProdCart {
-    width: 140px;
-    height: auto;
+  width: 140px;
+  height: auto;
 }
 
 .qntdProd {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    background-color: #BEBEBE;
-    border-radius: 5px;
-    padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #BEBEBE;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .deletePrice {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: end;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: end;
 }
 
 .deletePrice .precoOriginal {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .deletePrice .precoOferta {
-    font-size: 20px;
-    color: #e40000;
+  font-size: 20px;
+  color: #e40000;
 }
 
 .deleteIcon {
-    width: 40px;
-    height: auto;
-    cursor: pointer;
+  width: 40px;
+  height: auto;
+  cursor: pointer;
 }
 
 .btnResumo {
-    display: flex;
-    justify-content: end;
-    margin: 50px 0;
+  display: flex;
+  justify-content: end;
+  margin: 50px 0;
 }
 
 .btnResumo button {
-    border-radius: 3px;
-    border: 1px solid #000000;
-    padding: 2px 12px;
-    font-family: var(--fontePrimaria);
-    cursor: pointer;
-    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+  border-radius: 3px;
+  border: 1px solid #000000;
+  padding: 2px 12px;
+  font-family: var(--fontePrimaria);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
 .btnResumo button:hover {
-    background-color: #acacac;
-    color: #ffffff;
-    border: 2.2px solid #ffffff;
-    transform: scale(1.0);
-    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+  background-color: #acacac;
+  color: #ffffff;
+  border: 2.2px solid #ffffff;
+  transform: scale(1.0);
+  box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
 }
 
 .verMaisCart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .verMaisCart a {
-    font-size: 20px;
-    position: relative;
-    text-decoration: none;
-    color: #000000;
-    cursor: pointer;
-    display: inline-block;
+  font-size: 20px;
+  position: relative;
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .verMaisCart a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #1b1b1b;
-    transition: width 0.3s ease-in-out;
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1b1b1b;
+  transition: width 0.3s ease-in-out;
 }
 
 .verMaisCart a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
+/* FAVORITOS */
+
+/* Ícone desfavoritar com hover */
+.btnDesfavoritar img {
+  width: 24px;
+  height: 24px;
+  content: url("https://i.ibb.co/5mHR0sq/favorite-Black.png");
+  transition: content 0.2s ease;
+  cursor: pointer;
+}
+
+.btnDesfavoritar:hover img {
+  content: url("https://i.ibb.co/9HR1wYgm/desfavoritar.png");
+  transform: scale(1.2);
+}
+
+/* Item de favorito na sidebar */
+.favoritoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #d0d0d0;
+  font-family: var(--fontePrimaria);
+}
+
+.favoritoItem .imgFav {
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.infoFav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.infoFav p {
+  font-size: 16px;
+}
+
+.infoFav .precoFav {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.acoessFav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnVerProduto {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-family: var(--fontePrimaria);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btnVerProduto:hover {
+  background: #7E7E7E;
+}
+
+.btnDesfavoritar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.wishlistCart{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnAdicionarCarrinho {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btnAdicionarCarrinho img {
+  width: 20px;
+  height: 20px;
+  transition: content 0.2s ease;
+}
+
+.semFavoritos {
+  text-align: center;
+  font-family: var(--fonteTerciaria);
+  margin-top: 30px;
+  color: #7E7E7E;
+}
+
+.semFavoritos a {
+  color: #000;
+  text-decoration: underline;
+}
+
+
 .menuLogout {
-    position: absolute;
-    top: 55px;
-    right: 0;
-    background: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 8px;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-    z-index: 999;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  z-index: 999;
 }
 
 .menuLogout.ativo {
-    display: block;
+  display: block;
 }
 
 .menuLogout button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    width: 100%;
-    padding: 8px 16px;
-    text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
 }
 
 .menuLogout button:hover {
-    background: #f5f5f5;
+  background: #f5f5f5;
 }
-
 
 
 
 /* ===== ESTADO APÓS ROLAR ===== */
 header.scrolled {
-    background-color: #FFFFFF;
-    padding: 0 25px;
+  background-color: #FFFFFF;
+  padding: 0 25px;
 }
 
 header.scrolled .logoHeader img {
-    content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
-    width: 87px;
-    height: 87px;
+  content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
+  width: 87px;
+  height: 87px;
 }
 
 header.scrolled .logoHeader p {
-    color: #000000;
+  color: #000000;
 }
 
 header.scrolled nav a {
-    color: #000000;
+  color: #000000;
 }
 
 header.scrolled .logoHeader img {
-    color: #000000;
+  color: #000000;
 }
 
 header.scrolled .icons img {
-    filter: brightness(0);
+  filter: brightness(0);
 }
 
 .fundoPrincipal {
@@ -728,56 +840,441 @@ footer {
     display: none;
 }
 
+/* Desktop — esconde o hamburguer */
+.mobileMenuBtn {
+  display: none;
+}
+
+.mobileNav {
+  display: none;
+}
+
+.btnFecharFiltro{
+    display: none;
+}
+
+
+/* ==================================================
+   TABLETS (até 1024px)
+================================================== */
+@media (max-width: 1024px) {
+
+  /* ---------- Banner ---------- */
+
+  .bannerBlackFriday {
+    margin: 0 40px;
+    padding-top: 130px;
+  }
+
+  .anuncioBlackFriday h1 {
+    font-size: 48px;
+  }
+
+  /* ---------- Layout filtro + catálogo ---------- */
+
+  .filtroECat {
+    margin: 40px 30px;
+    gap: 30px;
+  }
+
+  /* Sidebar de filtro fica menor mas ainda visível */
+  .sidebarFiltro {
+    width: 220px;
+    min-width: 220px;
+    padding: 18px;
+  }
+
+  /* Catálogo passa de 4 para 3 colunas */
+  .catalogoOff {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    flex: 1;
+  }
+
+  .cardDisco {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footerContainer {
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+
+  .socialConteiner {
+    margin-right: 0;
+  }
+
+}
+
+
+/* ==================================================
+   CELULARES (até 768px)
+================================================== */
 @media (max-width: 768px) {
 
-    .sidebarFiltro {
+  /* ---------- Header ---------- */
 
-        position: fixed;
+  header {
+    height: 80px;
+    padding: 0 15px;
+    gap: 10px;
+  }
 
-        top: 0;
+  .desktopNav {
+    display: none;
+  }
 
-        left: -320px;
+  .logoHeader {
+    font-size: 22px;
+  }
 
-        width: 300px;
+  header img {
+    width: 55px;
+    height: 55px;
+  }
 
-        height: 100vh;
+  header .icons img {
+    width: 35px;
+    height: 35px;
+  }
 
-        z-index: 1001;
+  header.scrolled {
+    background-color: #FFFFFF;
+    padding: 0 15px;
+    box-shadow: none;
+  }
 
-        transition: .3s ease;
+  header.scrolled .logoHeader img {
+    content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
+    width: 55px;
+    height: 55px;
+  }
 
-        overflow-y: auto;
-    }
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 34px;
+    color: white;
+    cursor: pointer;
+  }
 
-    .sidebarFiltro.active {
+  header.scrolled .mobileMenuBtn {
+    color: black;
+  }
 
-        left: 0;
-    }
+  nav {
+    display: none;
+  }
 
-    .btnFiltroMobile {
+  .mobileNav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #7E7E7E;
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
 
-        display: block;
+  .mobileNav.active {
+    display: flex;
+  }
 
-        position: fixed;
+  .mobileNav a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "Caesar Dressing", system-ui;
+    font-size: 28px;
+  }
 
-        top: 20px;
+  /* ---------- Banner ---------- */
 
-        left: 20px;
+  .bannerBlackFriday {
+    margin: 0 15px;
+    padding-top: 100px;
+  }
 
-        z-index: 1002;
+  .anuncioBlackFriday h1 {
+    font-size: 30px;
+    margin-right: 0;
+    text-align: center;
+  }
 
-        background-color: #000000;
+  /* ---------- Botão de filtro mobile ---------- */
 
-        color: #ffffff;
+  /* Aparece só no mobile — abre a sidebar como drawer */
+  .btnFiltroMobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 15px 0;
+    padding: 10px 18px;
+    background: #1D1D1D;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: "Caesar Dressing", cursive;
+    font-size: 18px;
+    cursor: pointer;
+    width: fit-content;
+  }
 
-        border: none;
+  /* ---------- Layout: sidebar vira drawer sobreposto ---------- */
 
-        padding: 10px 15px;
+  .filtroECat {
+    flex-direction: column;
+    margin: 16px 15px;
+    gap: 0;
+    border: none; /* remove o border:2px solid red do desktop */
+  }
 
-        font-size: 16px;
+  /* Sidebar some do fluxo e vira drawer deslizante pela esquerda */
+  .sidebarFiltro {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    z-index: 1001;
+    transition: left 0.3s ease;
+    padding: 30px 20px;
+  }
 
-        cursor: pointer;
+  /* Classe adicionada via JS para abrir */
+  .sidebarFiltro.aberto {
+    left: 0;
+  }
 
-        border-radius: 5px;
-    }
+  /* Overlay escuro atrás do drawer */
+  .overlayFiltro {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .overlayFiltro.ativo {
+    display: block;
+  }
+
+  /* Botão fechar dentro do drawer */
+  .btnFecharFiltro {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  .btnFecharFiltro button {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    font-family: "Caesar Dressing", cursive;
+  }
+
+  /* ---------- Catálogo ---------- */
+
+  .catalogoOff {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    width: 100%;
+  }
+
+  .cardDisco {
+    width: 100%;
+    height: auto;
+    padding: 8px 10px;
+  }
+
+  .infoDisco {
+    font-size: 13px;
+    padding-bottom: 10px;
+  }
+
+  .infoDisco .precoDisco {
+    font-size: 15px;
+  }
+
+  .precoOferta {
+    font-size: 16px;
+  }
+
+  .preçoEFavDisco button {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  /* ---------- Sidebar Carrinho ---------- */
+
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+    right: -100%;
+    border-radius: 0;
+    padding: 0 10px;
+  }
+
+  .sidebar-header {
+    padding: 15px 10px;
+  }
+
+  .sidebar-header h2 {
+    font-size: 22px;
+  }
+
+  .sidebar-content .produtoItem {
+    gap: 10px;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .produtoItem .imgProdCart {
+    width: 75px;
+  }
+
+  .qntdProd {
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .qntdProd button {
+    font-size: 16px;
+  }
+
+  .deletePrice {
+    gap: 8px;
+  }
+
+  .deletePrice .precoOriginal {
+    font-size: 12px;
+  }
+
+  .deletePrice .precoOferta {
+    font-size: 16px;
+  }
+
+  .deleteIcon {
+    width: 24px;
+  }
+
+  .btnResumo {
+    margin: 20px 0;
+  }
+
+  .btnResumo button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .verMaisCart a {
+    font-size: 16px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 25px 15px;
+  }
+
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .socialConteiner {
+    margin-right: 0;
+  }
+
+  .formasPagamentoImg {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .copyrightVdR {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+}
+
+
+/* ==================================================
+   CELULARES PEQUENOS (até 480px)
+================================================== */
+@media (max-width: 480px) {
+
+  /* ---------- Header ---------- */
+
+  .logoHeader p {
+    font-size: 18px;
+  }
+
+  header .icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* ---------- Banner ---------- */
+
+  .anuncioBlackFriday h1 {
+    font-size: 24px;
+  }
+
+  /* ---------- Catálogo ---------- */
+
+  .catalogoOff {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .cardDisco {
+    padding: 6px 8px;
+  }
+
+  .infoDisco {
+    font-size: 12px;
+  }
+
+  .preçoEFavDisco button {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footerLogo img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .footerLogo h1 {
+    font-size: 28px;
+  }
+
+  .copyrightVdR {
+    font-size: 14px;
+  }
+
 }

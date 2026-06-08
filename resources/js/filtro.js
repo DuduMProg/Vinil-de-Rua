@@ -61,3 +61,23 @@ btnLimpar.addEventListener("click", () => {
     });
 
 });
+
+
+// FILTRO MOBILE
+
+const btnAbrir   = document.getElementById('btnAbrirFiltro');
+const btnFechar  = document.getElementById('btnFecharFiltro');
+const sidebar    = document.getElementById('sidebarFiltro');
+const overlay    = document.getElementById('overlayFiltro');
+
+btnAbrir.addEventListener('click', () => {
+    sidebar.classList.add('aberto');
+    overlay.classList.add('ativo');
+});
+
+[btnFechar, overlay].forEach(el => {
+    el.addEventListener('click', () => {
+        sidebar.classList.remove('aberto');
+        overlay.classList.remove('ativo');
+    });
+});

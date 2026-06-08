@@ -39,10 +39,12 @@
             <a href="#contato">Contato</a>
         </nav>
 
+        <div class="mobileMenuBtn" id="btnMenu">
+            ☰
+        </div>
+
         <div class="icons">
-            <a href="/favorite">
-                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite">
-            </a>
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
 
             <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
                 style="cursor:pointer">
@@ -62,12 +64,6 @@
                     <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
                 </a>
             @endauth
-            <div class="menuLogout">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="itemMenu">Sair</button>
-                </form>
-            </div>
         </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -88,12 +84,26 @@
                 </a>
             </div>
         </div>
+
+        {{-- Sidebar Favoritos --}}
+        <div class="sidebar" id="sidebarFavorite">
+            <div class="sidebar-header">
+                <h2>Favoritos</h2>
+                <button id="btnFecharFavorite">✖</button>
+            </div>
+
+            <div class="sidebar-content" id="favorite-content">
+                {{-- preenchido via AJAX --}}
+            </div>
+        </div>
     </header>
+    <div class="mobileNav" id="mobileNav">
+        <a href="/#catalogo">Catálogo</a>
+        <a href="/tag/show/1">Ofertas</a>
+        <a href="#contato">Contato</a>
+    </div>
 
 
-    <h1>{{ $tag->name }}</h1>
-
-    <p>{{ $products->count() }} disco(s) encontrado(s)</p>
 
     <section class="fundoPrincipal" #catalogoOff>
 
@@ -104,8 +114,15 @@
 
         </div>
 
+        <button class="btnFiltroMobile" id="btnAbrirFiltro">⚙ Filtros</button>
+
         <section class="filtroECat">
             <aside class="sidebarFiltro" id="sidebarFiltro">
+                
+                <div class="btnFecharFiltro">
+                    <button id="btnFecharFiltro">✕</button>
+                </div>
+
 
                 <div class="filtroTitulo">
                     <img src="https://i.ibb.co/r2nBVtd4/vinil-Rodando.png" class="vinyl">
@@ -172,7 +189,8 @@
                         $discountPrice = $p->price * 0.6;
                     @endphp
 
-                    <div class="cardDisco" preco="{{ $discountPrice }}" preco="{{ $discountPrice }}" categoria="{{ strtolower($p->category->name) }}">
+                    <div class="cardDisco" preco="{{ $discountPrice }}" preco="{{ $discountPrice }}"
+                        categoria="{{ strtolower($p->category->name) }}">
 
                         @if($cover)
 
@@ -247,6 +265,9 @@
             </section>
 
         </section>
+
+        <div class="overlayFiltro" id="overlayFiltro"></div>
+
         <footer id="contato">
             <div class="footerContainer">
                 <div class="footerLogo">

@@ -1,5 +1,3 @@
-
-
 * {
   padding: 0;
   margin: 0;
@@ -12,27 +10,24 @@ a* {
 }
 
 :root {
-    /* FONTES */
-    --fontePrimaria: 'Caesar Dressing', cursive;
-    --fonteSecundaria: 'Anton', sans-serif;
-    --fonteTerciaria: "Young Serif", serif;
-    --fonteDescricao: "Zilla Slab", serif;
-    --fonteNumeros: "Sahitya", serif;
-    /* CORES E GRADIENTES */
-    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    --gradienteCards: #D9D9D9;
-    --brancoVdr: #FDFDFD;
-    --vermelhoVdr: #6C2121;
-    --pretoVdr: #1D1D1D;
-    /* drop shadow discos */
-    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+  /* FONTES */
+  --fontePrimaria: 'Caesar Dressing', cursive;
+  --fonteSecundaria: 'Anton', sans-serif;
+  --fonteTerciaria: "Young Serif", serif;
+  --fonteDescricao: "Zilla Slab", serif;
+  --fonteNumeros: "Sahitya", serif;
+  /* CORES E GRADIENTES */
+  --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+  --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+  --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --gradienteCards: #D9D9D9;
+  --brancoVdr: #FDFDFD;
+  --vermelhoVdr: #6C2121;
+  --pretoVdr: #1D1D1D;
+  /* drop shadow discos */
+  --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
 }
 
-.table-auto{
-  border: 2px solid red;
-}
 
 #preloader {
   position: fixed;
@@ -227,7 +222,7 @@ header .icons img {
   align-items: end;
 }
 
-.deletePrice .precoOriginal{
+.deletePrice .precoOriginal {
   font-size: 15px;
 }
 
@@ -295,34 +290,146 @@ header .icons img {
   width: 100%;
 }
 
+/* FAVORITOS */
+
+/* Ícone desfavoritar com hover */
+.btnDesfavoritar img {
+  width: 24px;
+  height: 24px;
+  content: url("https://i.ibb.co/5mHR0sq/favorite-Black.png");
+  transition: content 0.2s ease;
+  cursor: pointer;
+}
+
+.btnDesfavoritar:hover img {
+  content: url("https://i.ibb.co/9HR1wYgm/desfavoritar.png");
+  transform: scale(1.2);
+}
+
+/* Item de favorito na sidebar */
+.favoritoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #d0d0d0;
+  font-family: var(--fontePrimaria);
+}
+
+.favoritoItem .imgFav {
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.infoFav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.infoFav p {
+  font-size: 16px;
+}
+
+.infoFav .precoFav {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.acoessFav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnVerProduto {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-family: var(--fontePrimaria);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btnVerProduto:hover {
+  background: #7E7E7E;
+}
+
+.btnDesfavoritar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.wishlistCart{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnAdicionarCarrinho {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btnAdicionarCarrinho img {
+  width: 20px;
+  height: 20px;
+  transition: content 0.2s ease;
+}
+
+.semFavoritos {
+  text-align: center;
+  font-family: var(--fonteTerciaria);
+  margin-top: 30px;
+  color: #7E7E7E;
+}
+
+.semFavoritos a {
+  color: #000;
+  text-decoration: underline;
+}
+
+
 .menuLogout {
-    position: absolute;
-    top: 55px;
-    right: 0;
-    background: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 8px;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    z-index: 999;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  z-index: 999;
 }
 
 .menuLogout.ativo {
-    display: block;
+  display: block;
 }
 
 .menuLogout button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    width: 100%;
-    padding: 8px 16px;
-    text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
 }
 
 .menuLogout button:hover {
-    background: #f5f5f5;
+  background: #f5f5f5;
 }
 
 
@@ -1027,5 +1134,518 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+
+/* Desktop — esconde o hamburguer */
+.mobileMenuBtn {
+  display: none;
+}
+
+.mobileNav {
+  display: none;
+}
+
+
+/* ==================================================
+   TABLETS (até 1024px)
+================================================== */
+@media (max-width: 1024px) {
+
+  /* ---------- Barra de situação ---------- */
+
+  .infoSituation {
+    padding-top: 130px;
+    font-size: 22px;
+    gap: 8px;
+  }
+
+  .infoSituation img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .produtoSituation,
+  .indentificacaoSituation,
+  .pagamentoSituation {
+    padding-right: 30px;
+  }
+
+  /* ---------- Resumo da compra ---------- */
+
+  .resumoCompra {
+    margin: 0 40px;
+    gap: 40px;
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .txtResumo h1 {
+    font-size: 24px;
+  }
+
+  /* ---------- Cartão de crédito ---------- */
+
+  .container {
+    max-width: 340px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 25px 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .avisosFooter {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .termos a {
+    position: static;
+    transform: none;
+    font-size: 18px;
+  }
+
+}
+
+
+/* ==================================================
+   CELULARES (até 768px)
+================================================== */
+@media (max-width: 768px) {
+
+  /* ---------- Header ---------- */
+
+  header {
+    height: 80px;
+    padding: 0 15px;
+    gap: 10px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .logoHeader {
+    font-size: 22px;
+  }
+
+  header img {
+    width: 55px;
+    height: 55px;
+  }
+
+  header .icons img {
+    width: 35px;
+    height: 35px;
+  }
+
+  header.scrolled {
+    background-color: #FFFFFF;
+    padding: 0 15px;
+    box-shadow: none;
+  }
+
+  header.scrolled .logoHeader img {
+    content: url("https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png");
+    width: 55px;
+    height: 55px;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 34px;
+    color: white;
+    cursor: pointer;
+  }
+
+  header.scrolled .mobileMenuBtn {
+    color: black;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #7E7E7E;
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .mobileNav.active {
+    display: flex;
+  }
+
+  .mobileNav a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "Caesar Dressing", system-ui;
+    font-size: 28px;
+  }
+
+  /* ---------- Barra de situação ---------- */
+
+  .infoSituation {
+    padding-top: 96px;
+    font-size: 14px;
+    gap: 4px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 8px;
+  }
+
+  .infoSituation img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .produtoSituation,
+  .indentificacaoSituation,
+  .pagamentoSituation {
+    padding-right: 14px;
+    padding-left: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Resumo da compra ---------- */
+
+  /* Empilha tudo em coluna única */
+  .resumoCompra {
+    flex-direction: column;
+    margin: 0 15px;
+    gap: 24px;
+    padding-top: 24px;
+    padding-bottom: 50px;
+    height: auto;
+  }
+
+  .txtResumo {
+    align-self: auto;
+  }
+
+  .txtResumo h1 {
+    font-size: 22px;
+  }
+
+  .cardsInfos {
+    gap: 16px;
+  }
+
+  .cardResumo {
+    padding: 16px;
+    width: 100%;
+  }
+
+  .tituloEditar h1 {
+    font-size: 17px;
+  }
+
+  .tituloEditar a {
+    font-size: 17px;
+  }
+
+  .cardResumo p {
+    font-size: 14px;
+  }
+
+  /* ---------- Pedido final ---------- */
+
+  .pedidoFinal .produtosFinais {
+    gap: 20px;
+  }
+
+  .produtoItem {
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .produtoItem img {
+    width: 70px;
+    flex-shrink: 0;
+  }
+
+  .infosFinais h1 {
+    font-size: 16px;
+  }
+
+  .qntProdutoFinal {
+    font-size: 13px;
+  }
+
+  /* ---------- Formas de pagamento ---------- */
+
+  .formasPagamento h1 {
+    font-size: 18px;
+  }
+
+  .fazerPagamento button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  /* ---------- Área PIX ---------- */
+
+  #areaPix {
+    padding: 16px 0;
+  }
+
+  #areaPix h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  #areaPix img.qrPix {
+    width: 180px;
+    height: 180px;
+  }
+
+  #areaPix .chavePix {
+    font-size: 13px;
+    word-break: break-all;
+    padding: 8px;
+  }
+
+  /* ---------- Área Cartão ---------- */
+
+  .form-container {
+    max-width: 100%;
+    padding: 10px 0;
+    grid-template-rows: 80px 80px 80px;
+  }
+
+  .container {
+    max-width: 100%;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  input {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* ---------- Sidebar Carrinho ---------- */
+
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+    right: -100%;
+    border-radius: 0;
+    padding: 0 10px;
+  }
+
+  .sidebar-header {
+    padding: 15px 10px;
+  }
+
+  .sidebar-header h2 {
+    font-size: 22px;
+  }
+
+  .sidebar-content .produtoItem {
+    gap: 10px;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .produtoItem .imgProdCart {
+    width: 75px;
+  }
+
+  .qntdProd {
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .qntdProd button {
+    font-size: 16px;
+  }
+
+  .deletePrice {
+    gap: 8px;
+  }
+
+  .deletePrice .precoOriginal {
+    font-size: 12px;
+  }
+
+  .deletePrice .precoOferta {
+    font-size: 16px;
+  }
+
+  .deleteIcon {
+    width: 24px;
+  }
+
+  .btnResumo {
+    margin: 20px 0;
+  }
+
+  .btnResumo button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .verMaisCart a {
+    font-size: 16px;
+  }
+
+  /* ---------- Footer checkout (mesmo padrão produto) ---------- */
+
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 15px;
+    gap: 16px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .footerLogo {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footerLogo img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .footerLogo h1 {
+    font-size: 20px;
+    text-align: center;
+    line-height: 24px;
+  }
+
+  .avisosFooter {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+  }
+
+  .termos a {
+    position: static;
+    transform: none;
+    font-size: 15px;
+    text-align: center;
+  }
+
+}
+
+
+/* ==================================================
+   CELULARES PEQUENOS (até 480px)
+================================================== */
+@media (max-width: 480px) {
+
+  /* ---------- Header ---------- */
+
+  .logoHeader p {
+    font-size: 18px;
+  }
+
+  header .icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* ---------- Barra de situação ---------- */
+
+  .infoSituation {
+    font-size: 12px;
+  }
+
+  .infoSituation img {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* ---------- Resumo ---------- */
+
+  .txtResumo h1 {
+    font-size: 18px;
+  }
+
+  .tituloEditar h1,
+  .tituloEditar a {
+    font-size: 15px;
+  }
+
+  .cardResumo p {
+    font-size: 13px;
+  }
+
+  .infosFinais h1 {
+    font-size: 14px;
+  }
+
+  .produtoItem img {
+    width: 55px;
+  }
+
+  /* ---------- Pagamento ---------- */
+
+  .formasPagamento h1 {
+    font-size: 16px;
+  }
+
+  .fazerPagamento button {
+    font-size: 16px;
+  }
+
+  #areaPix img.qrPix {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .footerLogo img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .footerLogo h1 {
+    font-size: 18px;
+  }
+
+  .avisosFooter {
+    font-size: 13px;
+  }
+
+  .termos a {
+    font-size: 13px;
+  }
 
 }
