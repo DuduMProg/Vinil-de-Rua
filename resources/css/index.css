@@ -906,60 +906,48 @@ main {
 
 
 footer {
-  background-color: #4C4C4C;
-  color: white;
-  padding: 30px;
-  border-radius: 30px 30px 0px 0px;
-
+  background-color: #1D1D1D;
+  color: #fff;
+  padding: 48px 40px 24px;
+  border-radius: 20px 20px 0 0;
 }
 
 .footerContainer {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 36px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Coluna 1 — logo */
+.footerLogoRow {
   display: flex;
-  justify-content: space-between;
-  justify-content: center;
-  justify-content: flex-start;
-  gap: 238px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .footerLogo img {
-  width: 117px;
-  height: 117px;
+  width: 48px;
+  height: 48px;
 }
 
 .footerLogo h1 {
   font-family: var(--fonteSecundaria);
-  font-size: 35px;
-  font-weight: 100;
+  font-size: 22px;
+  font-weight: 700;
   letter-spacing: 2px;
-  line-height: 35px;
+  line-height: 1.2;
 }
 
-.footerLogo {
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-}
-
-.socialConteiner {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.footerTagline {
   font-family: var(--fonteTerciaria);
-  margin-right: 335px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
-
-.socialConteiner hr {
-  margin-top: 16px;
-  margin-bottom: 11px;
-}
-
-
-.social {
-  font-size: 24px;
-  margin-top: 23px;
-  margin-bottom: 15px;
-}
-
 
 .socialLogo {
   display: flex;
@@ -968,32 +956,130 @@ footer {
 }
 
 .socialLogo img {
-  max-width: 30px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s;
 }
 
-.copyrightVdR {
+.socialLogo img:hover {
+  opacity: 1;
+}
+
+/* Colunas 2, 3, 4 */
+.footerCol {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerCol h3 {
+  font-family: var(--fontePrimaria);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 6px;
+}
+
+.footerCol ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerCol ul li a {
   font-family: var(--fonteTerciaria);
-  font-size: 24px;
-  margin-top: 90px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.footerCtt h1 {
-  font-size: 30px;
-  margin-bottom: 15px;
-  font-weight: bold;
+.footerCol ul li a:hover {
+  color: #ffffff;
 }
 
-.formasPagamento hr {
+.footerCol p {
+  font-family: var(--fonteTerciaria);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+}
+
+.footerHorario {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  margin-top: 4px;
+}
+
+/* Pagamentos */
+.footerPagamentos {
   margin-top: 16px;
-  margin-bottom: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .formasPagamentoImg {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.formasPagamentoImg img {
+  height: 22px;
+  width: auto;
+  opacity: 0.7;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.2s;
+}
+
+.formasPagamentoImg img:hover {
+  opacity: 1;
+}
+
+/* Rodapé inferior */
+.copyrightVdR {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 20px;
+}
+
+.copyrightVdR p {
+  font-family: var(--fonteTerciaria);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footerBottomLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.footerBottomLinks a {
+  font-family: var(--fonteTerciaria);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerBottomLinks a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stripeBadge {
+  font-family: var(--fonteTerciaria);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.02em;
 }
 
 
@@ -1061,12 +1147,8 @@ footer {
   /* ---------- Footer ---------- */
 
   .footerContainer {
-    flex-wrap: wrap;
-    gap: 60px;
-  }
-
-  .socialConteiner {
-    margin-right: 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
 
   /* ---------- SideBar ---------- */
@@ -1124,10 +1206,6 @@ footer {
     font-size: 18px;
   }
 }
-
-
-
-
 
 
 
@@ -1393,29 +1471,23 @@ footer {
   /* ---------- Footer ---------- */
 
   footer {
-    padding: 25px 15px;
+    padding: 36px 20px 20px;
   }
 
   .footerContainer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .socialConteiner {
-    margin-right: 0;
-  }
-
-  .formasPagamentoImg {
-    justify-content: center;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .copyrightVdR {
-    font-size: 18px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-top: 50px;
+    gap: 8px;
+  }
+
+  .footerBottomLinks {
+    gap: 16px;
   }
 }
 

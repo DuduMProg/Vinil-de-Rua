@@ -242,52 +242,90 @@
             </div>
         </section>
 
-        <footer id="contato">
+         <footer id="contato">
+
             <div class="footerContainer">
 
+                {{-- Coluna 1: Logo + tagline + redes --}}
                 <div class="footerLogo">
-                    <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua" class="logo">
-                    <h1>VINIL <br>DE RUA</h1>
-                </div>
-
-                <div class="socialConteiner">
-                    <div class="footerCtt">
-                        <h1>Contato</h1>
-                        <hr>
-                        <p>contato@vinilderua.com.br</p>
-                        <p>(11) 11 4002-8922</p>
+                    <div class="footerLogoRow">
+                        <img src="https://i.ibb.co/zhNXFH1t/logo-Vinil-De-Rua-branca.png" alt="Vinil de Rua">
+                        <h1>VINIL <br>DE RUA</h1>
                     </div>
-                    <p class="social">Nos siga:</p>
+                    <p class="footerTagline">Discos para quem vive a música.<br>Curadoria independente desde 2025.</p>
                     <div class="socialLogo">
-                        <img style="cursor:pointer" onclick="window.open('https://wa.me/5511945859221', '_blank')"
+                        <img onclick="window.open('https://wa.me/5511945859221','_blank')"
                             src="https://i.ibb.co/d0pJB3H5/zapLogo.png" alt="WhatsApp">
-                        <img style="cursor:pointer" onclick="window.open('https://www.instagram.com/', '_blank')"
+                        <img onclick="window.open('https://www.instagram.com/','_blank')"
                             src="https://i.ibb.co/Gv2fVPqD/insta-Logo.png" alt="Instagram">
-                        <img style="cursor:pointer" onclick="window.open('https://br.pinterest.com/', '_blank')"
+                        <img onclick="window.open('https://br.pinterest.com/','_blank')"
                             src="https://i.ibb.co/BKNqDc8Z/pinterest-Logo.png" alt="Pinterest">
-                        <img style="cursor:pointer" onclick="window.open('https://www.facebook.com/', '_blank')"
+                        <img onclick="window.open('https://www.facebook.com/','_blank')"
                             src="https://i.ibb.co/SXZ6bhxx/faceLogo.png" alt="Facebook">
                     </div>
                 </div>
 
-                <div class="formasPagamento">
-                    <h1>Formas de pagamento</h1>
-                    <hr>
-                    <div class="formasPagamentoImg">
-                        <img src="https://i.ibb.co/Zpx1P4rS/fiadoPay.png" alt="fiadoPay">
-                        <img src="https://i.ibb.co/PGTbDWv8/applePay.png" alt="applePay">
-                        <img src="https://i.ibb.co/j9xwJZxb/google-Pay.png" alt="google-Pay">
-                        <img src="https://i.ibb.co/Jw4Fw4Q4/mastercard-Pay.png" alt="mastercard-Pay">
-                        <img src="https://i.ibb.co/WpgW73SM/pixPay.png" alt="pixPay">
-                        <img src="https://i.ibb.co/RGHkXJks/visaPay.png" alt="visaPay">
+                {{-- Coluna 2: Navegação --}}
+                <div class="footerCol">
+                    <h3>Navegação</h3>
+                    <ul>
+                        <li><a href="/product">Catálogo</a></li>
+                        <li><a href="/tag/show/1">Ofertas</a></li>
+                        <li><a href="/#catalogo">Categorias</a></li>
+                        @auth
+                            <li><a href="{{ route('profile.index') }}">Minha conta</a></li>
+                            <li><a href="{{ route('profile.orders') }}">Meus pedidos</a></li>
+                        @else
+                            <li><a href="/login">Entrar</a></li>
+                            <li><a href="/register">Criar conta</a></li>
+                        @endauth
+                    </ul>
+                </div>
+
+                {{-- Coluna 3: Informações --}}
+                <div class="footerCol">
+                    <h3>Informações</h3>
+                    <ul>
+                        <li><a href="#">Política de privacidade</a></li>
+                        <li><a href="#">Trocas e devoluções</a></li>
+                        <li><a href="#">Prazo de entrega</a></li>
+                        <li><a href="#">Termos de uso</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                {{-- Coluna 4: Contato + Pagamento --}}
+                <div class="footerCol">
+                    <h3>Contato</h3>
+                    <p>vinil.derua01@gmail.com</p>
+                    <p>(11) 94585-9221</p>
+                    <p class="footerHorario">Seg–Sex, 9h às 21h<br>Sáb, 10h às 18h</p>
+
+                    <div class="footerPagamentos">
+                        <h3>Pagamento seguro</h3>
+                        <div class="formasPagamentoImg">
+                            <img src="https://i.ibb.co/PGTbDWv8/applePay.png" alt="Apple Pay">
+                            <img src="https://i.ibb.co/j9xwJZxb/google-Pay.png" alt="Google Pay">
+                            <img src="https://i.ibb.co/Jw4Fw4Q4/mastercard-Pay.png" alt="Mastercard">
+                            <img src="https://i.ibb.co/WpgW73SM/pixPay.png" alt="PIX">
+                            <img src="https://i.ibb.co/RGHkXJks/visaPay.png" alt="Visa">
+                        </div>
                     </div>
                 </div>
 
             </div>
 
+            {{-- Rodapé inferior --}}
             <div class="copyrightVdR">
-                <p>Copyright 2025 Vinil de Rua</p>
+                <p>© 2026 Vinil de Rua. Todos os direitos reservados.</p>
+                <div class="footerBottomLinks">
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos</a>
+                    <a href="#">Cookies</a>
+                </div>
+                <span class="stripeBadge">Pagamentos processados com segurança por Stripe</span>
             </div>
+
         </footer>
 
     </section>

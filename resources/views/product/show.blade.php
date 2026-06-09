@@ -145,24 +145,24 @@
         </div>
 
         {{-- ↓ LIGHTBOX — coloca aqui, logo antes do
-            </body> da view ↓ --}}
-            <div class="lb-fundo" id="lb">
-                <div class="lb-topo">
-                    <span class="lb-contador" id="lb-contador">1 / 1</span>
-                    <button class="lb-fechar" id="lb-fechar">✕</button>
-                </div>
-                <div class="lb-centro">
-                    <button class="lb-nav lb-prev" id="lb-prev">&#8592;</button>
-                    <div class="lb-img-wrap" id="lb-wrap">
-                        <img class="lb-img" id="lb-img" src="" alt="">
-                    </div>
-                    <button class="lb-nav lb-next" id="lb-next">&#8594;</button>
-                </div>
-                <div class="lb-miniaturas" id="lb-minis"></div>
-            </div>
+</body> da view ↓ --}}
+<div class="lb-fundo" id="lb">
+    <div class="lb-topo">
+        <span class="lb-contador" id="lb-contador">1 / 1</span>
+        <button class="lb-fechar" id="lb-fechar">✕</button>
+    </div>
+    <div class="lb-centro">
+        <button class="lb-nav lb-prev" id="lb-prev">&#8592;</button>
+        <div class="lb-img-wrap" id="lb-wrap">
+            <img class="lb-img" id="lb-img" src="" alt="">
+        </div>
+        <button class="lb-nav lb-next" id="lb-next">&#8594;</button>
+    </div>
+    <div class="lb-miniaturas" id="lb-minis"></div>
+</div>
 
 {{-- Coluna direita: infos + Spotify + compra --}}
-    <div class="infosProduto">
+<div class="infosProduto">
 
     {{-- Player Spotify dinâmico --}}
     <div class="tracklist">
@@ -218,6 +218,15 @@
     </div>
 
 </footer>
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 
 @vite('resources/js/navbar.js')
 @vite('resources/js/loading.js')

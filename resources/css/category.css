@@ -484,21 +484,83 @@ main {
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  z-index: 0;
 }
 
-.conteiner span {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  font-size: 94px;
-  font-weight: bold;
-  color: #000000;
+/* ── Banner editorial ── */
+.bannerEditorial {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Linha superior — fundo branco, texto escuro, corte diagonal */
+.bannerSup {
+  display: inline-block;
+  background: #ffffff;
+  color: #1D1D1D;
+  font-family: var(--fonteSecundaria);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 5px 34px 5px 28px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+
+/* Nome da categoria — fundo preto, texto branco, diagonal mais agressiva */
+.bannerNome {
+  display: inline-block;
+  background: #1D1D1D;
+  color: #ffffff;
   font-family: var(--fontePrimaria);
-  background-color: #838383;
-  border-radius: 8px;
-  padding: 20px 34px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  font-size: 72px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 14px 60px 14px 28px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
+}
+
+/* Linha inferior — vermelho Vinil de Rua, ícone de disco */
+.bannerInf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #6C2121;
+  color: #ffffff;
+  font-family: var(--fonteSecundaria);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 40px 6px 28px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
+}
+
+/* Ícone de disco mini na linha inferior */
+.discoSm {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  position: relative;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.discoSm::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 
@@ -523,34 +585,7 @@ main {
 
 }
 
-.categorias {
-  display: flex;
-  gap: 50px;
-}
 
-.categorias a {
-  position: relative;
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 28px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.categorias a::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #1b1b1b;
-  transition: width 0.3s ease-in-out;
-}
-
-.categorias a:hover::after {
-  width: 100%;
-}
 
 
 
@@ -567,6 +602,8 @@ main {
 }
 
 .cardDisco {
+  position: relative;
+  /* necessário para posicionar os ícones */
   width: 224px;
   height: 253px;
   background: var(--gradienteCardDiscos);
@@ -578,10 +615,15 @@ main {
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
-.cardDisco:hover {
-  transform: scale(1.03);
+/* Card esgotado: opacidade reduzida, cursor bloqueado */
+.cardDisco--esgotado {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .cardDisco .imgCard {
@@ -603,7 +645,8 @@ main {
 
 .infoDisco {
   font-size: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 40px;
+  /* espaço para os ícones não sobreporem o texto */
 }
 
 .infoDisco .precoDisco {
@@ -623,65 +666,142 @@ main {
   font-size: 20px;
 }
 
-
-.preçoEFavDisco {
+/* Ícones posicionados nos cantos inferiores */
+.cardAcoes {
+  position: absolute;
+  bottom: 8px;
+  left: 7px;
+  right: 7px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 7px;
 }
 
-.preçoEFavDisco button {
-  border-radius: 3px;
-  border: 1px solid #000000;
-  padding: 2px 12px;
-  font-family: var(--fontePrimaria);
-  cursor: pointer;
-  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+.cardAcoes .cart,
+.cardAcoes .favorite {
+  display: flex;
+  align-items: center;
 }
 
-.preçoEFavDisco button:hover {
-  background-color: #acacac;
-  color: #ffffff;
-  border: 2.2px solid #ffffff;
-  transform: scale(1.0);
-  box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+.cardAcoes .cart form,
+.cardAcoes .favorite form {
+  display: flex;
 }
 
-.preçoEFavDisco .favorite img {
-  width: 20px;
-  height: 20px;
-  transition: color 0.8s ease-in-out;
-  cursor: pointer;
-}
-
-.favorite .addFav {
+/* Botões dos ícones */
+.addCarrinho,
+.addFav {
   border: none;
   background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-.favorite .addFav:hover {
-  background-color: transparent;
-  border: none;
+.addCarrinho:hover,
+.addFav:hover {
   transform: scale(1.2);
+  background: rgba(0, 0, 0, 0.06);
   box-shadow: none;
 }
 
-.preçoEFavDisco .cart img {
+.addCarrinho:disabled,
+.addFav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cardAcoes .cart img,
+.cardAcoes .favorite img {
   width: 20px;
   height: 20px;
-  transition: color 0.8s ease-in-out;
   cursor: pointer;
 }
 
-.preçoEFavDisco .favorite img:hover {
+.cardAcoes .favorite img:hover {
   content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
 }
 
-.preçoEFavDisco .cart img:hover {
+.cardAcoes .cart img:hover {
   content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
 }
 
+
+
+/* ── Wave transição ── */
+.waveTransicao {
+  margin-top: 30px;
+  line-height: 0;
+}
+
+/* ── Categorias com pill + ícone de disco ── */
+.catPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 22px;
+  font-family: var(--fontePrimaria);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.catPill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.catPill::after {
+  content: none;
+  /* remove o underline animado que estava nos links antigos */
+}
+
+.discoIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  position: relative;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.discoIcon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Tilt 3D nos cards ── */
+.cardDisco {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s ease, box-shadow 0.25s ease;
+}
+
+.cardDisco:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  /* o transform é sobrescrito pelo JS no mousemove */
+}
+
+.categorias {
+  display: flex;
+  gap: 20px;
+}
 
 
 
@@ -689,60 +809,48 @@ main {
 
 
 footer {
-  background-color: #4C4C4C;
-  color: white;
-  padding: 30px;
-  border-radius: 30px 30px 0px 0px;
-
+  background-color: #1D1D1D;
+  color: #fff;
+  padding: 48px 40px 24px;
+  border-radius: 20px 20px 0 0;
 }
 
 .footerContainer {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 36px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Coluna 1 — logo */
+.footerLogoRow {
   display: flex;
-  justify-content: space-between;
-  justify-content: center;
-  justify-content: flex-start;
-  gap: 238px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .footerLogo img {
-  width: 117px;
-  height: 117px;
+  width: 48px;
+  height: 48px;
 }
 
 .footerLogo h1 {
   font-family: var(--fonteSecundaria);
-  font-size: 35px;
-  font-weight: 100;
+  font-size: 22px;
+  font-weight: 700;
   letter-spacing: 2px;
-  line-height: 35px;
+  line-height: 1.2;
 }
 
-.footerLogo {
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-}
-
-.socialConteiner {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.footerTagline {
   font-family: var(--fonteTerciaria);
-  margin-right: 335px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
-
-.socialConteiner hr {
-  margin-top: 16px;
-  margin-bottom: 11px;
-}
-
-
-.social {
-  font-size: 24px;
-  margin-top: 23px;
-  margin-bottom: 15px;
-}
-
 
 .socialLogo {
   display: flex;
@@ -751,33 +859,132 @@ footer {
 }
 
 .socialLogo img {
-  max-width: 30px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s;
 }
 
-.copyrightVdR {
+.socialLogo img:hover {
+  opacity: 1;
+}
+
+/* Colunas 2, 3, 4 */
+.footerCol {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerCol h3 {
+  font-family: var(--fontePrimaria);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 6px;
+}
+
+.footerCol ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerCol ul li a {
   font-family: var(--fonteTerciaria);
-  font-size: 24px;
-  margin-top: 90px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.footerCtt h1 {
-  font-size: 30px;
-  margin-bottom: 15px;
-  font-weight: bold;
+.footerCol ul li a:hover {
+  color: #ffffff;
 }
 
-.formasPagamento hr {
+.footerCol p {
+  font-family: var(--fonteTerciaria);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+}
+
+.footerHorario {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  margin-top: 4px;
+}
+
+/* Pagamentos */
+.footerPagamentos {
   margin-top: 16px;
-  margin-bottom: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .formasPagamentoImg {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
+
+.formasPagamentoImg img {
+  height: 22px;
+  width: auto;
+  opacity: 0.7;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.2s;
+}
+
+.formasPagamentoImg img:hover {
+  opacity: 1;
+}
+
+/* Rodapé inferior */
+.copyrightVdR {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 20px;
+}
+
+.copyrightVdR p {
+  font-family: var(--fonteTerciaria);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footerBottomLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.footerBottomLinks a {
+  font-family: var(--fonteTerciaria);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerBottomLinks a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stripeBadge {
+  font-family: var(--fonteTerciaria);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.02em;
+}
+
 
 
 /* Desktop — esconde o hamburguer */
@@ -807,6 +1014,22 @@ footer {
   .conteiner span {
     font-size: 72px;
     padding: 16px 28px;
+  }
+
+  .bannerNome {
+    font-size: 36px;
+    padding: 10px 44px 10px 15px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  }
+
+  .bannerSup {
+    font-size: 10px;
+    padding: 4px 26px 4px 15px;
+  }
+
+  .bannerInf {
+    font-size: 11px;
+    padding: 5px 30px 5px 15px;
   }
 
   /* ---------- Outras Categorias ---------- */
@@ -842,14 +1065,9 @@ footer {
   /* ---------- Footer ---------- */
 
   .footerContainer {
-    flex-wrap: wrap;
-    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
-
-  .socialConteiner {
-    margin-right: 0;
-  }
-
 }
 
 
@@ -941,8 +1159,7 @@ footer {
   }
 
   /* ---------- Hero da Categoria ---------- */
-
-  main {
+  conteiner main {
     height: auto;
     overflow: visible;
   }
@@ -956,7 +1173,8 @@ footer {
   .conteiner img {
     height: 55vh;
     min-height: 280px;
-    object-position: center top; /* mantém foco no topo da arte */
+    object-position: center top;
+    /* mantém foco no topo da arte */
   }
 
   /* Título desce para borda inferior — padrão Nike/Supreme mobile */
@@ -992,15 +1210,23 @@ footer {
   }
 
   @keyframes scrollHint {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%       { transform: translateX(-50%) translateY(7px); }
+
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+      transform: translateX(-50%) translateY(7px);
+    }
   }
 
   /* ---------- Outras Categorias ---------- */
 
   .outrasCategorias {
     margin: 0 15px;
-    padding-top: 52px; /* espaço para o scroll hint não sobrepor */
+    padding-top: 52px;
+    /* espaço para o scroll hint não sobrepor */
     gap: 16px;
   }
 
@@ -1119,29 +1345,23 @@ footer {
   /* ---------- Footer ---------- */
 
   footer {
-    padding: 25px 15px;
+    padding: 36px 20px 20px;
   }
 
   .footerContainer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .socialConteiner {
-    margin-right: 0;
-  }
-
-  .formasPagamentoImg {
-    justify-content: center;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .copyrightVdR {
-    font-size: 18px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-top: 50px;
+    gap: 8px;
+  }
+
+  .footerBottomLinks {
+    gap: 16px;
   }
 
 }
@@ -1161,6 +1381,11 @@ footer {
   header .icons {
     display: flex;
     gap: 8px;
+  }
+
+  .bannerNome {
+    font-size: 28px;
+    padding: 8px 36px 8px 12px;
   }
 
   /* ---------- Hero da Categoria ---------- */

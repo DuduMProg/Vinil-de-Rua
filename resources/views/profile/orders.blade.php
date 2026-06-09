@@ -141,7 +141,7 @@
                     <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td class="tdProdutos">
+                                <td data-label="Produto(s)" class="tdProdutos">
                                     @foreach($order->items as $item)
                                         @php $cover = $item->product->images->first(); @endphp
                                         <div class="itemPedido">
@@ -156,13 +156,13 @@
                                     @endforeach
                                 </td>
 
-                                <td>R$ {{ number_format($order->total, 2, ',', '.') }}</td>
+                                <td data-label="Total">R$ {{ number_format($order->total, 2, ',', '.') }}</td>
 
-                                <td>{{ $order->payment_label }}</td>
+                                <td data-label="Pagamento">{{ $order->payment_label }}</td>
 
-                                <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                <td data-label="Data">{{ $order->created_at->format('d/m/Y') }}</td>
 
-                                <td>
+                                <td data-label="Situação">
                                     <span class="statusPedido status-{{ $order->status }}">
                                         {{ $order->status_label }}
                                     </span>
@@ -177,11 +177,20 @@
 
     </main>
 
-    
+
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
-    
+
 
 </body>
 
