@@ -103,37 +103,37 @@
 
             </header>
 
-            <!-- CARDS DE RESUMO -->
-            <div class="cardsResumo">
-
-                <div class="cardResumo">
+    <!-- CARDS DE RESUMO -->
+    <div class="cardsResumo">
+        
+        <div class="cardResumo">
                     <p class="cardLabel">Total de Produtos</p>
                     <h2 class="cardValor">{{ $totalProducts }}</h2>
                 </div>
-
+                
                 <div class="cardResumo">
                     <p class="cardLabel">Usuários Cadastrados</p>
                     <h2 class="cardValor">{{ $totalUsers }}</h2>
                 </div>
-
+                
                 <div class="cardResumo">
                     <p class="cardLabel">Pedidos Pendentes</p>
                     <h2 class="cardValor">{{ $totalPendingOrders }}</h2>
                 </div>
-
+                
                 <div class="cardResumo">
                     <p class="cardLabel">Receita Total</p>
                     <h2 class="cardValor">R$ {{ number_format($totalRevenue, 2, ',', '.') }}</h2>
                 </div>
 
             </div>
-
+            
             <!-- GRÁFICOS -->
             <div class="areaGraficos">
 
                 <!-- Pedidos por período -->
                 <div class="grafico">
-                    <h3>Pedidos por período</h3>
+                    <h3>Pedidos por mês</h3>
                     <canvas id="graficoPedidos"></canvas>
                 </div>
 

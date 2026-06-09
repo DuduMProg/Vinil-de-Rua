@@ -140,8 +140,9 @@
                             <div class="infoForms">
                                 <label>Descrição:</label>
 
-                                <input type="text" name="description" placeholder="Descrição..."
-                                    value="{{ old('description') }}">
+                                <textarea type="text" name="description" placeholder="Descrição..."
+                                    value="{{ old('description') }}" class="campoDescricao">
+                                </textarea>
                             </div>
 
                             <div class="infoForms">

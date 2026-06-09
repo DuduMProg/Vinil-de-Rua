@@ -189,17 +189,16 @@
                         $discountPrice = $p->price * 0.6;
                     @endphp
 
-                    <div class="cardDisco" preco="{{ $discountPrice }}" preco="{{ $discountPrice }}"
-                        categoria="{{ strtolower($p->category->name) }}">
+
+
+                    <a class="cardDisco {{ $p->stock <= 0 ? 'cardDisco--esgotado' : '' }}"
+                        href="{{ $p->stock > 0 ? route('product.show', $p->id) : '#' }}">
 
                         @if($cover)
-
                             <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}" class="imgCard">
-
                         @endif
 
                         <div class="infoDisco">
-
                             <p class="nomeDisco">
                                 {{ $p->name }} - {{ $p->artist }}
                             </p>
@@ -220,42 +219,32 @@
                             </div>
                         </div>
 
-                        <div class="preçoEFavDisco">
-
-                            <button class="btnComprarAgora"
-                                onclick="window.location.href='{{ route('product.show', $p->id) }}'">
-                                {{ $p->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
-                            </button>
+                        {{-- Ícones nos cantos — stopPropagation evita abrir a página do produto ao clicar neles --}}
+                        <div class="cardAcoes">
 
                             <div class="cart">
-
-                                <form action="/cart/store/{{ $p->id }}" method="POST">
-
+                                <form action="/cart/store/{{ $p->id }}" method="POST"
+                                    onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
                                     @csrf
-
                                     <button type="submit" class="addCarrinho" {{ $p->stock <= 0 ? 'disabled' : '' }}>
-
                                         <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
-
                                     </button>
-
                                 </form>
-
                             </div>
 
                             <div class="favorite">
-
-                                <a href="/src/assets/pages/favorito.html">
-
-                                    <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
-
-                                </a>
-
+                                <form action="/whishlist/store/{{ $p->id }}" method="POST"
+                                    onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
+                                    @csrf
+                                    <button type="submit" class="addFav" {{ $p->stock <= 0 ? 'disabled' : '' }}>
+                                        <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
+                                    </button>
+                                </form>
                             </div>
 
                         </div>
 
-                    </div>
+                    </a>
 
                 @empty
 
@@ -366,8 +355,8 @@
 
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
-    @vite('resources/js/telaDeCompra.js')
     @vite('resources/js/filtro.js')
+    @vite('resources/js/cards.js')
 </body>
 
 </html>

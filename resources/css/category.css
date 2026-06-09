@@ -1247,7 +1247,7 @@ footer {
 
   .catalogoCategoria {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 15px;
     margin: 0 15px;
     padding: 50px 0 30px;
   }

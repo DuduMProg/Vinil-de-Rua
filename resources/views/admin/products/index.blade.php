@@ -74,13 +74,51 @@
             <!-- MENU SUPERIOR -->
             <header class="menuSuperior">
 
-                <div class="campoBusca">
+                <div class="adminBuscaFiltros">
 
-                    <input type="text" placeholder="Buscar produto...">
-
-                    <div class="btnBusca">
-                        <button>Buscar</button>
+                    {{-- Campo de busca --}}
+                    <div class="campoBusca">
+                        <input type="text" id="inputBusca" placeholder="Buscar por nome ou artista...">
+                        <div class="btnBusca">
+                            <button onclick="filtrar()">Buscar</button>
+                        </div>
                     </div>
+
+                    {{-- Filtros rápidos --}}
+                    <div class="filtrosRapidos">
+
+                        <button class="btnFiltro ativo" data-filtro="todos">
+                            Todos
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="oferta">
+                            Oferta
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="index">
+                            Index
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="destaque">
+                            Destaque
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="estoque-baixo">
+                            Estoque baixo
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="sem-tag">
+                            Sem tag
+                        </button>
+
+                        <button class="btnFiltro" data-filtro="sem-imagem">
+                            Sem imagem
+                        </button>
+
+                        <p class="contadorResultados" id="contadorResultados"></p>
+                    </div>
+
+                    {{-- Contador de resultados --}}
 
                 </div>
 
@@ -101,98 +139,94 @@
 
 
 
-            <table border="1">
+            <div class="adminProdutosGrid">
 
-                <tr>
-                    <th>Id</th>
-                    <th>Capa</th>
-                    <th>Produto</th>
-                    <th>Artista</th>
-                    <th>Categoria</th>
-                    <th>Tag</th>
-                    <th>Estoque</th>
-                    <th>Preço</th>
-                    <th>Imagens</th>
-                    <th>Ações</th>
-                </tr>
-
-                @foreach($products as $p)
+                @forelse($products as $p)
                     @php
-                        $cover = $p->images->firstWhere('is_cover', true)
-                            ?? $p->images->first();
+                        $cover = $p->images->firstWhere('is_cover', true) ?? $p->images->first();
                     @endphp
 
-                    <tr>
+                    <div class="adminCard" data-nome="{{ strtolower($p->name) }}"
+                        data-artista="{{ strtolower($p->artist) }}" data-tag="{{ $p->tag->name ?? '' }}"
+                        data-estoque="{{ $p->stock }}" data-imagens="{{ $p->images_count }}">
 
-                        <td>{{ $p->id }}</td>
-
-                        <td>
+                        {{-- Capa do álbum --}}
+                        <div class="adminCardCapa">
                             @if($cover)
-                                <img src="{{ $cover->path }}" width="60" alt="Capa">
+                                <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}">
                             @else
-                                —
+                                <div class="semCapa">Sem capa</div>
                             @endif
-                        </td>
 
-                        <td>
-                            <a href="/categories/{{ $p->category->id }}">
-                                {{ $p->name }}
-                            </a>
-                        </td>
-
-                        <td>{{ $p->artist }}</td>
-
-                        <td>
-                            {{ $p->category->name ?? 'Sem categoria' }}
-                        </td>
-
-                        <td>
+                            {{-- Badge de tag --}}
                             @if($p->tag)
-                                <span>{{ $p->tag->name }}</span>
-                            @else
-                                Sem tag
+                                <span class="adminBadgeTag badge-{{ $p->tag->name }}">
+                                    {{ strtoupper($p->tag->name) }}
+                                </span>
                             @endif
-                        </td>
+                        </div>
 
-                        <td>{{ $p->stock }}</td>
+                        {{-- Informações --}}
+                        <div class="adminCardInfo">
 
-                        <td>
-                            R$ {{ number_format($p->price, 2, ',', '.') }}
-                        </td>
+                            <div class="adminCardTitulo">
+                                <p class="adminCardNome">{{ $p->name }}</p>
+                                <p class="adminCardArtista">{{ $p->artist }}</p>
+                            </div>
 
-                        <td>{{ $p->images_count }}</td>
+                            <div class="adminCardDetalhes">
+                                <div class="adminCardDetalhe">
+                                    <span class="detalheLabel">Categoria</span>
+                                    <span class="detalheValor">{{ $p->category->name ?? '—' }}</span>
+                                </div>
+                                <div class="adminCardDetalhe">
+                                    <span class="detalheLabel">Estoque</span>
+                                    <span class="detalheValor {{ $p->stock <= 5 ? 'estoqueAlerta' : '' }}">
+                                        {{ $p->stock }} un.
+                                    </span>
+                                </div>
+                                <div class="adminCardDetalhe">
+                                    <span class="detalheLabel">Preço</span>
+                                    <span class="detalheValor">R$ {{ number_format($p->price, 2, ',', '.') }}</span>
+                                </div>
+                                <div class="adminCardDetalhe">
+                                    <span class="detalheLabel">Imagens</span>
+                                    <span class="detalheValor">{{ $p->images_count }}</span>
+                                </div>
+                            </div>
 
-                        <td>
+                        </div>
 
-                            <a href="/product/{{ $p->id }}/edit">
+                        {{-- Ações --}}
+                        <div class="adminCardAcoes">
+                            <a href="/admin/product/{{ $p->id }}/edit" class="btnAdminEditar">
                                 Editar
                             </a>
 
-                            |
-
-                            <form action="/product/{{ $p->id }}" method="POST" style="display:inline"
+                            <form action="/admin/product/{{ $p->id }}" method="POST"
                                 onsubmit="return confirm('Deletar {{ $p->name }}?')">
-
                                 @csrf
                                 @method('DELETE')
-
-                                <button type="submit">
+                                <button type="submit" class="btnAdminDeletar">
                                     Deletar
                                 </button>
-
                             </form>
+                        </div>
 
-                        </td>
+                    </div>
 
-                    </tr>
+                @empty
+                    <p class="semProdutos">Nenhum produto cadastrado ainda.</p>
+                @endforelse
 
-                @endforeach
-
-            </table>
+            </div>
 
         </main>
 
     </div>
+
+    @vite('resources/js/admin.js')
+
 </body>
 
 </html>

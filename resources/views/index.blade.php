@@ -41,26 +41,27 @@
         </div>
 
         <div class="icons">
-    <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite"style="cursor:pointer">
+            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
 
-    <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart" style="cursor:pointer">
+            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                style="cursor:pointer">
 
-    @auth
-        @if(auth()->user()->role === 'admin')
-            <a href="/admin/dashboard">
-                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-            </a>
-        @else
-            <a href="/profile">
-                <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-            </a>
-        @endif
-    @else
-        <a href="/login">
-            <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
-        </a>
-    @endauth
-</div>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a href="/admin/dashboard">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @else
+                    <a href="/profile">
+                        <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                    </a>
+                @endif
+            @else
+                <a href="/login">
+                    <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
+                </a>
+            @endauth
+        </div>
 
         <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
@@ -93,11 +94,11 @@
             </div>
         </div>
     </header>
-        <div class="mobileNav" id="mobileNav">
-            <a href="/#catalogo">Catálogo</a>
-            <a href="/tag/show/1">Ofertas</a>
-            <a href="#contato">Contato</a>
-        </div>
+    <div class="mobileNav" id="mobileNav">
+        <a href="/#catalogo">Catálogo</a>
+        <a href="/tag/show/1">Ofertas</a>
+        <a href="#contato">Contato</a>
+    </div>
     <main>
         <section class="conteiner">
             <div class="textConteiner">
@@ -106,13 +107,13 @@
             </div>
             <div class="imageHero">
                 <div class="banner">
-                  <img src="https://i.ibb.co/tTHjxkRD/disco-Vinil-De-Rua.png" class="shape">
+                    <img src="https://i.ibb.co/tTHjxkRD/disco-Vinil-De-Rua.png" class="shape">
 
-                  <!-- disco girando -->
-                  <img src="https://i.ibb.co/r2nBVtd4/vinil-Rodando.png" class="vinyl">
+                    <!-- disco girando -->
+                    <img src="https://i.ibb.co/r2nBVtd4/vinil-Rodando.png" class="vinyl">
 
-                  <!-- artista -->
-                  <img src="https://i.ibb.co/whWdbjdM/img-Sabota-Hero.png" class="artist">
+                    <!-- artista -->
+                    <img src="https://i.ibb.co/whWdbjdM/img-Sabota-Hero.png" class="artist">
 
                 </div>
             </div>
@@ -145,12 +146,12 @@
                             <div class="infoDisco">
                                 <p class="nomeDisco">{{ $o->name }} - {{ $o->artist }}</p>
                                 <div class="precoDisco">
-                                
+
                                     <p class="precoOferta">
                                         R$ {{ number_format($o->preco_com_desconto, 2, ',', '.') }}!
                                     </p>
-                                
-                            </div>
+
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -163,39 +164,40 @@
             <div class="catalogoIndex">
                 @forelse($destaques as $p)
                     @php $cover = $p->images->first() @endphp
-                    <div class="cardDisco">
+                    <a class="cardDisco {{ $p->stock <= 0 ? 'cardDisco--esgotado' : '' }}"
+                        href="{{ $p->stock > 0 ? route('product.show', $p->id) : '#' }}">
 
                         @if($cover)
                             <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}" class="imgCard">
                         @endif
 
                         <div class="infoDisco">
-                            <p class="nomeDisco">{{ $p->name }} - {{ $p->artist }}</p>
+                            <p class="nomeDisco">
+                                {{ $p->name }} - {{ $p->artist }}
+                            </p>
+
                             <div class="precoDisco">
                                 @if($p->tem_desconto)
                                     <p class="precoOriginal">
                                         <s>R$ {{ number_format($p->price, 2, ',', '.') }}</s>
                                     </p>
                                     <p class="precoOferta">
-                                        R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }} !
+                                        R$ {{ number_format($p->preco_com_desconto, 2, ',', '.') }}!
                                     </p>
                                 @else
                                     <p class="precoDisco">
                                         R$ {{ number_format($p->price, 2, ',', '.') }}
                                     </p>
                                 @endif
-                            </div>          
+                            </div>
                         </div>
 
-                        <div class="precoEFavDisco">
-                            <button class="btnComprarAgora"
-                                onclick="window.location.href='{{ route('product.show', $p->id) }}'"
-                                {{ $p->stock <= 0 ? 'disabled' : '' }}>
-                                {{ $p->stock > 0 ? 'Comprar agora' : 'Fora de estoque' }}
-                            </button>
+                        {{-- Ícones nos cantos — stopPropagation evita abrir a página do produto ao clicar neles --}}
+                        <div class="cardAcoes">
 
                             <div class="cart">
-                                <form action="/cart/store/{{ $p->id }}" method="POST">
+                                <form action="/cart/store/{{ $p->id }}" method="POST"
+                                    onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
                                     @csrf
                                     <button type="submit" class="addCarrinho" {{ $p->stock <= 0 ? 'disabled' : '' }}>
                                         <img src="https://i.ibb.co/6RFY694G/add-shopping-cart-1.png" alt="carrinho">
@@ -204,16 +206,18 @@
                             </div>
 
                             <div class="favorite">
-                                <form action="/favorite/store/{{ $p->id }}" method="POST">
+                                <form action="/whishlist/store/{{ $p->id }}" method="POST"
+                                    onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
                                     @csrf
-                                    <button type="submit" style="background:none; border:none; cursor:pointer">
+                                    <button type="submit" class="addFav" {{ $p->stock <= 0 ? 'disabled' : '' }}>
                                         <img src="https://i.ibb.co/5mHR0sq/favorite-Black.png" alt="favorito">
                                     </button>
                                 </form>
                             </div>
+
                         </div>
 
-                    </div>
+                    </a>
                 @empty
                     <p>Nenhum produto em destaque no momento.</p>
                 @endforelse
@@ -242,7 +246,7 @@
             </div>
         </section>
 
-         <footer id="contato">
+        <footer id="contato">
 
             <div class="footerContainer">
 
@@ -342,6 +346,7 @@
     @vite('resources/js/navbar.js')
     @vite('resources/js/loading.js')
     @vite('resources/js/index.js')
+    @vite('resources/js/cards.js')
 
 </body>
 

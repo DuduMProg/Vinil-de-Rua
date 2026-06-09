@@ -370,7 +370,7 @@ header .icons img {
   padding: 0;
 }
 
-.wishlistCart{
+.wishlistCart {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -463,72 +463,72 @@ header.scrolled .icons img {
 }
 
 .fundoPrincipal {
-    background: var(--gradienteVertical2);
+  background: var(--gradienteVertical2);
 
 }
 
 .bannerBlackFriday {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 150px;
 
-    padding-top: 150px;
+  padding-top: 150px;
 }
 
 .anuncioBlackFriday h1 {
-    font-family: var(--fontePrimaria);
-    font-size: 64px;
-    margin: 0;
-    line-height: 1.1;
-    text-align: left;
-    margin-right: 40px;
+  font-family: var(--fontePrimaria);
+  font-size: 64px;
+  margin: 0;
+  line-height: 1.1;
+  text-align: left;
+  margin-right: 40px;
 }
 
 .sidebarFiltro {
 
-    width: 280px;
+  width: 280px;
 
-    min-width: 280px;
+  min-width: 280px;
 
-    height: fit-content;
+  height: fit-content;
 
-    position: sticky;
+  position: sticky;
 
-    top: 140px;
+  top: 140px;
 
-    background: #d8d8d8;
+  background: #d8d8d8;
 
-    border: 2px solid #000;
+  border: 2px solid #000;
 
-    border-radius: 10px;
+  border-radius: 10px;
 
-    padding: 25px;
+  padding: 25px;
 }
 
 .filtroTitulo {
 
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 10px;
+  gap: 10px;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .filtroTitulo h2 {
 
-    font-family: "Caesar Dressing";
+  font-family: "Caesar Dressing";
 
-    font-size: 28px;
+  font-size: 28px;
 }
 
 .filtroTitulo .vinyl {
-    width: 40px;
-    animation: spin 5s linear infinite;
+  width: 40px;
+  animation: spin 5s linear infinite;
 
-    transform-origin: center center;
+  transform-origin: center center;
 }
 
 @keyframes spin {
@@ -543,205 +543,241 @@ header.scrolled .icons img {
 
 .grupoFiltro {
 
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    gap: 10px;
+  gap: 10px;
 
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .grupoFiltro h3 {
 
-    font-family: var(--fontePrimaria);
+  font-family: var(--fontePrimaria);
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .grupoFiltro input {
 
-    width: 18px;
+  width: 18px;
 
-    height: 18px;
+  height: 18px;
 
-    accent-color: #222;
-    border: 5px solid #000000;
-    cursor: pointer;
+  accent-color: #222;
+  border: 5px solid #000000;
+  cursor: pointer;
 }
 
 .grupoFiltro input:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 
 }
 
 
 .filtroECat {
 
-    display: flex;
+  display: flex;
 
-    gap: 50px;
+  gap: 50px;
 
-    margin: 50px;
+  margin: 50px;
 }
 
 .catalogoOff {
-    display: grid;
-    grid-template-columns: repeat(4, 224px);
-    gap: 150px;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 224px);
+  gap: 150px;
+  justify-content: center;
 }
 
 .campoFiltro {
-    font-family: var(--fontePrimaria);
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-    background-color: var(--gradienteCards);
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #000000;
-    display: none;
+  font-family: var(--fontePrimaria);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background-color: var(--gradienteCards);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+  display: none;
 }
 
 .campoFiltro .valores {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .btnsfiltro {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 
 }
 
 .sidebarFiltro button {
-    border-radius: 3px;
-    border: 1px solid #000000;
-    padding: 4px 14px;
-    font-size: 14px;
-    font-family: var(--fontePrimaria);
-    cursor: pointer;
-    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+  border-radius: 3px;
+  border: 1px solid #000000;
+  padding: 4px 14px;
+  font-size: 14px;
+  font-family: var(--fontePrimaria);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
 .sidebarFiltro button:hover {
-    color: var(--pretoVdr);
-    border: 2.2px solid #ffffff;
-    transform: scale(1.0);
-    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+  color: var(--pretoVdr);
+  border: 2.2px solid #ffffff;
+  transform: scale(1.0);
+  box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
 }
 
 
 
 .cardDisco {
-    width: 250px;
-    height: 280px;
-    background: var(--gradienteCardDiscos);
-    font-family: var(--fontePrimaria);
-    border-radius: 5px;
-    padding: 0px 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s ease;
+  position: relative;
+  /* necessário para posicionar os ícones */
+  width: 224px;
+  height: 253px;
+  background: var(--gradienteCardDiscos);
+  font-family: var(--fontePrimaria);
+  border-radius: 5px;
+  padding: 0px 7px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
-.cardDisco:hover {
-    transform: scale(1.03);
+/* Card esgotado: opacidade reduzida, cursor bloqueado */
+.cardDisco--esgotado {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .cardDisco .imgCard {
-    cursor: pointer;
-    padding-top: 6px;
-    padding-left: 7px;
-    padding-right: 9px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  cursor: pointer;
+  padding-top: 6px;
+  padding-left: 7px;
+  padding-right: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cardDisco .imgCard>img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .infoDisco {
-    font-size: 15px;
-    padding-bottom: 20px;
+  font-size: 15px;
+  padding-bottom: 40px;
+  /* espaço para os ícones não sobreporem o texto */
 }
 
 .infoDisco .precoDisco {
-    padding-top: 4px;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-
-.preçoEFavDisco {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 7px;
-}
-
-.preçoEFavDisco button {
-    border-radius: 3px;
-    border: 1px solid #000000;
-    padding: 2px 12px;
-    font-family: var(--fontePrimaria);
-    cursor: pointer;
-    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
-}
-
-.preçoEFavDisco button:hover {
-    background-color: #acacac;
-    color: #ffffff;
-    border: 2.2px solid #ffffff;
-    transform: scale(1.0);
-    box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
-}
-
-.preçoEFavDisco .favorite img {
-    width: 20px;
-    height: 20px;
-    transition: color 0.8s ease-in-out;
-    cursor: pointer;
-}
-
-.preçoEFavDisco .cart img {
-    width: 20px;
-    height: 20px;
-    transition: color 0.8s ease-in-out;
-    cursor: pointer;
-}
-
-.preçoEFavDisco .favorite img:hover {
-    content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
-}
-
-.preçoEFavDisco .cart img:hover {
-    content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
+  padding-top: 4px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .precoOriginal {
-    color: #7E7E7E;
-    text-decoration-line: line-through;
+  color: #7E7E7E;
+  font-size: 12px;
+  text-decoration-line: line-through;
 }
 
 .precoOferta {
-    color: #e40000;
-    font-size: 24px;
+  color: #e40000;
+  font-size: 20px;
 }
 
+/* Ícones posicionados nos cantos inferiores */
+.cardAcoes {
+  position: absolute;
+  bottom: 8px;
+  left: 7px;
+  right: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardAcoes .cart,
+.cardAcoes .favorite {
+  display: flex;
+  align-items: center;
+}
+
+.cardAcoes .cart form,
+.cardAcoes .favorite form {
+  display: flex;
+}
+
+/* Botões dos ícones */
+.addCarrinho,
+.addFav {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.addCarrinho:hover,
+.addFav:hover {
+  transform: scale(1.2);
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+.addCarrinho:disabled,
+.addFav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cardAcoes .cart img,
+.cardAcoes .favorite img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.cardAcoes .favorite img:hover {
+  content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
+}
+
+.cardAcoes .cart img:hover {
+  content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
+}
+
+.cardDisco {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s ease, box-shadow 0.25s ease;
+}
+
+.cardDisco:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  /* o transform é sobrescrito pelo JS no mousemove */
+}
 
 
 
@@ -925,7 +961,7 @@ footer {
 
 .btnFiltroMobile {
 
-    display: none;
+  display: none;
 }
 
 /* Desktop — esconde o hamburguer */
@@ -937,8 +973,8 @@ footer {
   display: none;
 }
 
-.btnFecharFiltro{
-    display: none;
+.btnFecharFiltro {
+  display: none;
 }
 
 
@@ -1119,7 +1155,8 @@ footer {
     flex-direction: column;
     margin: 16px 15px;
     gap: 0;
-    border: none; /* remove o border:2px solid red do desktop */
+    border: none;
+    /* remove o border:2px solid red do desktop */
   }
 
   /* Sidebar some do fluxo e vira drawer deslizante pela esquerda */
@@ -1178,23 +1215,24 @@ footer {
 
   .catalogoOff {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 15px;
+    margin: 0 15px;
+    padding: 50px 0 30px;
     width: 100%;
   }
 
-  .cardDisco {
+   .cardDisco {
     width: 100%;
     height: auto;
-    padding: 8px 10px;
+    padding: 8px;
   }
 
   .infoDisco {
     font-size: 13px;
-    padding-bottom: 10px;
   }
 
   .infoDisco .precoDisco {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .precoOferta {
@@ -1205,6 +1243,7 @@ footer {
     font-size: 11px;
     padding: 2px 8px;
   }
+
 
   /* ---------- Sidebar Carrinho ---------- */
 
@@ -1324,11 +1363,14 @@ footer {
 
   .catalogoOff {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
+    margin: 0 10px;
+    padding: 44px 0 20px;
+    margin-bottom: 50px;
   }
 
   .cardDisco {
-    padding: 6px 8px;
+    padding: 6px;
   }
 
   .infoDisco {

@@ -52,14 +52,24 @@
 /* --- Menu lateral --- */
 
 .menuLateral {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
     width: 240px;
+    height: 100vh;
+
     background-color: #fff;
     border-right: 2px solid #cfcfcf;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     padding: 20px 10px;
-    font-family: var(--fonteTerciaria);
+
+    overflow-y: auto;
 }
 
 .areaLogo {
@@ -145,7 +155,11 @@
 /* --- Conteúdo principal --- */
 
 .conteudoPrincipal {
-    flex: 1;
+    margin-left: 240px;
+
+    width: calc(100% - 240px);
+    height: 100vh;
+
     display: flex;
     flex-direction: column;
 }
@@ -154,18 +168,30 @@
 /* --- Menu superior --- */
 
 .menuSuperior {
-    height: 60px;
-    background: #fff;
+    position: fixed;
+
+    top: 0;
+    left: 260px; /* largura do aside + padding */
+
+    width: calc(100% - 260px);
+
+    background: var(--brancoVdr);
+
     border-bottom: 2px solid #ccc;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
+
+    padding: 15px 25px;
+
+    z-index: 100;
 }
 
 .campoBusca {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -204,7 +230,7 @@
     border-radius: 8px;
     padding: 8px;
     display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
     z-index: 999;
 }
 
@@ -245,6 +271,292 @@
     padding: 10px 25px;
     border-radius: 8px;
     font-weight: bold;
+}
+
+
+.adminProdutosGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 24px 0;
+}
+
+.adminCard {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.adminCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Capa */
+.adminCardCapa {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+.adminCardCapa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.adminCard:hover .adminCardCapa img {
+    transform: scale(1.05);
+}
+
+.semCapa {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-family: var(--fonteTerciaria, serif);
+    font-size: 14px;
+}
+
+/* Badge de tag */
+.adminBadgeTag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: var(--fontePrimaria, sans-serif);
+    letter-spacing: 0.5px;
+}
+
+.badge-oferta {
+    background: #FFF3CD;
+    color: #856404;
+}
+
+.badge-index {
+    background: #CFE2FF;
+    color: #084298;
+}
+
+.badge-destaque {
+    background: #D1E7DD;
+    color: #0A3622;
+}
+
+/* Info */
+.adminCardInfo {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.adminCardTitulo {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.adminCardNome {
+    font-family: var(--fontePrimaria, sans-serif);
+    font-size: 16px;
+    color: #1D1D1D;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.adminCardArtista {
+    font-family: var(--fonteTerciaria, serif);
+    font-size: 13px;
+    color: #7E7E7E;
+    margin-top: 3px;
+}
+
+/* Detalhes */
+.adminCardDetalhes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.adminCardDetalhe {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detalheLabel {
+    font-size: 11px;
+    color: #999;
+    font-family: var(--fonteTerciaria, serif);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detalheValor {
+    font-size: 14px;
+    color: #1D1D1D;
+    font-family: var(--fonteTerciaria, serif);
+    font-weight: 500;
+}
+
+.estoqueAlerta {
+    color: #842029;
+    font-weight: bold;
+}
+
+/* Ações */
+.adminCardAcoes {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #fafafa;
+    border-top: 1px solid #f0f0f0;
+}
+
+.btnAdminEditar {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    background: #1D1D1D;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: var(--fontePrimaria, sans-serif);
+    font-size: 13px;
+    transition: background 0.2s ease;
+}
+
+.btnAdminEditar:hover {
+    background: #7E7E7E;
+}
+
+.btnAdminDeletar {
+    flex: 1;
+    padding: 8px 12px;
+    background: #fff;
+    color: #842029;
+    border: 1px solid #842029;
+    border-radius: 6px;
+    font-family: var(--fontePrimaria, sans-serif);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnAdminDeletar:hover {
+    background: #842029;
+    color: #fff;
+}
+
+.semProdutos {
+    grid-column: 1/-1;
+    text-align: center;
+    font-family: var(--fonteTerciaria, serif);
+    color: #7E7E7E;
+    padding: 40px;
+}
+
+
+.adminBuscaFiltros {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.campoBusca {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.campoBusca input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    font-family: var(--fonteTerciaria, serif);
+    font-size: 15px;
+    background: #fafafa;
+    transition: border 0.2s ease;
+}
+
+.campoBusca input:focus {
+    outline: none;
+    border-color: #1D1D1D;
+    background: #fff;
+}
+
+.btnBusca button {
+    padding: 10px 22px;
+    background: #1D1D1D;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--fontePrimaria, sans-serif);
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnBusca button:hover {
+    background: #7E7E7E;
+}
+
+/* Filtros */
+.filtrosRapidos {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btnFiltro {
+    padding: 6px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    background: #fff;
+    font-family: var(--fonteTerciaria, serif);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #555;
+}
+
+.btnFiltro:hover {
+    border-color: #1D1D1D;
+    color: #1D1D1D;
+}
+
+.btnFiltro.ativo {
+    background: #1D1D1D;
+    color: #fff;
+    border-color: #1D1D1D;
+}
+
+/* Contador */
+.contadorResultados {
+    font-family: var(--fonteTerciaria, serif);
+    font-size: 13px;
+    color: #7E7E7E;
+}
+
+/* Card oculto pelo filtro */
+.adminCard.oculto {
+    display: none;
 }
 
 
@@ -371,6 +683,32 @@
     background-color: #D9D9D9;
 }
 
+.campoDescricao {
+    font-size: 20px;
+    padding: 10px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+
+    width: 100%;
+    min-height: 200px;
+
+    resize: vertical;
+    /* permite aumentar altura */
+    overflow-y: auto;
+    /* scrollbar vertical */
+
+    font-family: inherit;
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+    /* quebra linha */
+    word-wrap: break-word;
+    /* quebra palavras muito grandes */
+    font-size: 18px;
+}
+
 .formsEAddFoto select {
     font-size: 20px;
     padding: 5px;
@@ -420,10 +758,6 @@
     box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
 }
 
-
-
-
-
 .addFoto {
     display: flex;
     flex-direction: column;
@@ -447,6 +781,103 @@
     transform: scale(1.0);
     box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
 }
+
+/* EDITAR PRODUTO */
+
+
+.previewImagem,
+.previewSecundarias {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.previewImagem h3,
+.previewSecundarias h3 {
+    font-family: var(--fonteTerciaria);
+}
+
+.previewImagem img {
+    width: 250px;
+    height: auto;
+
+    border-radius: 8px;
+    border: 2px solid #D9D9D9;
+}
+
+.previewImagem p,
+.imagemSecundaria p {
+    max-width: 250px;
+    word-break: break-all;
+    font-size: 14px;
+    color: var(--pretoVdr);
+}
+
+.previewSecundarias {
+    display: flex;
+    flex-direction: row;
+    width: 50px;
+    gap: 20px;
+}
+
+.imagemSecundaria {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.imagemSecundaria img {
+    width: 120px;
+    height: auto;
+
+    border-radius: 8px;
+    border: 2px solid #D9D9D9;
+}
+
+.listaErros {
+    color: red;
+    margin-bottom: 40px;
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media (max-width: 768px) {
+
+    .formsEAddFoto {
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .formsNovoProduto,
+    .addFoto {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .previewImagem img {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .imagemSecundaria img {
+        width: 100px;
+    }
+
+    .btnAdicionarP {
+        width: 100%;
+    }
+
+    .btnAdicionarP button {
+        width: 100%;
+    }
+}
+
+
+
+/* DASHBOARD */
 
 
 

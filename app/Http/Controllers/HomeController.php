@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         
-        $tagDestaque = Tag::where('name', 'destaque')->first();
+        $tagDestaque = Tag::where('name', 'index')->first();
         $destaques = $tagDestaque
             ? Product::where('tag_id', $tagDestaque->id)->with(['images', 'tag'])->get()
             : collect();
