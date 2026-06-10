@@ -80,8 +80,8 @@
                         </label>
 
                         <label for="telefone">Telefone
-                            <input type="tel" id="telefone" name="telefone" placeholder="TELEFONE" class="inputTelefone"
-                                value="{{ old('telefone') }}">
+                            <input type="text" id="telefone" name="telefone" placeholder="TELEFONE"
+                                class="inputTelefone" value="{{ old('telefone') }}" maxlength="15">
                         </label>
 
                         <div class="campoCom2">
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="buttonOk">
-                            <button type="submit" id="buttonOk" onclick="open.window('/index')">CADASTRAR</button>
+                            <button type="submit" id="buttonOk" onclick="open.window('/')">CADASTRAR</button>
                         </div>
 
                         <div class="anchorUser">
@@ -154,6 +154,18 @@
                     document.getElementById('cidade').value = data.localidade;
                     document.getElementById('estadoInput').value = data.uf;
                 });
+        });
+
+        document.getElementById('telefone')?.addEventListener('input', function () {
+            let d = this.value.replace(/\D/g, '').slice(0, 11);
+
+            if (d.length === 0) { this.value = ''; return; }
+
+            let valor = '(' + d.substring(0, 2);
+            if (d.length > 2) valor += ') ' + d.substring(2, 7);
+            if (d.length > 7) valor += '-' + d.substring(7, 11);
+
+            this.value = valor;
         });
 
     </script>

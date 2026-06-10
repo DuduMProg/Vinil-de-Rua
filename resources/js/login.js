@@ -81,17 +81,5 @@ document.getElementById('cep')?.addEventListener('input', function () {
     this.value = valor;
 });
 
-// ── ViaCEP — preenche endereço automaticamente ──
-document.getElementById('cep')?.addEventListener('blur', function () {
-    const cep = this.value.replace(/\D/g, '');
-    if (cep.length !== 8) return;
 
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.erro) return;
-            document.getElementById('endereco').value    = data.logradouro;
-            document.getElementById('cidade').value      = data.localidade;
-            document.getElementById('estadoInput').value = data.uf;
-        });
-});
+

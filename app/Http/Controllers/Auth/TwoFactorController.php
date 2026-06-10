@@ -13,7 +13,10 @@ class TwoFactorController extends Controller
         if (!$request->session()->has('2fa')) {
             return redirect()->route('login');
         }
-        return view('auth.two-factor');
+
+        $code = $request->session()->get('2fa')['code'] ?? null;
+
+        return view('auth.two-factor', compact('code'));
     }
     public function verify(Request $request)
     {
@@ -43,7 +46,7 @@ class TwoFactorController extends Controller
         $data['expires_at'] = now()->addMinutes(10)->timestamp;
         $request->session()->put('2fa', $data);
         //Mail::to(User::find($data['user_id'])->email)
-          //  ->send(new TwoFactorCodeMail($code));
-        return redirect('/two-factor?code='.$code);
+        //  ->send(new TwoFactorCodeMail($code));
+        return redirect('/two-factor?code=' . $code);
     }
 }

@@ -21,6 +21,14 @@
 
             <h1>Verificação em duas etapas</h1>
             <p>Enviamos um código de 6 dígitos para o seu e-mail.</p>
+
+            {{-- Código visível na tela enquanto não há serviço de e-mail --}}
+            @if(isset($code))
+                <div class="codigoVisivel">
+                    <p>Seu código de acesso:</p>
+                    <strong>{{ $code }}</strong>
+                </div>
+            @endif
             @if (session('status'))
                 <p style="color: green;">{{ session('status') }}</p>
             @endif

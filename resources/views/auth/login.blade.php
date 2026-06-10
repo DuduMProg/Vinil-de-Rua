@@ -63,7 +63,7 @@
                         </label>
 
                         <div class="anchorUser">
-                            <a href="#" id="linkEsqueceuSenha">Esqueci a senha</a>
+                            <a href="{{ route('password.email') }}" id="linkEsqueceuSenha">Esqueci a senha</a>
                         </div>
 
                         <div class="buttonOk">

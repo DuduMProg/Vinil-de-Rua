@@ -1,87 +1,87 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    /* FONTES */
-    --fontePrimaria: 'Caesar Dressing', cursive;
-    --fonteSecundaria: 'Anton', sans-serif;
-    --fonteTerciaria: "Young Serif", serif;
-    --fonteDescricao: "Zilla Slab", serif;
-    --fonteNumeros: "Sahitya", serif;
-    /* CORES E GRADIENTES */
-    --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
-    --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
-    --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    --gradienteCards: #D9D9D9;
-    --brancoVdr: #FDFDFD;
-    --vermelhoVdr: #6C2121;
-    --pretoVdr: #1D1D1D;
-    /* drop shadow discos */
-    --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
+  /* FONTES */
+  --fontePrimaria: 'Caesar Dressing', cursive;
+  --fonteSecundaria: 'Anton', sans-serif;
+  --fonteTerciaria: "Young Serif", serif;
+  --fonteDescricao: "Zilla Slab", serif;
+  --fonteNumeros: "Sahitya", serif;
+  /* CORES E GRADIENTES */
+  --gradienteVertical1: linear-gradient(180deg, rgba(191, 191, 191, 1) 0%, rgba(81, 81, 81, 1) 100%);
+  --gradienteVertical2: linear-gradient(180deg, rgba(81, 81, 81, 1) 0%, rgba(191, 191, 191, 1) 100%);
+  --gradienteCardDiscos: linear-gradient(-41deg, rgba(159, 159, 159, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --gradienteCards: #D9D9D9;
+  --brancoVdr: #FDFDFD;
+  --vermelhoVdr: #6C2121;
+  --pretoVdr: #1D1D1D;
+  /* drop shadow discos */
+  --dropShadowDiscos: box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.404);
 }
 
 #preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: url(https://i.ibb.co/0RkwyFRy/fundo-Login.png);
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url(https://i.ibb.co/0RkwyFRy/fundo-Login.png);
+  background-size: cover;
+  background-position: center;
 }
 
 .autenticacao {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .autenticacao label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 
 .code-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .code-input {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    font-size: 24px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 
-.formCodigo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.formCodigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .formCodigo button {
@@ -128,54 +128,54 @@ main {
 
 
 .containerCadastro {
-    width: 100%;
-    min-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: left;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 
-    gap: 100px;
+  gap: 100px;
 }
 
 .imgCadastro {
-    width: 45%;
-    height: 800px;
+  width: 45%;
+  height: 800px;
 
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imgCadastro img:nth-child(1) {
-    width: 848px;
-    height: 1024px;
+  width: 848px;
+  height: 1024px;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: contain;
+  object-fit: contain;
 }
 
 
 .imgCadastro img:nth-child(2) {
-    width: 783px;
-    height: 956px;
+  width: 783px;
+  height: 956px;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: contain;
+  object-fit: contain;
 }
 
 .imgCadastro img:nth-child(3) {
-    width: 729px;
-    height: 912px;
+  width: 729px;
+  height: 912px;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: cover;
+  object-fit: cover;
 
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 
@@ -183,128 +183,128 @@ main {
 
 
 .logoEmsg {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 20px;
 }
 
 .logoPerfil {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
 }
 
 .logoPerfil img {
-    width: 100px;
-    height: 102px;
+  width: 100px;
+  height: 102px;
 }
 
 .logoPerfil h1 {
-    font-family: var(--fonteSecundaria);
-    font-size: 42px;
-    line-height: 50px;
-    letter-spacing: 2px;
+  font-family: var(--fonteSecundaria);
+  font-size: 42px;
+  line-height: 50px;
+  letter-spacing: 2px;
 }
 
 .mensagemBnv {
-    font-family: var(--fonteSecundaria);
-    font-size: 24px;
-    font-weight: normal;
-    letter-spacing: 2px;
-    text-decoration: underline;
-    text-align: center;
+  font-family: var(--fonteSecundaria);
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-decoration: underline;
+  text-align: center;
 }
 
 .infoUser {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: center;
-    gap: 15px;
-    width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 15px;
+  width: 450px;
 }
 
 .infoUser .inputSenha input {
-    border: none;
+  border: none;
 }
 
 .infoUser .inputSenha img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .infoUser input {
-    border-radius: 10px;
-    padding: 10px 10px;
-    background-color: #DBDBDB;
-    border: none;
-    width: 445px;
+  border-radius: 10px;
+  padding: 10px 10px;
+  background-color: #DBDBDB;
+  border: none;
+  width: 445px;
 }
 
 .infoUser label {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .campoCom2 {
-    display: flex;
-    gap: 95px;
-    justify-content: center;
+  display: flex;
+  gap: 95px;
+  justify-content: center;
 }
 
 .campoCom2 input {
-    width: 175px;
+  width: 175px;
 }
 
 .infoUser .placeholder {
-    padding: 10px;
+  padding: 10px;
 }
 
 
 
 .buttonLogin {
-    display: flex;
-    margin-top: 22px;
-    margin-bottom: 11px;
-    gap: 25px;
+  display: flex;
+  margin-top: 22px;
+  margin-bottom: 11px;
+  gap: 25px;
 }
 
 
 .buttonOk button {
-    font-family: var(--fontePrimaria);
-    padding: 10px;
-    cursor: pointer;
-    color: #FFFFFF;
-    background-color: #000000;
-    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.404);
-    border-radius: 5px;
-    border: none;
+  font-family: var(--fontePrimaria);
+  padding: 10px;
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: #000000;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.404);
+  border-radius: 5px;
+  border: none;
 }
 
 .anchorUser a {
-    position: relative;
-    text-decoration: none;
-    color: #1b1b1b;
-    font-size: 20px;
-    cursor: pointer;
-    display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #1b1b1b;
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .anchorUser a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #1b1b1b;
-    transition: width 0.3s ease-in-out;
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1b1b1b;
+  transition: width 0.3s ease-in-out;
 }
 
 .anchorUser a:hover:after {
-    width: 100%;
+  width: 100%;
 }
 
 
@@ -315,57 +315,83 @@ main {
 /* LOGIN USER */
 
 .containerLogin {
-    width: 100%;
-    min-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
 
-    display: flex;
-    align-items: start;
-    justify-content: right;
+  display: flex;
+  align-items: start;
+  justify-content: right;
 
-    gap: 100px;
+  gap: 100px;
 }
 
 .login {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 .imgLogin {
-    width: 843px;
-    height: 100vh;
+  width: 843px;
+  height: 100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imgLogin img:nth-child(1) {
-    width: 843px;
-    height: 100vh;
+  width: 843px;
+  height: 100vh;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: contain;
+  object-fit: contain;
 }
 
 
 .imgLogin img:nth-child(2) {
-    width: 783px;
-    height: 956px;
+  width: 783px;
+  height: 956px;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: contain;
+  object-fit: contain;
 }
 
 .imgLogin img:nth-child(3) {
-    width: 729px;
-    height: 912px;
+  width: 729px;
+  height: 912px;
 
-    position: absolute;
+  position: absolute;
 
-    object-fit: cover;
+  object-fit: cover;
 
-    border-radius: 6px;
+  border-radius: 6px;
+}
+
+
+/* ── Recuperar senha ── */
+.instrucaoSenha {
+  font-family: var(--fonteTerciaria);
+  font-size: 15px;
+  color: #7E7E7E;
+  margin-bottom: 20px;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.alertaSucesso {
+  background: #EAF3DE;
+  border: 1px solid #C0DD97;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  max-width: 445px;
+}
+
+.alertaSucesso p {
+  font-family: var(--fonteTerciaria);
+  font-size: 14px;
+  color: #27500A;
 }
 
 /* ==================================================
@@ -384,9 +410,20 @@ main {
     height: 600px;
   }
 
-  .imgCadastro img:nth-child(1) { width: 560px; height: 700px; }
-  .imgCadastro img:nth-child(2) { width: 520px; height: 650px; }
-  .imgCadastro img:nth-child(3) { width: 480px; height: 620px; }
+  .imgCadastro img:nth-child(1) {
+    width: 560px;
+    height: 700px;
+  }
+
+  .imgCadastro img:nth-child(2) {
+    width: 520px;
+    height: 650px;
+  }
+
+  .imgCadastro img:nth-child(3) {
+    width: 480px;
+    height: 620px;
+  }
 
   .infoUser {
     width: 380px;
@@ -414,9 +451,19 @@ main {
     width: 480px;
   }
 
-  .imgLogin img:nth-child(1) { width: 480px; }
-  .imgLogin img:nth-child(2) { width: 440px; height: 700px; }
-  .imgLogin img:nth-child(3) { width: 400px; height: 680px; }
+  .imgLogin img:nth-child(1) {
+    width: 480px;
+  }
+
+  .imgLogin img:nth-child(2) {
+    width: 440px;
+    height: 700px;
+  }
+
+  .imgLogin img:nth-child(3) {
+    width: 400px;
+    height: 680px;
+  }
 
 }
 

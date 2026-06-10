@@ -168,12 +168,8 @@
 /* --- Menu superior --- */
 
 .menuSuperior {
-    position: fixed;
 
-    top: 0;
-    left: 260px; /* largura do aside + padding */
 
-    width: calc(100% - 260px);
 
     background: var(--brancoVdr);
 
