@@ -192,7 +192,9 @@
 
 
                     <a class="cardDisco {{ $p->stock <= 0 ? 'cardDisco--esgotado' : '' }}"
-                        href="{{ $p->stock > 0 ? route('product.show', $p->id) : '#' }}">
+                        href="{{ $p->stock > 0 ? route('product.show', $p->id) : '#' }}"
+                        data-preco="{{ $p->tem_desconto ? number_format($p->preco_com_desconto, 2, '.', '') : number_format($p->price, 2, '.', '') }}"
+                        data-categoria="{{ strtolower($p->category->name) }}">
 
                         @if($cover)
                             <img src="{{ $cover->path }}" alt="Capa de {{ $p->name }}" class="imgCard">

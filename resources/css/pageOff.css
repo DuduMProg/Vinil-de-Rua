@@ -50,7 +50,7 @@ header {
   align-items: center;
   padding: 0 25px;
   justify-content: space-between;
-  background-color: #7E7E7E;
+  background-color: var(--pretoVdr);
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.404);
   position: fixed;
   top: 0;
@@ -462,73 +462,132 @@ header.scrolled .icons img {
   filter: brightness(0);
 }
 
-.fundoPrincipal {
-  background: var(--gradienteVertical2);
 
+/* ══════════════════════════════════════════
+   PÁGINA DE OFERTAS — Identidade Dark Urbana
+   ══════════════════════════════════════════ */
+
+.fundoPrincipal {
+  background: #111111;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
-.bannerBlackFriday {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0 150px;
+/* Textura grain sutil no fundo */
+.fundoPrincipal::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
 
-  padding-top: 150px;
+/* ── Banner topo ── */
+.bannerBlackFriday {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 160px 60px 60px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bannerBlackFriday::after {
+  content: 'OFERTAS';
+  position: absolute;
+  font-family: var(--fonteSecundaria, 'Anton', sans-serif);
+  font-size: clamp(120px, 20vw, 280px);
+  color: rgba(255, 255, 255, 0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -4px;
+  z-index: 0;
+}
+
+.anuncioBlackFriday {
+  position: relative;
+  z-index: 1;
 }
 
 .anuncioBlackFriday h1 {
   font-family: var(--fontePrimaria);
-  font-size: 64px;
+  font-size: clamp(32px, 5vw, 64px);
+  color: #ffffff;
   margin: 0;
   line-height: 1.1;
-  text-align: left;
-  margin-right: 40px;
+  text-align: center;
 }
 
+.anuncioBlackFriday h1 span {
+  color: #DE3434;
+}
+
+/* Pill de desconto */
+.bannerPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #DE3434;
+  color: #fff;
+  font-family: var(--fontePrimaria);
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 6px 18px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+/* ── Layout filtro + catálogo ── */
+.filtroECat {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 40px;
+  margin: 40px 50px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar de filtros ── */
 .sidebarFiltro {
-
-  width: 280px;
-
-  min-width: 280px;
-
-  height: fit-content;
-
+  width: 260px;
+  min-width: 260px;
   position: sticky;
-
-  top: 140px;
-
-  background: #d8d8d8;
-
-  border: 2px solid #000;
-
-  border-radius: 10px;
-
-  padding: 25px;
+  top: 130px;
+  background: #1A1A1A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
 }
 
 .filtroTitulo {
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
-  margin-bottom: 25px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .filtroTitulo h2 {
-
-  font-family: "Caesar Dressing";
-
-  font-size: 28px;
+  font-family: var(--fontePrimaria);
+  font-size: 24px;
+  color: #fff;
 }
 
 .filtroTitulo .vinyl {
-  width: 40px;
+  width: 36px;
   animation: spin 5s linear infinite;
-
-  transform-origin: center center;
+  filter: invert(1);
+  opacity: 0.7;
 }
 
 @keyframes spin {
@@ -542,241 +601,273 @@ header.scrolled .icons img {
 }
 
 .grupoFiltro {
-
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
-
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .grupoFiltro h3 {
-
   font-family: var(--fontePrimaria);
-
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
   margin-bottom: 8px;
 }
 
-.grupoFiltro input {
-
-  width: 18px;
-
-  height: 18px;
-
-  accent-color: #222;
-  border: 5px solid #000000;
-  cursor: pointer;
-}
-
-.grupoFiltro input:hover {
-  transform: scale(1.1);
-
-}
-
-
-.filtroECat {
-
+.grupoFiltro label {
   display: flex;
-
-  gap: 50px;
-
-  margin: 50px;
-}
-
-.catalogoOff {
-  display: grid;
-  grid-template-columns: repeat(4, 224px);
-  gap: 150px;
-  justify-content: center;
-}
-
-.campoFiltro {
-  font-family: var(--fontePrimaria);
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  background-color: var(--gradienteCards);
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid #000000;
-  display: none;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--fonteTerciaria, serif);
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.campoFiltro .valores {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 30px;
+.grupoFiltro label:hover {
+  color: #fff;
+}
+
+.grupoFiltro input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #DE3434;
+  cursor: pointer;
 }
 
 .btnsfiltro {
   display: flex;
-  gap: 20px;
-
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.sidebarFiltro button {
-  border-radius: 3px;
-  border: 1px solid #000000;
-  padding: 4px 14px;
-  font-size: 14px;
+.btnLimpar {
+  flex: 1;
+  padding: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px;
   font-family: var(--fontePrimaria);
+  font-size: 13px;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+  transition: all 0.2s ease;
 }
 
-.sidebarFiltro button:hover {
-  color: var(--pretoVdr);
-  border: 2.2px solid #ffffff;
-  transform: scale(1.0);
-  box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+.btnLimpar:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #fff;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
+.btnFiltrar {
+  flex: 1;
+  padding: 8px;
+  background: #DE3434;
+  color: #fff;
+  border: none !important;
+  border-radius: 8px;
+  font-family: var(--fontePrimaria);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
+.btnFiltrar:hover {
+  background: #c0392b;
+  box-shadow: none !important;
+  transform: none !important;
+}
 
+/* Botão fechar filtro mobile */
+.btnFecharFiltro button {
+  background: transparent;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ── Catálogo ── */
+.catalogoOff {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 224px));
+  gap: 24px;
+  justify-content: start;
+}
+
+/* ── Cards ── */
 .cardDisco {
   position: relative;
-  /* necessário para posicionar os ícones */
   width: 224px;
-  height: 253px;
-  background: var(--gradienteCardDiscos);
+  height: 280px;
+  background: #1A1A1A;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   font-family: var(--fontePrimaria);
-  border-radius: 5px;
-  padding: 0px 7px;
+  border-radius: 12px;
+  padding: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
-  color: inherit;
+  color: #fff;
 }
 
-/* Card esgotado: opacidade reduzida, cursor bloqueado */
+.cardDisco:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+}
+
 .cardDisco--esgotado {
-  opacity: 0.55;
+  opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
 }
 
+/* Imagem do card */
 .cardDisco .imgCard {
-  cursor: pointer;
-  padding-top: 6px;
-  padding-left: 7px;
-  padding-right: 9px;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: #222;
 }
 
-.cardDisco .imgCard>img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
+.cardDisco .imgCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
+.cardDisco:hover .imgCard img {
+  transform: scale(1.05);
+}
+
+/* Info */
 .infoDisco {
-  font-size: 15px;
-  padding-bottom: 40px;
-  /* espaço para os ícones não sobreporem o texto */
+  padding: 10px 10px 36px;
+  flex: 1;
 }
 
-.infoDisco .precoDisco {
-  padding-top: 4px;
-  font-weight: bold;
-  font-size: 20px;
+.nomeDisco {
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.precoDisco {
+  margin-top: 6px;
 }
 
 .precoOriginal {
-  color: #7E7E7E;
-  font-size: 12px;
-  text-decoration-line: line-through;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  text-decoration: line-through;
+  font-family: var(--fonteTerciaria, serif);
 }
 
 .precoOferta {
-  color: #e40000;
-  font-size: 20px;
+  color: #DE3434;
+  font-size: 18px;
+  font-family: var(--fontePrimaria);
 }
 
-/* Ícones posicionados nos cantos inferiores */
+/* Ações */
 .cardAcoes {
   position: absolute;
   bottom: 8px;
-  left: 7px;
-  right: 7px;
+  left: 10px;
+  right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.cardAcoes .cart,
-.cardAcoes .favorite {
-  display: flex;
-  align-items: center;
-}
-
-.cardAcoes .cart form,
-.cardAcoes .favorite form {
-  display: flex;
-}
-
-/* Botões dos ícones */
 .addCarrinho,
 .addFav {
   border: none;
-  background: transparent;
-  padding: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  transition: transform 0.15s ease, background 0.15s ease;
+  border-radius: 6px;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .addCarrinho:hover,
 .addFav:hover {
-  transform: scale(1.2);
-  background: rgba(0, 0, 0, 0.06);
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.1);
 }
 
 .addCarrinho:disabled,
 .addFav:disabled {
-  opacity: 0.3;
+  opacity: 0.2;
   cursor: not-allowed;
 }
 
-.cardAcoes .cart img,
-.cardAcoes .favorite img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+.cardAcoes img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
 }
 
 .cardAcoes .favorite img:hover {
   content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
+  filter: none;
 }
 
 .cardAcoes .cart img:hover {
   content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
+  filter: none;
 }
 
-.cardDisco {
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: transform 0.15s ease, box-shadow 0.25s ease;
+/* ── Botão filtro mobile ── */
+.btnFiltroMobile {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 500;
+  background: #DE3434;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-family: var(--fontePrimaria);
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(222, 52, 52, 0.4);
 }
 
-.cardDisco:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
-  /* o transform é sobrescrito pelo JS no mousemove */
+/* ── Overlay filtro mobile ── */
+.overlayFiltro {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 400;
+}
+
+.overlayFiltro.ativo {
+  display: block;
 }
 
 
@@ -986,13 +1077,14 @@ footer {
   /* ---------- Banner ---------- */
 
   .bannerBlackFriday {
-    margin: 0 40px;
-    padding-top: 130px;
+    padding: 120px 20px 40px;
   }
 
-  .anuncioBlackFriday h1 {
-    font-size: 48px;
+  .filtroECat {
+    margin: 20px 16px;
+    gap: 20px;
   }
+
 
   /* ---------- Layout filtro + catálogo ---------- */
 
@@ -1003,22 +1095,36 @@ footer {
 
   /* Sidebar de filtro fica menor mas ainda visível */
   .sidebarFiltro {
-    width: 220px;
-    min-width: 220px;
-    padding: 18px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 500;
+    border-radius: 0;
+    transition: left 0.3s ease;
   }
+
+  .sidebarFiltro.aberto {
+    left: 0;
+  }
+
+  .btnFiltroMobile {
+    display: flex;
+  }
+
 
   /* Catálogo passa de 4 para 3 colunas */
   .catalogoOff {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    flex: 1;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .cardDisco {
     width: 100%;
-    height: auto;
   }
+
 
   /* ---------- Footer ---------- */
 
@@ -1221,7 +1327,7 @@ footer {
     width: 100%;
   }
 
-   .cardDisco {
+  .cardDisco {
     width: 100%;
     height: auto;
     padding: 8px;
@@ -1382,12 +1488,81 @@ footer {
     padding: 2px 6px;
   }
 
+  /* ---------- Layout: sidebar vira drawer sobreposto ---------- */
+
+  .filtroECat {
+    flex-direction: column;
+    margin: 16px 15px;
+    gap: 0;
+    border: none;
+  }
+
+  /* Sidebar some do fluxo e vira drawer deslizante pela esquerda */
+  .sidebarFiltro {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    z-index: 1001;
+    transition: left 0.3s ease;
+    padding: 30px 20px;
+  }
+
+  /* Classe adicionada via JS para abrir */
+  .sidebarFiltro.aberto {
+    left: 0;
+  }
+
+  /* Overlay escuro atrás do drawer */
+  .overlayFiltro {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .overlayFiltro.ativo {
+    display: block;
+  }
+
+  /* Botão fechar dentro do drawer */
+  .btnFecharFiltro {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  .btnFecharFiltro button {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    font-family: "Caesar Dressing", cursive;
+  }
+
   /* ---------- Footer ---------- */
 
   .footerLogo img {
     width: 90px;
     height: 90px;
   }
+
+  .socialLogo img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
 
   .footerLogo h1 {
     font-size: 28px;

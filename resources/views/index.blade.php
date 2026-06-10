@@ -41,12 +41,12 @@
         </div>
 
         <div class="icons">
-            <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
-
-            <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
-                style="cursor:pointer">
-
             @auth
+                <img src="https://i.ibb.co/ynVyBhq2/favorite.png" alt="favorite" id="btnFavorite" style="cursor:pointer">
+
+                <img src="https://i.ibb.co/JRf4dtY8/shopping-cart.png" alt="shopping-cart" id="btnCart"
+                    style="cursor:pointer">
+
                 @if(auth()->user()->role === 'admin')
                     <a href="/admin/dashboard">
                         <img src="https://i.ibb.co/4RGqW28z/account-circle.png" alt="account-circle">
@@ -126,38 +126,57 @@
 
             {{-- Card de Ofertas --}}
             <div class="cardOff" id="cardOff">
-                <button class="closeCard" id="closeCard">x</button>
 
-                <div class="linkEImg">
-                    <div class="offEimg">
-                        <h1>COM 15% OFF, LIMITADO!</h1>
-                        <a href="/tag/show/1" class="offDisco">VEJA MAIS AQUI</a>
+                {{-- Botão fechar --}}
+                <button class="closeCard" id="closeCard">✕</button>
+
+                {{-- Header da seção --}}
+
+                <div class="bannerBlackFriday">
+                    <div class="anuncioBlackFriday">
+                        <div class="bannerPill">TEMPO LIMITADO</div>
+                        <h1><span>15% OFF</span> EM DISCOS<br>SELECIONADOS</h1>
                     </div>
-                    <img src="https://i.ibb.co/yckTbjhV/paleta.png" alt="">
                 </div>
 
+                {{-- Lista de discos --}}
                 <div class="listaDiscos">
                     @forelse($ofertas as $o)
                         @php $cover = $o->images->first() @endphp
-                        <div class="cardDiscoOff">
-                            @if($cover)
-                                <img src="{{ $cover->path }}" alt="Capa {{ $o->name }}" class="imgCard">
-                            @endif
-                            <div class="infoDisco">
-                                <p class="nomeDisco">{{ $o->name }} - {{ $o->artist }}</p>
-                                <div class="precoDisco">
 
-                                    <p class="precoOferta">
-                                        R$ {{ number_format($o->preco_com_desconto, 2, ',', '.') }}!
-                                    </p>
+                        <a href="/product/{{ $o->id }}" class="cardDiscoOff">
 
+                            <div class="cardDiscoOffCapa">
+                                @if($cover)
+                                    <img src="{{ $cover->path }}" alt="{{ $o->name }}">
+                                @else
+                                    <div class="semCapaOff">—</div>
+                                @endif
+
+                                {{-- Selo de desconto --}}
+                                <span class="seloDesconto">-15%</span>
+                            </div>
+
+                            <div class="cardDiscoOffInfo">
+                                <p class="offNome">{{ Str::limit($o->name, 22) }}</p>
+                                <p class="offArtista">{{ $o->artist }}</p>
+                                <div class="offPrecos">
+                                    <span class="offPrecoOriginal">
+                                        R$ {{ number_format($o->price, 2, ',', '.') }}
+                                    </span>
+                                    <span class="offPrecoFinal">
+                                        R$ {{ number_format($o->preco_com_desconto, 2, ',', '.') }}
+                                    </span>
                                 </div>
                             </div>
-                        </div>
+
+                        </a>
+
                     @empty
-                        <p>Nenhuma oferta no momento.</p>
+                        <p class="semOfertas">Nenhuma oferta no momento.</p>
                     @endforelse
                 </div>
+
             </div>
 
             {{-- Catalogo de Destaques --}}
@@ -229,21 +248,37 @@
 
         {{-- Explorar Categorias --}}
         <section class="explorarCategorias">
-            <h1>Explorar por categorias</h1>
+
+            <h1>Explorar Categorias</h1>
+
             <div class="categorias">
+
                 @forelse($categories as $c)
+
                     <a class="cardCategorias" href="{{ route('category.show', $c->id) }}">
+
                         @if($c->banner)
-                            <img src="{{ $c->banner }}" alt="Imagem categoria {{ $c->name }}">
+                            <img src="{{ $c->banner }}" class="categoriaPreview">
                         @endif
-                        <span>
-                            <p>{{ strtoupper($c->name) }}</p>
-                        </span>
+
+                        <div class="iconeCategoria">
+
+                            <img src="https://i.ibb.co/r2nBVtd4/vinil-Rodando.png" class="vinylCategoria">
+
+                            <h3>{{ strtoupper($c->name) }}</h3>
+                        </div>
+
+
                     </a>
+
                 @empty
+
                     <p>Nenhuma categoria cadastrada.</p>
+
                 @endforelse
+
             </div>
+
         </section>
 
         <footer id="contato">

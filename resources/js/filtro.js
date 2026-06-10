@@ -1,74 +1,57 @@
 const btnFiltrar = document.querySelector(".btnFiltrar");
-const btnLimpar = document.querySelector(".btnLimpar");
-
-const cards = document.querySelectorAll(".cardDisco");
-const filtrosPreco = document.querySelectorAll(".filtroPreco");
+const btnLimpar  = document.querySelector(".btnLimpar");
+const cards      = document.querySelectorAll(".cardDisco");
+const filtrosPreco    = document.querySelectorAll(".filtroPreco");
+const filtrosCategoria = document.querySelectorAll(".filtroCategoria");
 
 btnFiltrar.addEventListener("click", () => {
 
-    const selecionados = [...filtrosPreco]
+    const precosAtivos = [...filtrosPreco]
         .filter(cb => cb.checked)
         .map(cb => Number(cb.value));
 
-    // nenhum filtro marcado
-    if (selecionados.length === 0) {
-
-        cards.forEach(card => {
-            card.style.display = "flex";
-        });
-
-        return;
-    }
+    const categoriasAtivas = [...filtrosCategoria]
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase().trim());
 
     cards.forEach(card => {
 
-        const preco = Number(card.getAttribute("preco"));
+        const preco      = parseFloat(card.getAttribute("data-preco")) || 0;
+        const categoria  = (card.getAttribute("data-categoria") || "").toLowerCase().trim();
 
-        let mostrar = false;
+        // ── Filtro de preço ──
+        let passaPreco = true;
+        if (precosAtivos.length > 0) {
+            passaPreco = precosAtivos.some(valor => {
+                if (valor === 100) return preco <= 100;
+                if (valor === 200) return preco > 100 && preco <= 200;
+                if (valor === 300) return preco > 200 && preco <= 300;
+                if (valor === 400) return preco > 300 && preco <= 400;
+                return false;
+            });
+        }
 
-        selecionados.forEach(valor => {
+        // ── Filtro de categoria ──
+        let passaCategoria = true;
+        if (categoriasAtivas.length > 0) {
+            passaCategoria = categoriasAtivas.includes(categoria);
+        }
 
-            if (valor === 100 && preco <= 100) {
-                mostrar = true;
-            }
-
-            if (valor === 200 && preco > 100 && preco <= 200) {
-                mostrar = true;
-            }
-
-            if (valor === 300 && preco > 200 && preco <= 300) {
-                mostrar = true;
-            }
-            if (valor === 400 && preco > 300 && preco <= 400) {
-                mostrar = true;
-            }
-
-        });
-
-        card.style.display = mostrar ? "flex" : "none";
-
+        card.style.display = (passaPreco && passaCategoria) ? "flex" : "none";
     });
-
 });
+
 btnLimpar.addEventListener("click", () => {
-
-    filtrosPreco.forEach(cb => {
-        cb.checked = false;
-    });
-
-    cards.forEach(card => {
-        card.style.display = "flex";
-    });
-
+    filtrosPreco.forEach(cb => cb.checked = false);
+    filtrosCategoria.forEach(cb => cb.checked = false);
+    cards.forEach(card => card.style.display = "flex");
 });
 
-
-// FILTRO MOBILE
-
-const btnAbrir   = document.getElementById('btnAbrirFiltro');
-const btnFechar  = document.getElementById('btnFecharFiltro');
-const sidebar    = document.getElementById('sidebarFiltro');
-const overlay    = document.getElementById('overlayFiltro');
+// ── Filtro mobile ──
+const btnAbrir  = document.getElementById('btnAbrirFiltro');
+const btnFechar = document.getElementById('btnFecharFiltro');
+const sidebar   = document.getElementById('sidebarFiltro');
+const overlay   = document.getElementById('overlayFiltro');
 
 btnAbrir.addEventListener('click', () => {
     sidebar.classList.add('aberto');

@@ -508,7 +508,10 @@ header.scrolled .icons img {
 
 /* info do usuario */
 
-
+.areaUsuario {
+  border: none;
+  background: none;
+}
 
 .infoUser {
   display: flex;
@@ -844,6 +847,8 @@ section .vistoRecente {
 }
 
 .cardDisco {
+  position: relative;
+  /* necessário para posicionar os ícones */
   width: 224px;
   height: 253px;
   background: var(--gradienteCardDiscos);
@@ -855,10 +860,15 @@ section .vistoRecente {
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
-.cardDisco:hover {
-  transform: scale(1.03);
+/* Card esgotado: opacidade reduzida, cursor bloqueado */
+.cardDisco--esgotado {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .cardDisco .imgCard {
@@ -880,7 +890,8 @@ section .vistoRecente {
 
 .infoDisco {
   font-size: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  /* espaço para os ícones não sobreporem o texto */
 }
 
 .infoDisco .precoDisco {
@@ -889,50 +900,78 @@ section .vistoRecente {
   font-size: 20px;
 }
 
+.precoOriginal {
+  color: #7E7E7E;
+  font-size: 12px;
+  text-decoration-line: line-through;
+}
 
-.preçoEFavDisco {
+.precoOferta {
+  color: #e40000;
+  font-size: 20px;
+}
+
+/* Ícones posicionados nos cantos inferiores */
+.cardAcoes {
+  position: absolute;
+  bottom: 8px;
+  left: 7px;
+  right: 7px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 7px;
 }
 
-.preçoEFavDisco button {
-  border-radius: 3px;
-  border: 1px solid #000000;
-  padding: 2px 12px;
-  font-family: var(--fontePrimaria);
+.cardAcoes .cart,
+.cardAcoes .favorite {
+  display: flex;
+  align-items: center;
+}
+
+.cardAcoes .cart form,
+.cardAcoes .favorite form {
+  display: flex;
+}
+
+/* Botões dos ícones */
+.addCarrinho,
+.addFav {
+  border: none;
+  background: transparent;
+  padding: 4px;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-.preçoEFavDisco button:hover {
-  background-color: #acacac;
-  color: #ffffff;
-  border: 2.2px solid #ffffff;
-  transform: scale(1.0);
-  box-shadow: 12px 12px 12px 2px rgba(0, 0, 0, 0.2);
+.addCarrinho:hover,
+.addFav:hover {
+  transform: scale(1.2);
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: none;
 }
 
-.preçoEFavDisco .favorite img {
+.addCarrinho:disabled,
+.addFav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cardAcoes .cart img,
+.cardAcoes .favorite img {
   width: 20px;
   height: 20px;
-  transition: color 0.8s ease-in-out;
   cursor: pointer;
 }
 
-.preçoEFavDisco .cart img {
-  width: 20px;
-  height: 20px;
-  transition: color 0.8s ease-in-out;
-  cursor: pointer;
-}
-
-.preçoEFavDisco .favorite img:hover {
+.cardAcoes .favorite img:hover {
   content: url("https://i.ibb.co/b5vJrSGP/favorite-Red.png");
 }
 
-.preçoEFavDisco .cart img:hover {
+.cardAcoes .cart img:hover {
   content: url("https://i.ibb.co/DPg9f9c3/add-shopping-cart-3.png");
 }
 

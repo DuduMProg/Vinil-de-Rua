@@ -20,7 +20,6 @@ use App\Http\Controllers\StripeWebhookController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/product', [ProductController::class, 'index']);
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
 
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');

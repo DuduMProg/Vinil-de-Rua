@@ -602,98 +602,230 @@ main {
   margin-right: auto;
 }
 
-.cardOff .closeCard {
-  top: 10px;
-  right: 10px;
-  background-color: #838383;
-  border: none;
-  border-radius: 255px;
-  font-size: 26px;
-  cursor: pointer;
-}
 
+/* PARTE ALI DAS OFERTAS */
 
-.offECatalogo .cardOff {
-  margin-top: 100px;
-  background-color: var(--gradienteCards);
-  border: 1.5px solid #000000;
+.cardOff {
+  position: relative;
+  background: var(--pretoVdr);
+  border-radius: 16px;
+  padding: 24px 20px;
+  width: 300px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: auto;
-  height: 510px;
-}
-
-.cardDiscoOff {
-  border: 2px solid none;
-  background: var(--gradienteCardDiscos);
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   font-family: var(--fontePrimaria);
-  border-radius: 5px;
-  padding: 0px 7px;
-  overflow: hidden;
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s ease;
+  margin-top: 100px;
+}
+
+/* ── Botão fechar ── */
+.cardOff .closeCard {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 14px;
   cursor: pointer;
-  margin-bottom: 40px;
-}
-
-.cardDiscoOff .offDisco {
-  font-size: 25px;
-  color: #ff0000;
-}
-
-.offECatalogo .cardOff .offEimg {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
-  gap: 5px;
-  font-family: var(--fontePrimaria);
+  transition: background 0.2s ease;
+  z-index: 2;
 }
 
-.cardOff {
-  font-family: var(--fontePrimaria);
+.cardOff .closeCard:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
-
-.offEimg {
-  padding: 0;
+/* ── Header ── */
+.offHeader {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  gap: 6px;
 }
 
-.offEimg a {
+.bannerBlackFriday{
+  color: var(--brancoVdr);
+}
+
+.offBadge {
   display: inline-block;
-  margin: 0;
-  text-decoration: underline;
-  text-align: left;
-  color: #241f70;
+  background: #DE3434;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  width: fit-content;
 }
 
-.offEimg>* {
-  align-self: flex-start;
+.offTitulo {
+  font-family: var(--fonteSecundaria, 'Anton', sans-serif);
+  font-size: 48px;
+  color: var(--brancoVdr);
+  line-height: 1;
+  letter-spacing: -1px;
 }
 
-.offEimg h1 {
-  font-size: 30px;
+.offSubtitulo {
+  font-family: var(--fonteTerciaria, serif);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.linkEImg {
-  display: flex;
-  gap: 20px;
+.offVerMais {
+  display: inline-block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: border-color 0.2s ease;
 }
 
+.offVerMais:hover {
+  border-color: #fff;
+}
+
+/* ── Lista de discos ── */
 .cardOff .listaDiscos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   overflow-y: auto;
+  max-height: 340px;
+  padding-right: 4px;
   scrollbar-width: thin;
-  scrollbar-color: #4E4E4E #989898;
-  padding-right: 50px;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
+
+.cardOff .listaDiscos::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cardOff .listaDiscos::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* ── Card do disco ── */
+.cardDiscoOff {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.cardDiscoOff:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+/* Capa */
+.cardDiscoOffCapa {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cardDiscoOffCapa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.semCapaOff {
+  width: 100%;
+  height: 100%;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+/* Selo -15% */
+.seloDesconto {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #DE3434;
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 4px 0 0 0;
+}
+
+/* Info do disco */
+.cardDiscoOffInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.offNome {
+  font-family: var(--fontePrimaria);
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.offArtista {
+  font-family: var(--fonteTerciaria, serif);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.offPrecos {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 2px;
+}
+
+.offPrecoOriginal {
+  font-family: var(--fonteTerciaria, serif);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: line-through;
+}
+
+.offPrecoFinal {
+  font-family: var(--fontePrimaria);
+  font-size: 15px;
+  color: #DE3434;
+}
+
+.semOfertas {
+  font-family: var(--fonteTerciaria, serif);
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
 
 
 .catalogoIndex {
@@ -846,73 +978,179 @@ main {
 }
 
 
+/* EXPLORAR CATEGORIA */
+
 .explorarCategorias {
+
+  width: 100%;
+
+  padding: 100px 0;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+
   margin-bottom: 100px;
 }
 
 .explorarCategorias h1 {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 100px;
+
   font-family: var(--fontePrimaria);
-  font-size: 32px;
-  color: #ffffff;
+
+  font-size: 42px;
+
+  color: white;
+
   font-weight: 100;
+
+  margin-bottom: 60px;
 }
 
 .categorias {
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-}
 
-.categorias img {
-  width: 500px;
-  height: 150px;
-  border-radius: 10px;
+  display: grid;
+
+  grid-template-columns: repeat(3, 260px);
+
+  gap: 30px;
+
+  justify-content: center;
 }
 
 .cardCategorias {
+
   position: relative;
-  display: inline-block;
-  transition: 0.2s ease-in;
+
+  width: 260px;
+  height: auto;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, .08);
+
+  backdrop-filter: blur(50px);
+
+  border: 1px solid rgba(255, 255, 255, .15);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 20px;
+
+  transition: .3s;
+
+  text-decoration: none;
 }
 
-.cardCategorias p {
-  color: var(--pretoVdr);
-}
+.cardCategorias h3 {
 
-.categorias button {
-  border: none;
-  background-color: none;
-  border-radius: 10px;
-  cursor: pointer;
+  position: relative;
 
+  z-index: 3;
+
+  color: white;
+
+  font-family: var(--fontePrimaria);
+
+  font-size: 24px;
+
+  font-weight: 100;
 }
 
 .cardCategorias:hover {
-  transform: scale(1.08);
-  box-shadow: var(--dropShadowDiscos);
+
+  transform: translateY(-8px);
+
+  border-color: rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.08),
+    0 0 30px rgba(255, 255, 255, 0.05);
 }
 
+.iconeCategoria {
+  width: 90px;
+  height: 90px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.cardCategorias p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #838383;
+  position: relative;
+  z-index: 3;
+}
+
+/* Ícone padrão */
+.iconeCategoria img {
+  width: 70px;
+  height: 70px;
+
+  object-fit: contain;
+
+  position: relative;
+  z-index: 3;
+}
+
+/* Vinil girando */
+.vinylCategoria {
+  width: 70px !important;
+  height: 70px !important;
+
+  animation: spin 6s linear infinite;
+
+  opacity: .9;
+
+  filter: none;
+}
+
+/* Nome da categoria */
+.cardCategorias span {
+  color: white;
   font-family: var(--fontePrimaria);
   font-size: 24px;
-  padding: 5px 33px;
-  border-radius: 5px;
+  text-align: center;
 }
 
+/* Preview da imagem */
+.categoriaPreview {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: .18;
+
+  z-index: 1;
+}
+
+
+
+/* Mantém conteúdo acima */
+.cardCategorias>* {
+  position: relative;
+  z-index: 3;
+}
+
+/* Animação */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 
 
@@ -920,7 +1158,7 @@ main {
 
 
 footer {
-  background-color: #1D1D1D;
+  background-color: var(--pretoVdr);
   color: #fff;
   padding: 48px 40px 24px;
   border-radius: 20px 20px 0 0;
@@ -1140,7 +1378,7 @@ footer {
     width: 500px;
   }
 
-  .vinyl {
+  .vinylCategoria {
     width: 260px;
   }
 
@@ -1430,7 +1668,7 @@ footer {
     padding: 50px 0 30px;
   }
 
-   .cardDisco {
+  .cardDisco {
     width: 100%;
     height: auto;
     padding: 8px;
@@ -1463,29 +1701,28 @@ footer {
 
   /* ---------- Categorias ---------- */
 
-  .explorarCategorias {
-    padding: 0 15px;
+  .categorias {
+
+    grid-template-columns: 1fr;
+
+    width: 100%;
+
+    padding: 0 20px;
+  }
+
+  .cardCategorias {
+
+    width: 100%;
+    max-width: 350px;
+
+    margin: 0 auto;
   }
 
   .explorarCategorias h1 {
-    font-size: 28px;
+
+    font-size: 32px;
+
     text-align: center;
-    padding-bottom: 60px;
-  }
-
-  .categorias {
-    width: 100%;
-    gap: 20px;
-  }
-
-  .categorias img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-  }
-
-  .cardCategorias p {
-    font-size: 20px;
   }
 
   /* ---------- Footer ---------- */
@@ -1504,6 +1741,14 @@ footer {
     align-items: center;
     text-align: center;
     gap: 8px;
+  }
+
+  .socialLogo img {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s;
   }
 
   .footerBottomLinks {
@@ -1582,6 +1827,14 @@ footer {
   .footerLogo img {
     width: 90px;
     height: 90px;
+  }
+
+  .socialLogo img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s;
   }
 
   .footerLogo h1 {

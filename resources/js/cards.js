@@ -1,4 +1,4 @@
-document.querySelectorAll('.cardDisco').forEach(card => {
+document.querySelectorAll('.cardDisco', 'cardCategorias').forEach(card => {
     card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         const x = e.clientX - r.left;
