@@ -1,0 +1,11 @@
+{
+  "resources/css/category.css": {
+    "file": "assets/category-DvnJtCwE.css",
+    "name": "category",
+    "names": [
+      "category.css"
+    ],
+    "src": "resources/css/category.css",
+    "isEntry": true
+  }
+}
