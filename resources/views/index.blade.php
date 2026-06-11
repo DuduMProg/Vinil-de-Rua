@@ -246,7 +246,7 @@
 
 
 
-        {{-- Explorar Categorias cards --}}
+        {{-- Explorar Categorias cards  --}}
         <section class="explorarCategorias">
 
             <h1>Explorar Categorias</h1>
