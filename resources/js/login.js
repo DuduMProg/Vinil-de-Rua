@@ -1,25 +1,3 @@
-const container = document.querySelector('.form-container');
-
-document.getElementById('linkEsqueceuSenha')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    container.classList.add('show-forgot');
-});
-
-document.getElementById('linkVoltarLogin')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    container.classList.remove('show-forgot');
-});
-
-document.getElementById('criarConta')?.addEventListener('click', function () {
-    window.location.href = '{{ route("register") }}';
-});
-
-const inputSenha = document.getElementById('inputSenhaField');
-const toggleSenha = document.getElementById('toggleSenha');
-
-toggleSenha?.addEventListener('click', function () {
-    inputSenha.type = inputSenha.type === 'text' ? 'password' : 'text';
-});
 
 
 document.addEventListener('DOMContentLoaded', function () {

@@ -1,4 +1,13 @@
 {
+  "resources/css/app.css": {
+    "file": "assets/app-B3dmeOrl.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
   "resources/css/category.css": {
     "file": "assets/category-DvnJtCwE.css",
     "name": "category",
@@ -6,6 +15,154 @@
       "category.css"
     ],
     "src": "resources/css/category.css",
+    "isEntry": true
+  },
+  "resources/css/globalcss.css": {
+    "file": "assets/globalcss-d3MZXmzC.css",
+    "name": "globalcss",
+    "names": [
+      "globalcss.css"
+    ],
+    "src": "resources/css/globalcss.css",
+    "isEntry": true
+  },
+  "resources/css/index.css": {
+    "file": "assets/index-C058a6Vr.css",
+    "name": "index",
+    "names": [
+      "index.css"
+    ],
+    "src": "resources/css/index.css",
+    "isEntry": true
+  },
+  "resources/css/pageOff.css": {
+    "file": "assets/pageOff-C1JN_A42.css",
+    "name": "pageOff",
+    "names": [
+      "pageOff.css"
+    ],
+    "src": "resources/css/pageOff.css",
+    "isEntry": true
+  },
+  "resources/css/perfil.css": {
+    "file": "assets/perfil-jAfpSfdN.css",
+    "name": "perfil",
+    "names": [
+      "perfil.css"
+    ],
+    "src": "resources/css/perfil.css",
+    "isEntry": true
+  },
+  "resources/css/resumoCompra.css": {
+    "file": "assets/resumoCompra-Bk_ig6kt.css",
+    "name": "resumoCompra",
+    "names": [
+      "resumoCompra.css"
+    ],
+    "src": "resources/css/resumoCompra.css",
+    "isEntry": true
+  },
+  "resources/css/styleAdm.css": {
+    "file": "assets/styleAdm-C3gheLWN.css",
+    "name": "styleAdm",
+    "names": [
+      "styleAdm.css"
+    ],
+    "src": "resources/css/styleAdm.css",
+    "isEntry": true
+  },
+  "resources/css/styleLoginRegister.css": {
+    "file": "assets/styleLoginRegister-pZUEJMjI.css",
+    "name": "styleLoginRegister",
+    "names": [
+      "styleLoginRegister.css"
+    ],
+    "src": "resources/css/styleLoginRegister.css",
+    "isEntry": true
+  },
+  "resources/css/telaDeCompra.css": {
+    "file": "assets/telaDeCompra-Cl-66g__.css",
+    "name": "telaDeCompra",
+    "names": [
+      "telaDeCompra.css"
+    ],
+    "src": "resources/css/telaDeCompra.css",
+    "isEntry": true
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-C5zI1N9E.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BIhzqQmw.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "resources/js/bootstrap.js",
+      "resources/js/bootstrap.js"
+    ]
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-ITASvb0C.js",
+    "name": "bootstrap",
+    "src": "resources/js/bootstrap.js",
+    "isEntry": true
+  },
+  "resources/js/cards.js": {
+    "file": "assets/cards-bHHB3B4N.js",
+    "name": "cards",
+    "src": "resources/js/cards.js",
+    "isEntry": true
+  },
+  "resources/js/filtro.js": {
+    "file": "assets/filtro-D4ngoIH9.js",
+    "name": "filtro",
+    "src": "resources/js/filtro.js",
+    "isEntry": true
+  },
+  "resources/js/index.js": {
+    "file": "assets/index-BsEgjylw.js",
+    "name": "index",
+    "src": "resources/js/index.js",
+    "isEntry": true
+  },
+  "resources/js/loading.js": {
+    "file": "assets/loading-COTYOlyn.js",
+    "name": "loading",
+    "src": "resources/js/loading.js",
+    "isEntry": true
+  },
+  "resources/js/login.js": {
+    "file": "assets/login-BdNhbxzP.js",
+    "name": "login",
+    "src": "resources/js/login.js",
+    "isEntry": true
+  },
+  "resources/js/navbar.js": {
+    "file": "assets/navbar-D4bxrthP.js",
+    "name": "navbar",
+    "src": "resources/js/navbar.js",
+    "isEntry": true
+  },
+  "resources/js/popup.js": {
+    "file": "assets/popup-Cv11QZ1x.js",
+    "name": "popup",
+    "src": "resources/js/popup.js",
+    "isEntry": true
+  },
+  "resources/js/telaDeCompra.js": {
+    "file": "assets/telaDeCompra-sEBjXRfX.js",
+    "name": "telaDeCompra",
+    "src": "resources/js/telaDeCompra.js",
+    "isEntry": true
+  },
+  "resources/js/twoFactor.js": {
+    "file": "assets/twoFactor-DxmBQB7w.js",
+    "name": "twoFactor",
+    "src": "resources/js/twoFactor.js",
     "isEntry": true
   }
 }

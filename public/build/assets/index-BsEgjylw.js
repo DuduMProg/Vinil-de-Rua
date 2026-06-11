@@ -1,0 +1,1 @@
+document.addEventListener(`DOMContentLoaded`,function(){let e=document.getElementById(`cardOff`),t=document.getElementById(`closeCard`),n=document.querySelector(`.catalogoIndex`);t.addEventListener(`click`,()=>{e.style.display=`none`,n.classList.add(`centered`)})});
