@@ -31,7 +31,7 @@ class AdminController extends Controller
         $ordersByMonth = Order::selectRaw("DATE_FORMAT(created_at, '%m/%Y') as month, COUNT(*) as total")
             ->where('created_at', '>=', now()->subMonths(6))
             ->groupByRaw("DATE_FORMAT(created_at, '%m/%Y')")
-            ->orderByRaw("DATE_FORMAT(created_at, '%Y%m')")
+            ->orderByRaw("MIN(created_at)")
             ->get();
 
         // ── Gráfico: produtos mais vendidos (top 5) ──
