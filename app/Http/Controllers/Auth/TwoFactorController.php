@@ -33,7 +33,7 @@ class TwoFactorController extends Controller
         Auth::loginUsingId($data['user_id'], $data['remember'] ?? false);
         $request->session()->forget('2fa');
         $request->session()->regenerate();
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('/', absolute: false));
     }
     public function resend(Request $request)
     {

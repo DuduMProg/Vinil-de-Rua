@@ -28,10 +28,10 @@ class AdminController extends Controller
             ->get();
 
         // ── Gráfico: pedidos por mês (últimos 6 meses) ──
-        $ordersByMonth = Order::selectRaw("strftime('%m/%Y', created_at) as month, COUNT(*) as total")
+        $ordersByMonth = Order::selectRaw("DATE_FORMAT(created_at, '%m/%Y') as month, COUNT(*) as total")
             ->where('created_at', '>=', now()->subMonths(6))
-            ->groupByRaw("strftime('%m/%Y', created_at)")
-            ->orderByRaw("strftime('%Y%m', created_at)")
+            ->groupByRaw("DATE_FORMAT(created_at, '%m/%Y')")
+            ->orderByRaw("DATE_FORMAT(created_at, '%Y%m')")
             ->get();
 
         // ── Gráfico: produtos mais vendidos (top 5) ──
@@ -102,5 +102,5 @@ class AdminController extends Controller
         ));
     }
 
-    
+
 }
