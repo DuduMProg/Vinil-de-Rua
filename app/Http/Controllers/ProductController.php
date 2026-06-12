@@ -33,7 +33,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'category_id' => 'nullable|exists:categories,id',
-            'tag_id' => 'nullable|exists:tag,id',
+            'tag_id' => 'nullable|exists:tags,id',
             'stock' => 'nullable|integer|min:0',
             'main_img' => 'nullable|url',
             'images.*' => 'nullable|url',

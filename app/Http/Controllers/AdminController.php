@@ -28,10 +28,10 @@ class AdminController extends Controller
             ->get();
 
         // ── Gráfico: pedidos por mês (últimos 6 meses) ──
-        $ordersByMonth = Order::selectRaw("DATE_FORMAT(created_at, '%m/%Y') as month, COUNT(*) as total")
+        $ordersByMonth = Order::selectRaw("strftime('%m/%Y', created_at) as month, COUNT(*) as total")
             ->where('created_at', '>=', now()->subMonths(6))
-            ->groupByRaw("DATE_FORMAT(created_at, '%m/%Y')")
-            ->orderByRaw("MIN(created_at)")
+            ->groupByRaw("strftime('%m/%Y', created_at)")
+            ->orderByRaw("strftime('%Y%m', created_at)")
             ->get();
 
         // ── Gráfico: produtos mais vendidos (top 5) ──
@@ -47,10 +47,10 @@ class AdminController extends Controller
             ]);
 
         // ── Gráfico: usuários por mês (últimos 6 meses) ──
-        $usersByMonth = User::selectRaw("DATE_FORMAT(created_at, '%m/%Y') as month, COUNT(*) as total")
+        $usersByMonth = User::selectRaw("strftime('%m/%Y', created_at) as month, COUNT(*) as total")
             ->where('created_at', '>=', now()->subMonths(6))
-            ->groupByRaw("DATE_FORMAT(created_at, '%m/%Y')")
-            ->orderByRaw("MIN(created_at)")
+            ->groupByRaw("strftime('%m/%Y', created_at)")
+            ->orderByRaw("strftime('%Y%m', created_at)")
             ->get();
 
         // ── Sidebar ──
@@ -82,7 +82,6 @@ class AdminController extends Controller
         $order->update(['status' => 'cancelled']);
         return redirect()->back()->with('success', 'Pedido #' . $order->id . ' cancelado.');
     }
-
     public function orders(Request $request)
     {
         $orders = Order::with('user')
@@ -102,4 +101,6 @@ class AdminController extends Controller
             'categories'
         ));
     }
+
+    
 }
