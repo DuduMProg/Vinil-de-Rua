@@ -121,7 +121,7 @@
                     {{-- FORM PRINCIPAL --}}
                     <div class="formsNovoProduto">
 
-                        <form action="/product" method="POST">
+                        <form action="/admin/product" method="POST">
                             @csrf
 
                             <div class="infoForms">
@@ -195,50 +195,50 @@
                                     value="{{ old('stock', 0) }}">
                             </div>
 
-                    </div>
+                            </div>
 
-                    {{-- IMAGENS --}}
-                    <div class="addFoto">
+                            {{-- IMAGENS --}}
+                            <div class="addFoto">
 
-                        <div class="infoForms">
-
-                            <label>Imagem principal</label>
-
-                            <input type="text" name="main_img" placeholder="https://...">
-
-                        </div>
-
-                        <div class="infoForms">
-
-                            <label>Imagem secundária</label>
-
-                            <input type="text" name="images[]" placeholder="https://...">
-
-                        </div>
-
-                        <div class="infoForms">
-
-                            <label>Imagem secundária</label>
-
-                            <input type="text" name="images[]" placeholder="https://...">
-
-                        </div>
-
-                        <div class="infoForms">
-
-                            <label>Imagem secundária</label>
-
-                            <input type="text" name="images[]" placeholder="https://...">
-
-                        </div>
-
-                        <div class="btnAdicionarP">
-
-                            <button type="submit">
-                                Adicionar produto
-                            </button>
-
-                        </div>
+                                <div class="infoForms">
+        
+                                    <label>Imagem principal</label>
+        
+                                    <input type="text" name="main_img" placeholder="https://...">
+        
+                                </div>
+        
+                                <div class="infoForms">
+        
+                                    <label>Imagem secundária</label>
+        
+                                    <input type="text" name="images[]" placeholder="https://...">
+        
+                                </div>
+        
+                                <div class="infoForms">
+        
+                                    <label>Imagem secundária</label>
+        
+                                    <input type="text" name="images[]" placeholder="https://...">
+        
+                                </div>
+        
+                                <div class="infoForms">
+        
+                                    <label>Imagem secundária</label>
+        
+                                    <input type="text" name="images[]" placeholder="https://...">
+        
+                                </div>
+        
+                                <div class="btnAdicionarP">
+        
+                                    <button type="submit">
+                                        Adicionar produto
+                                    </button>
+        
+                                </div>
 
                         </form>
 
