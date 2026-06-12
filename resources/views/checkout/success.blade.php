@@ -20,14 +20,6 @@
     <section class="checkoutCompra">
 
 
-        <header class="headerSuccess">
-            <div class="logoHeader">
-                <a href="/">
-                    <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Vinil de Rua">
-                </a>
-                <p>VINIL <br>DE RUA</p>
-            </div>
-        </header>
 
         <main class="successMain">
 

@@ -713,46 +713,6 @@ header.scrolled .icons img {
   min-height: 100vh;
 }
 
-/* ── Header ── */
-.headerSuccess {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  padding: 0 32px;
-  background: #ffffff;
-  border-bottom: 0.5px solid #E0E0E0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
-.logoHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #1D1D1D;
-  font-family: var(--fonteSecundaria);
-  font-size: 26px;
-  text-decoration: none;
-}
-
-.logoHeader a {
-  text-decoration: none;
-}
-
-.logoHeader img {
-  width: 52px;
-  height: 52px;
-}
-
-.logoHeader p {
-  color: #1D1D1D;
-  line-height: 1.1;
-  font-size: 20px;
-  margin-left: 6px;
-}
 
 /* ── Main ── */
 .successMain {
@@ -1451,20 +1411,6 @@ footer {
   }
 
   /* ---------- COMPRA FINALIZADA ---------- */
-
-  .headerSuccess {
-    height: 68px;
-    padding: 0 16px;
-  }
-
-  .logoHeader img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .logoHeader p {
-    font-size: 17px;
-  }
 
   .successMain {
     padding: 92px 16px 48px;

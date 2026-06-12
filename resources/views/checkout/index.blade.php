@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumo da compra - Vinil de Rua</title>
 
+    <!-- FONTES USADASS -->
     <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,6 +95,7 @@
             </div>
         </div>
     </header>
+
     <div class="mobileNav" id="mobileNav">
         <a href="/#catalogo">Catálogo</a>
         <a href="/tag/show/1">Ofertas</a>
