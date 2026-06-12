@@ -153,6 +153,11 @@
                         R$300 - R$400
                     </label>
 
+                    <label>
+                        <input type="checkbox" class="filtroPreco" value="500">
+                        R$400 - R$500
+                    </label>
+
                 </div>
 
                 <div class="grupoFiltro">

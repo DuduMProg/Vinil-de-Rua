@@ -7,7 +7,7 @@
 
 a,
 * {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 :root {
@@ -464,9 +464,7 @@ header.scrolled .icons img {
 }
 
 
-/* ══════════════════════════════════════════
-   PÁGINA DE OFERTAS — Identidade Dark Urbana
-   ══════════════════════════════════════════ */
+
 
 .fundoPrincipal {
   background: #111111;
@@ -1051,10 +1049,6 @@ footer {
   letter-spacing: 0.02em;
 }
 
-.btnFiltroMobile {
-
-  display: none;
-}
 
 /* Desktop — esconde o hamburguer */
 .mobileMenuBtn {
@@ -1065,15 +1059,26 @@ footer {
   display: none;
 }
 
-.btnFecharFiltro {
+.btnFiltroMobile {
+
   display: none;
 }
 
+.btnFecharFiltro {
+  display: none;
+}
 
 /* ==================================================
    TABLETS (até 1024px)
 ================================================== */
 @media (max-width: 1024px) {
+
+  /* ✅ Remove stacking context para o drawer funcionar */
+  .filtroECat {
+    z-index: auto;
+    margin: 40px 30px;
+    gap: 30px;
+  }
 
   /* ---------- Banner ---------- */
 
@@ -1081,20 +1086,7 @@ footer {
     padding: 120px 20px 40px;
   }
 
-  .filtroECat {
-    margin: 20px 16px;
-    gap: 20px;
-  }
-
-
-  /* ---------- Layout filtro + catálogo ---------- */
-
-  .filtroECat {
-    margin: 40px 30px;
-    gap: 30px;
-  }
-
-  /* Sidebar de filtro fica menor mas ainda visível */
+  /* ---------- Sidebar de filtro vira drawer ---------- */
   .sidebarFiltro {
     position: fixed;
     top: 0;
@@ -1102,7 +1094,7 @@ footer {
     width: 280px;
     height: 100vh;
     overflow-y: auto;
-    z-index: 500;
+    z-index: 1001;
     border-radius: 0;
     transition: left 0.3s ease;
   }
@@ -1115,8 +1107,29 @@ footer {
     display: flex;
   }
 
+  .btnFecharFiltro {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
 
-  /* Catálogo passa de 4 para 3 colunas */
+  /* Overlay */
+  .overlayFiltro {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .overlayFiltro.ativo {
+    display: block;
+  }
+
+  /* Catálogo passa para 2 colunas */
   .catalogoOff {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -1125,7 +1138,6 @@ footer {
   .cardDisco {
     width: 100%;
   }
-
 
   /* ---------- Footer ---------- */
 
@@ -1141,6 +1153,15 @@ footer {
    CELULARES (até 768px)
 ================================================== */
 @media (max-width: 768px) {
+
+  /* ✅ Remove stacking context */
+  .filtroECat {
+    z-index: auto;
+    flex-direction: column;
+    margin: 16px 15px;
+    gap: 0;
+    border: none;
+  }
 
   /* ---------- Header ---------- */
 
@@ -1239,7 +1260,6 @@ footer {
 
   /* ---------- Botão de filtro mobile ---------- */
 
-  /* Aparece só no mobile — abre a sidebar como drawer */
   .btnFiltroMobile {
     display: flex;
     align-items: center;
@@ -1256,17 +1276,8 @@ footer {
     width: fit-content;
   }
 
-  /* ---------- Layout: sidebar vira drawer sobreposto ---------- */
+  /* ---------- Sidebar drawer ---------- */
 
-  .filtroECat {
-    flex-direction: column;
-    margin: 16px 15px;
-    gap: 0;
-    border: none;
-    /* remove o border:2px solid red do desktop */
-  }
-
-  /* Sidebar some do fluxo e vira drawer deslizante pela esquerda */
   .sidebarFiltro {
     position: fixed;
     top: 0;
@@ -1282,12 +1293,11 @@ footer {
     padding: 30px 20px;
   }
 
-  /* Classe adicionada via JS para abrir */
   .sidebarFiltro.aberto {
     left: 0;
   }
 
-  /* Overlay escuro atrás do drawer */
+  /* Overlay */
   .overlayFiltro {
     display: none;
     position: fixed;
@@ -1303,7 +1313,7 @@ footer {
     display: block;
   }
 
-  /* Botão fechar dentro do drawer */
+  /* Botão fechar */
   .btnFecharFiltro {
     display: flex;
     justify-content: flex-end;
@@ -1350,7 +1360,6 @@ footer {
     font-size: 11px;
     padding: 2px 8px;
   }
-
 
   /* ---------- Sidebar Carrinho ---------- */
 
@@ -1449,6 +1458,15 @@ footer {
 ================================================== */
 @media (max-width: 480px) {
 
+  /* ✅ Remove stacking context */
+  .filtroECat {
+    z-index: auto;
+    flex-direction: column;
+    margin: 16px 15px;
+    gap: 0;
+    border: none;
+  }
+
   /* ---------- Header ---------- */
 
   .logoHeader p {
@@ -1489,16 +1507,8 @@ footer {
     padding: 2px 6px;
   }
 
-  /* ---------- Layout: sidebar vira drawer sobreposto ---------- */
+  /* ---------- Sidebar drawer ---------- */
 
-  .filtroECat {
-    flex-direction: column;
-    margin: 16px 15px;
-    gap: 0;
-    border: none;
-  }
-
-  /* Sidebar some do fluxo e vira drawer deslizante pela esquerda */
   .sidebarFiltro {
     position: fixed;
     top: 0;
@@ -1514,12 +1524,10 @@ footer {
     padding: 30px 20px;
   }
 
-  /* Classe adicionada via JS para abrir */
   .sidebarFiltro.aberto {
     left: 0;
   }
 
-  /* Overlay escuro atrás do drawer */
   .overlayFiltro {
     display: none;
     position: fixed;
@@ -1535,7 +1543,6 @@ footer {
     display: block;
   }
 
-  /* Botão fechar dentro do drawer */
   .btnFecharFiltro {
     display: flex;
     justify-content: flex-end;
@@ -1558,12 +1565,12 @@ footer {
   }
 
   .socialLogo img {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  opacity: 0.75;
-  transition: opacity 0.2s;
-}
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
 
   .footerLogo h1 {
     font-size: 28px;
