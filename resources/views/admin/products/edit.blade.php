@@ -117,7 +117,7 @@
 
                         <form action="{{ route('admin.product.update', $product->id) }}" method="POST">
                             @csrf
-                            @method('PUT'
+                            @method('PUT')
 
 
                             <div class="infoForms">
