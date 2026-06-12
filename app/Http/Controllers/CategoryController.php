@@ -31,7 +31,7 @@ class CategoryController extends Controller
             'banner' => $request->banner,
         ]);
 
-        return redirect('/category')->with('success', 'Categoria criada!');
+        return redirect('/admin/category')->with('success', 'Categoria criada!');
     }
 
     public function edit(Category $category)
@@ -51,7 +51,7 @@ class CategoryController extends Controller
             'banner' => $request->banner ?? $category->banner,
         ]);
 
-        return redirect('/category')->with('success', 'Categoria atualizada!');
+        return redirect('/admin/category')->with('success', 'Categoria atualizada!');
     }
 
     public function destroy(Category $category)
@@ -60,7 +60,7 @@ class CategoryController extends Controller
             \Storage::disk('public')->delete($category->banner);
         }
         $category->delete();
-        return redirect('/category')->with('success', 'Categoria deletada!');
+        return redirect('/admin/category')->with('success', 'Categoria deletada!');
     }
 
     public function show(Category $category)

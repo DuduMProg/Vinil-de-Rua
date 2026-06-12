@@ -27,7 +27,7 @@ class TagController extends Controller
 
         Tag::create(['name' => $request->name]);
 
-        return redirect('/tag')->with('success', 'Tag criada!');
+        return redirect('/admin/tag')->with('success', 'Tag criada!');
     }
 
     public function edit(Tag $tag)
@@ -43,13 +43,13 @@ class TagController extends Controller
 
         $tag->update(['name' => $request->name]);
 
-        return redirect('/tag')->with('success', 'Tag atualizada!');
+        return redirect('/admin/tag')->with('success', 'Tag atualizada!');
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect('/tag')->with('success', 'Tag deletada!');
+        return redirect('/admin/tag')->with('success', 'Tag deletada!');
     }
 
     // show é público — mantém na pasta tag

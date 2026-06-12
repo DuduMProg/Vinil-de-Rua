@@ -24,52 +24,38 @@
 
         <!-- MENU LATERAL -->
         <aside class="menuLateral">
-
             <div class="areaLogo">
                 <img src="https://i.ibb.co/RknvXKX2/logo-Vinil-De-Rua-preta.png" alt="Logo Vinil de Rua">
                 <h1>Vinil de Rua</h1>
             </div>
 
             <nav class="menuPrincipal">
-                <button class="itemMenuAtivo" onclick="window.location.href='/admin/dashboard'">
-                    Dashboard
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/admin/product/create'">
-                    Adicionar Produto
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/admin/product'">
-                    Todos os produtos
-                </button>
-
-                <button class="itemMenu" onclick="window.location.href='/admin/orders'">
-                    Pedidos
-                </button>
+                <button class="itemMenu" onclick="window.location.href='/admin/dashboard'">Dashboard</button>
+                <button class="itemMenu" onclick="window.location.href='/admin/product/create'">Adicionar
+                    Produto</button>
+                <button class="itemMenu" onclick="window.location.href='/admin/product'">Todos os produtos</button>
+                <button class="itemMenu" onclick="window.location.href='/admin/orders'">Pedidos</button>
             </nav>
 
             <div class="menuCategorias">
-
                 <h1>Categorias</h1>
-
                 <ul>
-                    @foreach($categories as $category)
-                        <li>
-                            <span>{{ $category->name }}</span>
-                            <span>{{ $category->products_count }}</span>
-                        </li>
-                    @endforeach
+                    <li>
+                        <a href="/admin/category" class="linkMenuCat">Ver todas</a>
+                    </li>
+                    <li>
+                        <a href="/admin/category/create" class="linkMenuCat">+ Nova categoria</a>
+                    </li>
                 </ul>
 
+                <div class="menuTagsLink">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li><a href="/admin/tag" class="linkMenuCat">Ver todas</a></li>
+                        <li><a href="/admin/tag/create" class="linkMenuCat ativo">+ Nova tag</a></li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="menuLogout">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="itemMenu">Sair</button>
-                </form>
-            </div>
-
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->
@@ -103,31 +89,31 @@
 
             </header>
 
-    <!-- CARDS DE RESUMO -->
-    <div class="cardsResumo">
-        
-        <div class="cardResumo">
+            <!-- CARDS DE RESUMO -->
+            <div class="cardsResumo">
+
+                <div class="cardResumo">
                     <p class="cardLabel">Total de Produtos</p>
                     <h2 class="cardValor">{{ $totalProducts }}</h2>
                 </div>
-                
+
                 <div class="cardResumo">
                     <p class="cardLabel">Usuários Cadastrados</p>
                     <h2 class="cardValor">{{ $totalUsers }}</h2>
                 </div>
-                
+
                 <div class="cardResumo">
                     <p class="cardLabel">Pedidos Pendentes</p>
                     <h2 class="cardValor">{{ $totalPendingOrders }}</h2>
                 </div>
-                
+
                 <div class="cardResumo">
                     <p class="cardLabel">Receita Total</p>
                     <h2 class="cardValor">R$ {{ number_format($totalRevenue, 2, ',', '.') }}</h2>
                 </div>
 
             </div>
-            
+
             <!-- GRÁFICOS -->
             <div class="areaGraficos">
 

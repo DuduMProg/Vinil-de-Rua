@@ -67,7 +67,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('/product')->with('success', 'Produto criado com sucesso!');
+        return redirect('/admin/product')->with('success', 'Produto criado com sucesso!');
     }
 
     public function edit(Product $product)
@@ -115,7 +115,7 @@ class ProductController extends Controller
     {
         $product->images()->delete();
         $product->delete();
-        return redirect('/product')->with('success', 'Produto deletado com sucesso!');
+        return redirect('/admin/product')->with('success', 'Produto deletado com sucesso!');
     }
 
     // show é público — mantém na pasta product
