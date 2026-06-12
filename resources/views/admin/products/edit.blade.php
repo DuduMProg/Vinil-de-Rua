@@ -114,10 +114,11 @@
 
                     <div class="formsNovoProduto">
 
-                        <form action="/product/{{ $product->id }}" method="POST">
 
+                        <form action="{{ route('admin.product.update', $product->id) }}" method="POST">
                             @csrf
-                            @method('PUT')
+                            @method('PUT'
+
 
                             <div class="infoForms">
                                 <label>Nome do produto:</label>
